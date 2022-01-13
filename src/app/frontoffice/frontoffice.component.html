@@ -1,0 +1,172 @@
+<div nz-row style="background-color:white;padding: 20px;height: 10vh">
+  <div nz-col nzSpan="4">
+    <img src="../../../assets/i01_abc (1).jpg" style="height: 50px"/>
+  </div>
+  <div nz-col nzSpan="16"></div>
+  <div nz-col nzSpan="2" style="text-align: right;padding-top: 10px">
+    <button nz-button nzType="default"
+            style="background-color: #D21241;border-color: #D21241;color: #fafafa;font-weight: bold;height: 50px;width: 100px"
+            (click)="changeScreen(2)">Orders
+    </button>
+  </div>
+  <div nz-col nzSpan="2" style="text-align: right;padding-top: 10px">
+    <button nz-button nzType="default"
+            style="background-color: #D21241;border-color: #D21241;color: #fafafa;font-weight: bold;height: 50px;width: 100px"
+            (click)="changeScreen(1)">Rooms
+    </button>
+  </div>
+</div>
+
+<div nz-row *ngIf="room === 1"
+     style="height:80vh; padding-left:7px;background-color:#D21241;margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+  <div nz-col nzSpan="8">
+    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;height: 50px">Rooms</h3>
+  </div>
+
+  <div nz-col nzSpan="2" style="text-align: right">
+    <h5 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px">Unreserved</h5>
+  </div>
+  <div nz-col nzSpan="1" style="padding-top: 23px;text-align: left">
+    <div style="height: 20px;width: 20px;background-color: #fafafa;margin-left: 5px"></div>
+  </div>
+
+  <div nz-col nzSpan="2" style="text-align: right">
+    <h5 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px">Reserved</h5>
+  </div>
+  <div nz-col nzSpan="1" style="padding-top: 23px;text-align: left">
+    <div style="height:20px;width: 20px;background-color: #c9c9c9;margin-left: 5px"></div>
+  </div>
+
+  <div nz-col nzSpan="10" style="margin-top: 15px;text-align: right;padding-right: 15px">
+    <button nz-button nzType="default"
+            style="background-color: #fafafa;border-color: #fafafa;color: #D21241;font-weight: bold"
+            (click)="changeScreen(2)">Rooms
+    </button>
+  </div>
+  <div style="margin-left:40px" nz-row>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="001"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="002"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="003"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="004"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="005"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="006"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="007"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="008"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="009"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="010"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="011"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="012"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="013"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="014"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="015"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="3" number="016"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="017"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="018"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="3" number="019"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="020"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="1" number="021"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="022"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="023"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="024"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="025"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="026"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="027"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="028"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="029"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="030"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="031"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="2" number="032"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="033"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="3" number="034"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="035"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="036"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="3" number="037"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="038"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="1" number="039"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" [order_status]="3" number="040"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="true" [order_status]="2" number="041"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+    <app-room-card [isAvailable]="false" number="021" [order_status]="1"
+                   (messageEvent)="showRoom($event)"></app-room-card>
+  </div>
+</div>
+
+
+<div nz-row *ngIf="room === 2" style="height:80vh; padding-left:7px;background-color:#D21241;overflow: scroll;
+margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+  <div nz-col nzSpan="24">
+    <div nz-row style="margin-bottom: 15px;">
+      <div nz-col nzSpan="6"><h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">
+        Orders</h3></div>
+      <div nz-col nzSpan="6"></div>
+      <div nz-col nzSpan="6"></div>
+      <div nz-col nzSpan="6"><h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;margin-left: 150px">
+        Total Orders : 250</h3></div>
+    </div>
+    <!--    <div nz-row [nzGutter]="24" style="background-color: white;">-->
+    <!--      <div nz-col class="gutter-row" [nzSpan]="20"><div class="inner-box">col-6</div></div>-->
+    <!--      <div nz-col class="gutter-row" [nzSpan]="2"><div class="inner-box">col-6</div></div>-->
+    <!--    </div>-->
+    <!--    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">Orders</h3>-->
+    <!--    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">Total:</h3>-->
+    <div style="margin-left: 100px;width: 1400px;height: 300px;" nz-row>
+
+      <div nz-row [nzGutter]="[16, 24]">
+        <app-order-card [btnStatus]="0"[orderStatus]="100" [roomNumber]="'Room Number  001'"></app-order-card>
+        <app-order-card [btnStatus]="0"[orderStatus]="100"[roomNumber]="'Room Number 002'"></app-order-card>
+        <app-order-card [btnStatus]="0"[orderStatus]="100" [roomNumber]="'Room Number 003'"></app-order-card>
+        <app-order-card [btnStatus]="0"[orderStatus]="100" [roomNumber]="'Room Number 004'"></app-order-card>
+        <app-order-card [btnStatus]="0" [orderStatus]="100"[roomNumber]="'Room Number 005'"></app-order-card>
+        <app-order-card [btnStatus]="0" [orderStatus]="100"[roomNumber]="'Room Number 006'"></app-order-card>
+      </div>
+    </div>
+  </div>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Rooms" [nzCancelText]="null" [nzOkText]="null">
+    <div *nzModalContent style="color: #D21241"></div>
+    <nz-card style="width:100%;margin-bottom: 1px;color: #D21241" *ngFor="let i of Rooms">
+    </nz-card>
+  </nz-modal>
+</div>
+<div style="text-align: center;margin-top: 20px"><span nz-typography><strong>Design & Developed By Technography</strong></span>
+</div>

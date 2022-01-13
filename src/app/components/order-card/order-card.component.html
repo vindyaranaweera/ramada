@@ -1,0 +1,53 @@
+<nz-card
+  style="width:440px; box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px"
+  [style.background-color]="isAvailable?'white':'#ffffff'" [style.border.color]="isAvailable?'white':'#ffffff'" [style.width.px]="width"
+  (click)="showOrderDetails(order)">
+  <span nz-typography style="text-align: center"><strong
+    style="font-size: x-large;font-weight: bold;color: #D21241">{{order}}</strong></span>
+  <nz-table #basicTable [nzData]="listOfData" [nzShowPagination]="false">
+    <thead>
+    <tr>
+      <th>Category</th>
+      <th>Item</th>
+      <th>Qty</th>
+    </tr>
+    </thead>
+    <tbody style="height: 50px;overflow: scroll">
+    <tr *ngFor="let data of basicTable.data">
+      <td style="color:#f3c500">{{ data.category}}</td>
+      <td>{{ data.item}}</td>
+      <td>{{ data.qty}}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <div nz-row style="padding-top:10px;">
+    <div nz-col nzSpan="8" >
+      <h3 *ngIf="orderStatus==1||orderStatus==2||orderStatus==3" >{{roomNumber}}</h3><br>
+    </div>
+    <div nz-col nzSpan="8" *ngIf="orderStatus==100">
+      <h3 >{{roomNumber}}</h3><br>
+    </div>
+    <div nz-col nzSpan="8" *ngIf="orderStatus==1">
+      <h3 style="color:red" >New</h3>
+    </div>
+    <div *ngIf="orderStatus==2">
+      <h3 style="margin-left:10px;margin-right: 10px;color: #cece12">Processing</h3>
+    </div>
+    <div *ngIf="orderStatus==3">
+      <h3 style="margin-left:20px;color: darkgreen;margin-right: 15px">Finished</h3>
+    </div>
+
+    <div nz-col nzSpan="8" *ngIf="btnStatus==1">
+      <button style="margin-left: 30px" nz-button nzType="default"
+              style="background-color: #D21241;border-color: #D21241;color:#fafafa;font-weight: bold">{{btnText}}
+      </button>
+
+    </div>
+
+    <div *ngIf="btnserve==0" ></div>
+  </div>
+<p style="font-weight: bold">Time :</p>
+</nz-card>
+
+
+

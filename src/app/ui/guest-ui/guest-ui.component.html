@@ -1,0 +1,1046 @@
+<div nz-row style="text-align: center;">
+  <div nz-col nzSpan="24" style="text-align: center; margin-top: 50px; background-color: white; ">
+    <img src="../../../assets/i01_abc (1).jpg">
+  </div>
+  <!--  <nz-divider nzText="Left Text" nzOrientation="center"></nz-divider>-->
+  <!--  <nz-divider style="font-size: x-large; text-align: center" nzPlain nzText="BREAKFAST MENU" nzOrientation="center"></nz-divider>-->
+</div>
+
+<div nz-row style="text-align: center;height:10vh; text-align:center;">
+  <h2 style="width: 100%;margin-left:-6px">BREAKFAST MENU</h2>
+  <div style="width: 300px;margin-top: -35px">
+  </div>
+</div>
+<div style="text-align: right">
+  <nz-affix [nzOffsetTop]="220">
+    <nz-badge [nzCount]="totalQuantity" style="margin-right: 24px;">
+      <nz-avatar nzIcon="shopping-cart" [nzShape]="'square'"
+                 style="background-color: #D21241; color: #fafafa;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
+                 (click)="showCart()"></nz-avatar>
+    </nz-badge>
+  </nz-affix>
+</div>
+<!--<div nz-row style="height:50vh;background-color: gray; padding-left: 7px; ">-->
+<!--  <div nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="2" nzXl="2"></div>-->
+<!--  <div style="background-color: darkcyan; " nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="6" nzXl="4">-->
+<!--    <app-category-card image="../../../assets/omelte.jpg" text="Cheese Omelette" name="5 Choices Available">-->
+<!--    </app-category-card>-->
+<!--  </div>-->
+<!--  <div style="background-color:gray; " nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="4" nzXl="4">-->
+<!--    <app-category-card image="../../../assets/pancake.jpg" text="Pancake" name="3 Choices Available"></app-category-card>-->
+<!--  </div>-->
+<!--  <div style="background-color:aqua; " nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="4" nzXl="4">-->
+<!--    <app-category-card image="../../../assets/sandwich.jpg" text="Egg & Cheese Sandwich" name="5 Choices Available" >-->
+<!--    </app-category-card>-->
+<!--  </div>-->
+<!--  <div style="background-color:red;  " nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="4" nzXl="4">-->
+<!--    <app-category-card image="../../../assets/french-toast.jpg" text="French Toast" name="3 Choices Available">-->
+<!--    </app-category-card>-->
+<!--  </div>-->
+<!--  <div style="background-color:yellow;" nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="4" nzXl="4">-->
+<!--    <app-category-card image="../../../assets/eg.jpg" text="Eggs" name="5 Choices Available"></app-category-card>-->
+<!--  </div>-->
+
+<!--  <div nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="2" nzXl="2"></div>-->
+<!--</div>-->
+
+<!--<div nz-row style=" height:30vh; padding-top: 70px; background-color: blueviolet">-->
+<!--  <div nz-col nzSpan="6" nzOrder="4">-->
+<!--  </div>-->
+
+<!--</div>-->
+<div nz-row style="height:50vh; padding-left: 7px;">
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box scr0ll" style="padding-left: 9vw">
+      <div class="myCol">
+        <app-category-card image="../../../assets/001.jpg" width="155px" text="Cheese Omelette"
+                           name="5 Choices Available" background="#D21241" text_color="white"
+                           (click)="changeItemPanel(1);">
+        </app-category-card>
+      </div>
+      <div class="myCol">
+        <app-category-card image="../../../assets/006.jpg" width="150px" text="Pancake"
+                           name="3 Choices Available" background="#D21241" text_color="white"
+                           (click)="changeItemPanel(2);"></app-category-card>
+      </div>
+      <div class="myCol">
+        <app-category-card image="../../../assets/new.jpg" width="150px" text="Egg & Cheese Sandwich"
+                           name="5 Choices Available" background="#D21241" text_color="white"
+                           (click)="changeItemPanel(3);"></app-category-card>
+      </div>
+      <div class="myCol">
+        <app-category-card image="../../../assets/pan.jpg" width="150px" text="French Toast"
+                           name="3 Choices Available" background="#D21241" text_color="white"
+                           (click)="changeItemPanel(4);"></app-category-card>
+      </div>
+      <div class="myCol">
+        <app-category-card image="../../../assets/e2.jpg" width="150px" text="Eggs"
+                           name="5 Choices Available" background="#D21241" text_color="white"
+                           (click)="changeItemPanel(5);"></app-category-card>
+      </div>
+    </div>
+  </div>
+</div>
+<nz-modal *ngIf="panel=== 1"
+          [(nzVisible)]="isVisible2" [nzContent]="modalContent" [nzCloseIcon]="close"
+          (nzOnCancel)="handleCancel1()" [nzBodyStyle]="{'background-color':'#D21241'}" [nzFooter]="null">
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px">Cheese Omelette</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact>
+      <p style="text-align:center;font-weight:bold;color: white;font-size:17px">Select Your Protien</p>
+      <br>
+      <img src="../../../assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <p style="margin-left: 40px;font-weight: bold;color: white">Bacon</p>
+      <p style="margin-left: 75px;font-weight: bold;color: white">Sausage</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Extra Egg</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(false)" *ngIf="Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(true)" *ngIf="!Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(false)" *ngIf="Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+      <br>
+      <p style="margin-left: 25px;font-weight: bold;color: white">Brown Bread</p>
+      <p style="margin-left: 35px;font-weight: bold;color: white">White Bread</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Hashbrown</p><br>
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+    </nz-input-group>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button nzType="primary"
+                (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button
+                nzType="primary"
+                (click)="handleOk('Cheese Omelette' )">Send To Cart
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <br>
+</nz-modal>
+
+<nz-modal *ngIf="panel === 2"
+          [(nzVisible)]="isVisible2"
+          [nzFooter]="null"
+          [nzContent]="modalContent"
+          [nzCloseIcon]="close"
+          [nzBodyStyle]="{'background-color':'#D21241'}"
+          (nzOnCancel)="handleCancel1()">
+
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px">Pancake</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
+      <img src="../../../assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <p style="margin-left: 40px;font-weight: bold;color: white">Bacon</p>
+      <p style="margin-left: 75px;font-weight: bold;color: white">Sausage</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Extra Egg</p>
+    </nz-input-group>
+    <br>
+
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Hashbrown</p><br>
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+    </nz-input-group>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button nzType="primary"
+                (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button
+                nzType="primary"
+                (click)="handleOk('Pancake'  )">Send To Cart
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>
+
+<nz-modal *ngIf="panel === 3"
+          [(nzVisible)]="isVisible2"
+          [nzFooter]="null"
+          [nzCloseIcon]="close"
+          [nzContent]="modalContent"
+          [nzBodyStyle]="{'background-color':'#D21241'}"
+          (nzOnCancel)="handleCancel1()">
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px;padding-right:20px">Egg And Cheese Sandwich</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
+      <img src="../../../assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <p style="margin-left: 40px;font-weight: bold;color: white">Bacon</p>
+      <p style="margin-left: 75px;font-weight: bold;color: white">Sausage</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Extra Egg</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(false)" *ngIf="Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(true)" *ngIf="!Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(false)" *ngIf="Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <br>
+      <p style="margin-left: 25px;font-weight: bold;color: white">Brown Bread</p>
+      <p style="margin-left: 35px;font-weight: bold;color: white">White Bread</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Do You Want Hashbrown?</p><br>
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <!--      <nz-switch style="margin-left: 15px;"  [(ngModel)]="hash" nzCheckedChildren="Yes" nzUnCheckedChildren="No"></nz-switch>-->
+      <!--             <nz-rate [ngModel]="1"></nz-rate>-->
+    </nz-input-group>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button nzType="primary"
+                (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button
+                nzType="primary"
+                (click)="handleOk('Egg And Cheese Sandwich')">Send To Cart
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>
+
+<nz-modal *ngIf="panel === 4"
+          [(nzVisible)]="isVisible2"
+          [nzCloseIcon]="close"
+          [nzContent]="modalContent"
+          [nzFooter]="null"
+          [nzBodyStyle]="{'background-color':'#D21241'}"
+          (nzOnCancel)="handleCancel1()"
+>
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px">French Toast</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
+      <img src="../../../assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <p style="margin-left: 40px;font-weight: bold;color: white">Bacon</p>
+      <p style="margin-left: 75px;font-weight: bold;color: white">Sausage</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Extra Egg</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(false)" *ngIf="Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(true)" *ngIf="!Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(false)" *ngIf="Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <br>
+      <p style="margin-left: 25px;font-weight: bold;color: white">Brown Bread</p>
+      <p style="margin-left: 35px;font-weight: bold;color: white">White Bread</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Hashbrown</p><br>
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <!--             <nz-rate [ngModel]="1"></nz-rate>-->
+    </nz-input-group>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button nzType="primary"
+                (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button
+                nzType="primary"
+                (click)="handleOk('French Toast'  )">Send To Cart
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>
+
+<nz-modal *ngIf="panel === 5"
+          [(nzVisible)]="isVisible2"
+          [nzCloseIcon]="close"
+          [nzContent]="modalContent"
+          [nzFooter]="null"
+          [nzBodyStyle]="{'background-color':'#D21241'}"
+          (nzOnCancel)="handleCancel1()"
+>
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px">Eggs</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Style Your Egg</p><br>
+      <img src="../../../assets/dssb.jpg" (click)="changeSunny(true)" *ngIf="!sunny"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/dssb.jpg" (click)="changeSunny(false)" *ngIf="sunny"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/huhu.jpg" (click)="changeOver(true)" *ngIf="!over"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/huhu.jpg" (click)="changeOver(false)" *ngIf="over"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/errr.jpg" (click)="changeScrambled(true)" *ngIf="!scrambled"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/errr.jpg" (click)="changeScrambled(false)" *ngIf="scrambled"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+      <p style="margin-left: 20px;font-weight: bold;color: white">Sunny Sideup</p>
+      <p style="margin-left: 45px;font-weight: bold;color: white">Overeasy</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Scrambled</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
+      <img src="../../../assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+           style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <p style="margin-left: 40px;font-weight: bold;color: white">Bacon</p>
+      <p style="margin-left: 75px;font-weight: bold;color: white">Sausage</p>
+      <p style="margin-left: 55px;font-weight: bold;color: white">Extra Egg</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../assets/toast.jpg" (click)="changeBrownbread(false)" *ngIf="Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(true)" *ngIf="!Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/hi.jpg"(click)="changeWhitebread(false)" *ngIf="Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <br>
+      <p style="margin-left: 25px;font-weight: bold;color: white">Brown Bread</p>
+      <p style="margin-left: 35px;font-weight: bold;color: white">White Bread</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Hashbrown</p><br>
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <!--             <nz-rate [ngModel]="1"></nz-rate>-->
+    </nz-input-group>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button nzType="primary"
+                (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
+                nz-button
+                nzType="primary"
+                (click)="handleOk('Eggs')">Send To Cart
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>
+
+<button style="background-color: #D21241;margin-left:350px;border-color: #D21241;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;" nz-button
+        [nzType]="'default'" (click)="showModal()"><span><i style="color: white;font-size: large" nz-icon
+                                                            nzType="unlock" nzTheme="fill"></i></span></button>
+<nz-modal  [(nzVisible)]="isVisible3" nzTitle="Login" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">
+  <ng-container *nzModalContent>
+
+    <nz-input-group [nzSuffix]="suffixTemplate">
+      <input
+        [type]="passwordVisible ? 'text' : 'password'"
+        nz-input
+        placeholder="input password"
+        [(ngModel)]="password"
+      />
+    </nz-input-group>
+    <ng-template #suffixTemplate>
+      <i nz-icon [nzType]="passwordVisible ? 'eye-invisible':'eye'" (click)="passwordVisible = !passwordVisible"></i>
+    </ng-template>
+
+  </ng-container>
+</nz-modal>
+
+<!--jojiupoiupi[o][p]\p-->
+<!--cheese omelette modal-->
+<!--<nz-modal [(nzVisible)]="isVisible2" nzTitle="Cheese Omelette" (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk()" >-->
+<!--  <ng-container *nzModalContent>-->
+<!--    <nz-input-group nzCompact>-->
+<!--      <p>Select Your Protien</p>-->
+<!--      <nz-select style="width: 200px;margin-left: 10px" [ngModel]="''">-->
+<!--        <nz-option [nzLabel]="'Bacon'" [nzValue]="'Bacon'"></nz-option>-->
+<!--        <nz-option [nzLabel]="'Sausage'" [nzValue]="'Sausage'"></nz-option>-->
+<!--        <nz-option [nzLabel]="'Extra Egg'" [nzValue]="'Extra Egg'"></nz-option>-->
+<!--      </nz-select>-->
+<!--    </nz-input-group>-->
+
+<!--    <nz-input-group nzCompact>-->
+<!--      <p>Select Your Toast</p>-->
+<!--      <nz-select style="width: 200px;margin-left: 22px" [ngModel]="''">-->
+<!--        <nz-option [nzLabel]="'White Bread'" [nzValue]="'White Bread'"></nz-option>-->
+<!--        <nz-option [nzLabel]="'Brown Bread'" [nzValue]="'Brown Bread'"></nz-option>-->
+<!--      </nz-select>-->
+<!--    </nz-input-group>-->
+
+<!--    <nz-input-group nzCompact>-->
+<!--      <p>Select Hashbrown</p>-->
+<!--      <nz-select style="width: 200px;margin-left: 15px" [ngModel]="''">-->
+<!--        <nz-option [nzLabel]="'Yes'" [nzValue]="'Yes'"></nz-option>-->
+<!--        <nz-option [nzLabel]="'No'" [nzValue]="'No'"></nz-option>-->
+
+<!--      </nz-select>-->
+
+<!--    </nz-input-group>-->
+
+<!--  </ng-container>-->
+
+<!--</nz-modal>-->
+<!--jkhkjhkjhlkjlojojo;oipp'o-->
+<!--<div nz-row style=" padding-left: 7px;background-color: #D21241;">-->
+<!--  <div nz-row *ngIf="panel === 1" style="width: 100vw;">-->
+<!--    <div style="margin-top: 25px;width: 100%">-->
+<!--      <div style="text-align:center; padding-bottom: 20px;margin-left:-9px " class="css-3d-text ">Cheese Omelette</div>-->
+<!--&lt;!&ndash;      <div style="width: 400px;height: 0.5px;background-color: #fafafa;margin-bottom: 30px;"></div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px; margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/005.jpg);background-size: cover; width: 250px; height: 250px; border-radius:150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"-->
+<!--                   (click)="click('Cheese Omelette','Hashbrown')"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size:20px; " class="back">-->
+<!--            Hashbrown-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image:url(../../../assets/003.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Cheese Omelette','Bacon')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Bacon-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/004.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Cheese Omelette','Sausage')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Sausage-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/toast.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Cheese Omelette','Brown Bread')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Brown Bread-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24" nzOffset="9">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left:-110px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/hi.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top:105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Cheese Omelette','White bread')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            White Bread-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div nz-row *ngIf="panel === 2" style="width: 100vw">-->
+<!--    <div style="margin-top:15px; width: 100%;text-align: center; margin-left: -13px">-->
+<!--      <div style="padding-bottom: 20px" class="css-3d-text">Pancakes</div>-->
+<!--&lt;!&ndash;      <div style="width: 400px;height: 0.5px;background-color: #fafafa;"></div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="3" nzMd="3" nzSm="0"></div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px; margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/005.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;padding-top: 150px">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height:50px;background-color: white;margin-top: 45%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Pancake','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Hashbrown-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px; margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/003.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px; ">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Pancake','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Bacon-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left:30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/004.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Pancake','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Sausage-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24" style="padding-top: 10px" class="card"></div>-->
+<!--  </div>-->
+<!--  <div nz-row *ngIf="panel === 3">-->
+<!--    <div style="margin-top: 25px;width: 100%; text-align: center">-->
+<!--      <div style="padding-bottom: 20px"  class="css-3d-text">Egg & Cheese Sandwich</div>-->
+<!--&lt;!&ndash;      <div style="width: 400px;height: 0.5px;background-color: #fafafa;"></div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 35px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/005.jpg);background-size: cover; width: 250px; height: 250px; border-radius:150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size:20px" class="back">-->
+<!--            Hashbrown-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 35px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/003.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Bacon-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 35px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/004.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Sausage-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 35px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/007.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img cdsrc="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Brown Bread-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24" nzOffset="9">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left:-110px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/008.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height:50px;background-color:white;margin-top:105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            White Bread-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div nz-row *ngIf="panel === 4" style="width: 100vw">-->
+<!--    <div style="margin-top: 25px; width: 100%;text-align: center;margin-left: -13px">-->
+<!--      <div style="padding-bottom: 20px" class="css-3d-text">French Toast</div>-->
+<!--&lt;!&ndash;      <div style="width: 400px;height: 0.5px;background-color: #fafafa;"></div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="3" nzMd="3" nzSm="0"></div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/005.jpg);background-size: cover; width: 250px; height: 250px; border-radius:150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size:20px" class="back">-->
+<!--            Hashbrown-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/003.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Bacon-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/004.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Egg & Cheese Sandwich\n'+-->
+<!--'\n','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Sausage-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24" style="padding-top: 10px" class="card"></div>-->
+<!--  </div>-->
+<!--  <div nz-row *ngIf="panel === 5">-->
+<!--    <div style="margin-top: 25px;width: 100%;text-align: center;margin-left: -13px">-->
+<!--      <div style="padding-bottom: 20px" class="css-3d-text">Eggs</div>-->
+<!--&lt;!&ndash;      <div style="width: 400px;height:0.5px;background-color: #fafafa;"></div>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/errr.jpg);background-size: cover; width: 250px; height: 250px; border-radius:150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Eggs','Hashbrown')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px;"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size:20px" class="back">-->
+<!--            Scrambled Eggs-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--&lt;!&ndash;               style="background-image: url(../../../assets/dssb.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">&ndash;&gt;-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Eggs','Bacon')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Sunny Side Up-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/huhu.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Eggs','Sausage')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Over Easy-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left: 30px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/fdfsff.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Eggs','Brown Bread')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size: 20px" class="back">-->
+<!--            Medium Egg-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div nz-col nzLg="6" nzMd="6" nzSm="24" nzOffset="9">-->
+<!--      <div class="card">-->
+<!--        <div class="content" style="border-radius: 150px;margin-left:-110px">-->
+<!--          <div class="front"-->
+<!--               style="background-image: url(../../../assets/008.jpg);background-size: cover; width: 250px; height: 250px; border-radius: 150px;">-->
+<!--            <nz-card-->
+<!--              style="width:30%;height: 50px;background-color: white;margin-top: 105%;margin-left: 35%;margin-right: 35%;border-radius: 7px;box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;"-->
+<!--              (click)="click('Eggs','White Bread')">-->
+<!--              <img src="../../../assets/icon.png" width="30px" height="30px" style="margin-top: -28px"/>-->
+<!--            </nz-card>-->
+<!--          </div>-->
+<!--          <div style="font-size:20px" class="back">-->
+<!--            White Bread-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<p style="color:#D21241;margin-left:65px;margin-top: 20px"> Designed And Developed By TECHNOGRAPHY</p>
+<!--</div>-->
+
+<nz-modal style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Cart" (nzOnCancel)="handleCancel()"
+          [nzCancelText]="null"
+          [nzOkText]="null">
+
+  <div *nzModalContent style="color: #D21241;">
+    <nz-card
+      style="width:100%;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
+      *ngFor="let i of cart">
+      <div nz-row>
+        <div nz-col nzSpan="22">
+          <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+        </div>
+        <div nz-col nzSpan="2">
+          <button nz-button nzType="primary" [nzSize]="'small'"
+                  style="background-color: #D21241;border-color: #D21241;width:30px;height:30px;margin-right: 10px"
+                  (click)="deleteQty(i)"><i nz-icon nzType="delete"></i></button>
+        </div>
+      </div>
+      <div nz-row style="margin-top: 10px;">
+        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+          <p nz-typography style="font-weight: bold">Protien</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+          <p nz-typography style="font-weight: bold">Toast</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+          <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+          <p nz-typography style="font-weight: bold">Egg Style</p>
+        </div>
+      </div>
+      <div nz-row style="margin-top: -5px">
+        <div nz-col nzSpan="6" style="text-align:left">
+          <p nz-typography style="font-weight: bold;color: #475057">{{i.protien}}</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align:left">
+          <p nz-typography style="font-weight: bold;color: #475057">{{i.toast}}</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align:left">
+          <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
+        </div>
+        <div nz-col nzSpan="6" style="text-align:left">
+          <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
+        </div>
+      </div>
+    </nz-card>
+
+    <nz-mention [nzSuggestions]="suggestions">
+      <!--      <p style="font-weight: bold">Favourite</p>-->
+      <!--      <p style="font-weight: bold" *ngFor="let item of cart">{{item.protein}}{{item.toast}}{{item.hashbrown}}{{item.eggstyle}}</p>-->
+      <!--      <textarea rows="4" nz-input ></textarea><br><br>-->
+      <nz-divider></nz-divider>
+      <p style="font-weight: bold">Time</p>
+      <nz-time-picker></nz-time-picker>
+      <p style="padding-top:10px;font-weight: bold">Note</p>
+      <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" nzMentionTrigger></textarea>
+    </nz-mention>
+    <div style="text-align:right;margin-top: 10px;margin-right: 22px">
+      <button nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+      color: white;" (click)="sendToKitchen()">{{buttonText}}
+      </button>
+    </div>
+  </div>
+</nz-modal>
+
+

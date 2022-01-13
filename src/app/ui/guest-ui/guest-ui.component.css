@@ -1,0 +1,113 @@
+#modalContent{
+  background-color: #D21241;
+}
+.ant-switch-checked{
+  background-color: #D21241;
+}
+.col{
+
+}
+
+.scr0ll {
+  padding-left: 40px;
+  padding-top: 25px;
+  max-height: 100%;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /*width: 500px;*/
+  height: 400px;
+  /*background-color: blue;*/
+  /*overflow: hidden;*/
+  /*overflow-x: auto;*/
+  /*display: flex;*/
+}
+
+.myCol {
+  min-width: 250px;
+  height: 110px;
+  line-height: 110px;
+  text-align: center;
+  padding-top: 40px;
+
+  /*border: solid black;*/
+  /*width: 2000px;*/
+  /*height: 100px;*/
+  /*background-color: green;*/
+  /*float: left;*/
+}
+
+.css-3d-text {
+  font-size: 24px;
+  color: #fafafa;
+  margin-left: 20px;
+  font-family: Arial Black, Gadget, sans-serif;
+  text-shadow: 0px 0px 0 rgb(217,217,217),
+  0px 1px 0 rgb(185,185,185),
+  0px 2px 0 rgb(152,152,152),
+  0px 3px 0 rgb(119,119,119),
+  0px 4px  0 rgb(86,86,86),
+  0px 5px 4px rgba(0,0,0,0.04),
+  0px 5px 1px rgba(0,0,0,0.5),
+  0px 0px 4px rgba(0,0,0,.2);
+}
+
+
+.card {
+  width: 250px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 250px;
+  perspective: 250px;
+  margin-bottom: 80px;
+
+
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card:active .content {
+  transform: rotateY( 180deg ) ;
+  transition: transform 0.5s ease-in-out;
+}
+
+.front,
+.back {
+  position:absolute;
+  height:100%;
+  width:100%;
+  background: white;
+  line-height: 300px;
+  color: #03446A;
+  text-align:center;
+  font-size:60px;
+  border-radius:5px;
+  backface-visibility:hidden;
+
+}
+
+.back {
+  background: white;
+  color: #D21241;
+  font-weight: bold;
+  transform: rotateY( 180deg );
+}
+.ant-switch-checked{
+  background-color: #D21241;
+}
+.ant-modal-header {
+  background-color: #D21241;
+}
+.ant-modal-body{
+  background-color: #D21241;
+}
+.ant-modal-footer{
+  background-color: #D21241;
+}

@@ -1,0 +1,16 @@
+body ::-webkit-scrollbar {
+  display: none;
+}
+.ant-switch-checked{
+  background-color: #D21241;
+  }
+/*.ant-modal-header {*/
+/*  background-color: #D21241;*/
+/*}*/
+/*.ant-modal-body{*/
+/*  background-color: #D21241;*/
+/*}*/
+/*.ant-modal-footer{*/
+/*  background-color: #D21241;*/
+/*}*/
+

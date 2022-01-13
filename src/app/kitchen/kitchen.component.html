@@ -1,0 +1,60 @@
+<div nz-row style="background-color:white;padding: 20px;height: 10vh">
+  <div nz-col nzSpan="4">
+    <img src="../../../assets/i01_abc (1).jpg" style="height: 50px"/>
+  </div>
+</div>
+<div nz-row style="height:80vh; padding-left:7px;background-color:#D21241;overflow: scroll;
+margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+  <div nz-col nzSpan="24">
+    <div nz-row style="margin-bottom: 15px;">
+      <div nz-col nzSpan="6"><h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">
+        Orders</h3></div>
+      <div nz-col nzSpan="6"></div>
+      <div nz-col nzSpan="6"></div>
+      <div nz-col nzSpan="6"><h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;margin-left: 150px">
+        Total Orders : 250</h3></div>
+    </div>
+    <div nz-row nzJustify="space-around">
+      <div style="height: 6vh;" nz-col nzSpan="12">
+        <h5 nz-typography style="color: #fafafa;margin-left: 20px">New Orders</h5>
+      </div>
+      <div style="height: 6vh;" nz-col nzSpan="6">
+        <h5 nz-typography style="color: #fafafa;margin-left: 20px">In Progress</h5>
+      </div>
+      <div style="height: 6vh;" nz-col nzSpan="6">
+        <h5 nz-typography style="color: #fafafa;margin-left: 20px">Finished</h5>
+      </div>
+    </div>
+    <div nz-row nzJustify="space-around">
+      <div style="height: 67vh;" nz-col nzSpan="12">
+        <div nz-row style="height: 67vh;overflow: scroll;">
+          <div nz-col nzSpan="11" style="padding-left: 15px;margin-right: 5px">
+            <app-order-card [width]="350" [btnStatus]="1" [btnText]="'Start'" [orderStatus]="1" [roomNumber]="'001'">
+            </app-order-card>
+          </div>
+          <div nz-col nzSpan="11" style="padding-left: 15px;margin-right: 5px">
+            <app-order-card [width]="350" [btnStatus]="1" [btnText]="'Start'" [orderStatus]="1" [roomNumber]="'002'"></app-order-card>
+          </div>
+          <div nz-col nzSpan="11" style="padding-left: 15px;margin-right: 5px">
+            <app-order-card [width]="350" [btnStatus]="1" [btnText]="'Start'"[orderStatus]="1" [roomNumber]="'003'"></app-order-card>
+          </div>
+        </div>
+      </div>
+      <div style="height: 67vh;overflow: scroll" nz-col nzSpan="6">
+        <app-order-card [width]="350"[btnStatus]="1" [btnText]="'Finished'" [orderStatus]="2" [roomNumber]="'004'"></app-order-card>
+        <app-order-card [width]="350"[btnStatus]="1"[btnText]="'Finished'" [orderStatus]="2" [roomNumber]="'005'" ></app-order-card>
+        <app-order-card [width]="350"[btnStatus]="1" [btnText]="'Finished'" [orderStatus]="2" [roomNumber]="'006'"></app-order-card>
+      </div>
+
+      <div style="height: 67vh;overflow: scroll;" nz-col nzSpan="6">
+        <app-order-card [width]="350"[btnStatus]="1" [orderStatus]="3" [roomNumber]="'007'" [btnText]="'Served'" ></app-order-card>
+        <app-order-card [width]="350"[btnStatus]="1" [orderStatus]="3" [roomNumber]="'008'" [btnText]="'Served'" ></app-order-card>
+        <app-order-card [width]="350"[btnStatus]="1" [orderStatus]="3" [roomNumber]="'009'" [btnText]="'Served'" ></app-order-card>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div style="text-align: center;margin-top: 20px"><span nz-typography><strong>Design & Developed By Technography</strong></span>
+</div>
