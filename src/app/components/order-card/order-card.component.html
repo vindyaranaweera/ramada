@@ -2,27 +2,67 @@
   style="width:440px; box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px"
   [style.background-color]="isAvailable?'white':'#ffffff'" [style.border.color]="isAvailable?'white':'#ffffff'" [style.width.px]="width"
   (click)="showOrderDetails(order)">
-  <span nz-typography style="text-align: center"><strong
-    style="font-size: x-large;font-weight: bold;color: #D21241">{{order}}</strong></span>
-  <nz-table #basicTable [nzData]="listOfData" [nzShowPagination]="false">
-    <thead>
-    <tr>
-      <th>Category</th>
-      <th>Item</th>
-      <th>Qty</th>
-    </tr>
-    </thead>
-    <tbody style="height: 50px;overflow: scroll">
-    <tr *ngFor="let data of basicTable.data">
-      <td style="color:#f3c500">{{ data.category}}</td>
-      <td>{{ data.item}}</td>
-      <td>{{ data.qty}}</td>
-    </tr>
-    </tbody>
-  </nz-table>
+  <nz-card
+    style="width:100%;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
+    *ngFor="let i of cart">
+    <div nz-row>
+      <div nz-col nzSpan="22">
+        <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+      </div>
+      <div nz-col nzSpan="2">
+
+      </div>
+    </div>
+    <div nz-row style="margin-top: 10px;">
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold">Protien</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left;color: #475057">
+        <p nz-typography style="font-weight: bold">Toast</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold">Egg Style</p>
+      </div>
+    </div>
+    <div nz-row style="margin-top: -5px">
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{i.protien}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{i.toast}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
+      </div>
+    </div>
+  </nz-card>
+<!--  <span nz-typography style="text-align: center"><strong-->
+<!--    style="font-size: x-large;font-weight: bold;color: #D21241">{{order}}</strong></span>-->
+<!--  <nz-table #basicTable [nzData]="listOfData" [nzShowPagination]="false">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>Category</th>-->
+<!--      <th>Item</th>-->
+<!--      <th>Qty</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody style="height: 50px;overflow: scroll">-->
+<!--    <tr *ngFor="let data of basicTable.data">-->
+<!--      <td style="color:#f3c500">{{ data.category}}</td>-->
+<!--      <td>{{ data.item}}</td>-->
+<!--      <td>{{ data.qty}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </nz-table>-->
   <div nz-row style="padding-top:10px;">
     <div nz-col nzSpan="8" >
-      <h3 *ngIf="orderStatus==1||orderStatus==2||orderStatus==3" >{{roomNumber}}</h3><br>
+      <h3 *ngIf="orderStatus==1||orderStatus==2||orderStatus==3||orderStatus==4" >{{roomNumber}}</h3><br>
     </div>
     <div nz-col nzSpan="8" *ngIf="orderStatus==100">
       <h3 >{{roomNumber}}</h3><br>
@@ -34,7 +74,10 @@
       <h3 style="margin-left:10px;margin-right: 10px;color: #cece12">Processing</h3>
     </div>
     <div *ngIf="orderStatus==3">
-      <h3 style="margin-left:20px;color: darkgreen;margin-right: 15px">Finished</h3>
+      <h3 style="margin-left:20px;color: darkgreen;margin-right: 15px">Finish</h3>
+    </div>
+    <div *ngIf="orderStatus==4">
+      <h3 style="margin-left:20px;color: darkgreen;margin-right: 15px">Serve</h3>
     </div>
 
     <div nz-col nzSpan="8" *ngIf="btnStatus==1">

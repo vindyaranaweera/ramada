@@ -33,6 +33,7 @@ export class OrderCardComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
 
   listOfData: any;
+  cart: any;
 
 
   constructor() {
