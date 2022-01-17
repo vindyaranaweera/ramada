@@ -1,9 +1,14 @@
 body ::-webkit-scrollbar {
   display: none;
 }
-.ant-switch-checked{
+body{
+  /*background-color: #000c17;*/
+}
+
+.ant-switch-checked {
   background-color: #D21241;
-  }
+}
+
 /*.ant-modal-header {*/
 /*  background-color: #D21241;*/
 /*}*/
@@ -14,3 +19,6 @@ body ::-webkit-scrollbar {
 /*  background-color: #D21241;*/
 /*}*/
 
+.ant-picker-footer{
+  display: none;
+}
