@@ -12,13 +12,80 @@
   </div>
 </div>
 <div style="text-align: right">
-  <nz-affix [nzOffsetTop]="220">
-    <nz-badge [nzCount]="totalQuantity" style="margin-right: 24px;">
-      <nz-avatar nzIcon="shopping-cart" [nzShape]="'square'"
-                 style="background-color: #D21241; color: #fafafa;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"
-                 (click)="showCart()"></nz-avatar>
-    </nz-badge>
-  </nz-affix>
+  <!--  <nz-affix [nzOffsetTop]="220">-->
+  <!--    <nz-badge style="margin-right: 24px;text-align: center">-->
+  <!--      <nz-avatar nzIcon="eye" [nzShape]="'square'"-->
+  <!--                 style="background-color: #D21241; color: #fafafa;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"-->
+  <!--                 (click)="showCart()"></nz-avatar>-->
+  <!--    </nz-badge>-->
+  <!--  </nz-affix>-->
+</div>
+<div nz-row style="margin-top: 5vh">
+  <div nz-col nzSpan="23">
+    <div nz-row style="height:50vh;">
+      <div nz-col class="gutter-row" [nzSpan]="24">
+        <div class="inner-box scr0ll" style="padding-left: 9vw;padding-right: -5px;margin-right: -20px">
+          <div class="myCol">
+            <app-category-card image="../../../ramada/assets/001.jpg" width="155px" text="Cheese Omelette"
+                               name="5 Choices Available" background="#D21241" text_color="white"
+                               (click)="changeItemPanel(1);">
+            </app-category-card>
+          </div>
+          <div class="myCol">
+            <app-category-card image="../../../ramada/assets/006.jpg" width="150px" text="Pancake"
+                               name="3 Choices Available" background="#D21241" text_color="white"
+                               (click)="changeItemPanel(2);"></app-category-card>
+          </div>
+          <div class="myCol">
+            <app-category-card image="../../../ramada/assets/new.jpg" width="150px" text="Egg & Cheese Sandwich"
+
+                               name="5 Choices Available" background="#D21241" text_color="white"
+                               (click)="changeItemPanel(3);"></app-category-card>
+          </div>
+          <div class="myCol">
+            <app-category-card image="../../../ramada/assets/pan.jpg" width="150px" text="French Toast"
+                               name="3 Choices Available" background="#D21241" text_color="white"
+                               (click)="changeItemPanel(4);"></app-category-card>
+          </div>
+          <div class="myCol">
+            <app-category-card image="../../../ramada/assets/e2.jpg" width="150px" text="Eggs"
+                               name="5 Choices Available" background="#D21241" text_color="white"
+                               (click)="changeItemPanel(5);"></app-category-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSpan="1" style="float: right">
+    <nz-affix [nzOffsetTop]="240" style="text-align: right;">
+      <div [ngStyle]="{'width':myInnerWidth<768 ?'50px':'90%'}"
+           style="float:right;margin-left:9%;height: 290px;border:3px solid white; outline: none; background-color: #d21241;border-bottom-left-radius: 10px;border-top-left-radius: 10px;box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">
+        <div nz-row style="text-align: center">
+          <div nz-col nzSpan="24" style="text-align: center">
+            <nz-divider style="color: #fafafa;background-color: #fafafa"></nz-divider>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center;justify-content: center;justify-items: center" (click)="showCart()">
+            <i nz-icon nzType="schedule" nzTheme="fill" style="color: #fafafa;font-size: 30px"></i>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center">
+            <nz-divider style="color: #fafafa;background-color: #fafafa"></nz-divider>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center">
+            <b style="color: #fafafa;font-size: 20px">0/2</b>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center">
+            <nz-divider style="color: #fafafa;background-color: #fafafa"></nz-divider>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center;justify-content: center;justify-items: center" (click)="showModal()">
+            <i nz-icon nzType="unlock" nzTheme="fill" style="color: #fafafa;font-size: 30px"></i>
+          </div>
+          <div nz-col nzSpan="24" style="text-align: center">
+            <nz-divider style="color: #fafafa;background-color: #fafafa"></nz-divider>
+          </div>
+        </div>
+      </div>
+    </nz-affix>
+  </div>
 </div>
 <!--<div nz-row style="height:50vh;background-color: gray; padding-left: 7px; ">-->
 <!--  <div nz-col nzXs="8" nzSm="12" nzMd="6" nzLg="2" nzXl="2"></div>-->
@@ -49,38 +116,7 @@
 <!--  </div>-->
 
 <!--</div>-->
-<div nz-row style="height:50vh;">
-  <div nz-col class="gutter-row" [nzSpan]="24">
-    <div class="inner-box scr0ll" style="padding-left: 9vw;padding-right: -5px;">
-      <div class="myCol">
-        <app-category-card image="../../../ramada/assets/001.jpg" width="155px" text="Cheese Omelette"
-                           name="5 Choices Available" background="#D21241" text_color="white"
-                           (click)="changeItemPanel(1);">
-        </app-category-card>
-      </div>
-      <div class="myCol">
-        <app-category-card image="../../../ramada/assets/006.jpg" width="150px" text="Pancake"
-                           name="3 Choices Available" background="#D21241" text_color="white"
-                           (click)="changeItemPanel(2);"></app-category-card>
-      </div>
-      <div class="myCol">
-        <app-category-card image="../../../ramada/assets/new.jpg" width="150px" text="Egg & Cheese Sandwich"
-                           name="5 Choices Available" background="#D21241" text_color="white"
-                           (click)="changeItemPanel(3);"></app-category-card>
-      </div>
-      <div class="myCol">
-        <app-category-card image="../../../ramada/assets/pan.jpg" width="150px" text="French Toast"
-                           name="3 Choices Available" background="#D21241" text_color="white"
-                           (click)="changeItemPanel(4);"></app-category-card>
-      </div>
-      <div class="myCol">
-        <app-category-card image="../../../ramada/assets/e2.jpg" width="150px" text="Eggs"
-                           name="5 Choices Available" background="#D21241" text_color="white"
-                           (click)="changeItemPanel(5);"></app-category-card>
-      </div>
-    </div>
-  </div>
-</div>
+
 <nz-modal *ngIf="panel=== 1"
           [(nzVisible)]="isVisible2" [nzContent]="modalContent" [nzCloseIcon]="close"
           (nzOnCancel)="handleCancel1()" [nzBodyStyle]="{'background-color':'#D21241'}" [nzFooter]="null">
@@ -94,23 +130,23 @@
       <p style="text-align:center;font-weight:bold;color: white;font-size:17px">Select Your Protien</p>
       <br>
       <div>
-        <div nz-row  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" style="height: 120px;margin-top: 10px;">
+        <div nz-row [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" style="height: 120px;margin-top: 10px;">
           <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
-          <div nz-col  nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px; margin-right: 20px">
+          <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px; margin-right: 20px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
                  style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
                  style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
             <p style="margin-left:20px;font-weight: bold;color: white">Extra Egg</p>
           </div>
-          <div nz-col  nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px; margin-right: 20px">
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px; margin-right: 20px">
             <img src="../../../ramada/assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
                  style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
             <img src="../../../ramada/assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
                  style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
             <p style="margin-left: 30px;font-weight: bold;color: white">Bacon</p>
           </div>
-          <div nz-col  nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px; margin-right: 20px">
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px; margin-right: 20px">
             <img src="../../../ramada/assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
                  style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
             <img src="../../../ramada/assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
@@ -170,16 +206,18 @@
         <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button nzType="primary"
-                (click)="handleCancel()">Cancel
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
         </button>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button
-                nzType="primary"
-                (click)="handleOk('Cheese Omelette' )">Send To Cart
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk('Cheese Omelette' )">Ready For Breakfast
         </button>
       </div>
     </div>
@@ -204,7 +242,8 @@
     <nz-input-group nzCompact>
       <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
       <div>
-        <div  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}"nz-row style="width:470px;height: 120px;margin-top: 10px;">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
           <div nz-col nzSpan="6" nzOrder="4"></div>
           <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
@@ -249,16 +288,18 @@
         <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button nzType="primary"
-                (click)="handleCancel()">Cancel
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
         </button>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button
-                nzType="primary"
-                (click)="handleOk('Pancake'  )">Send To Cart
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk('Pancake'  )">Ready For Breakfast
         </button>
       </div>
     </div>
@@ -281,7 +322,8 @@
     <nz-input-group nzCompact>
       <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
       <div>
-        <div  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row style="width:470px;height: 120px;margin-top: 10px;">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
           <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
           <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
@@ -342,16 +384,18 @@
         <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button nzType="primary"
-                (click)="handleCancel()">Cancel
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
         </button>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button
-                nzType="primary"
-                (click)="handleOk('Egg And Cheese Sandwich')">Send To Cart
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk('Egg And Cheese Sandwich')">Ready For Breakfast
         </button>
       </div>
     </div>
@@ -375,7 +419,8 @@
     <nz-input-group nzCompact>
       <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
       <div>
-        <div  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row style="width:470px;height: 120px;margin-top: 10px;">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
           <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
           <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
@@ -435,16 +480,18 @@
         <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button nzType="primary"
-                (click)="handleCancel()">Cancel
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
         </button>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button
-                nzType="primary"
-                (click)="handleOk('French Toast'  )">Send To Cart
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk('French Toast'  )">Ready For Breakfast
         </button>
       </div>
     </div>
@@ -468,7 +515,8 @@
     <nz-input-group nzCompact>
       <p style="font-weight: bold;color: white;font-size:17px">Style Your Egg</p><br>
       <div>
-        <div  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row style="width:470px;height: 120px;margin-top: 10px;">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
           <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
           <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
             <img src="../../../ramada/assets/dssb.jpg" (click)="changeSunny(true)" *ngIf="!sunny"
@@ -499,7 +547,8 @@
       <br>
       <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
       <div>
-        <div  [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row style="width:470px;height: 120px;margin-top: 10px;">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
           <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
           <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
             <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
@@ -559,26 +608,28 @@
         <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button nzType="primary"
-                (click)="handleCancel()">Cancel
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
         </button>
       </div>
       <div nz-col nzSpan="6">
-        <button style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px"
-                nz-button
-                nzType="primary"
-                (click)="handleOk('Eggs')">Send To Cart
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk('Eggs')">Ready For Breakfast
         </button>
       </div>
     </div>
   </ng-template>
 </nz-modal>
 
-<button style="background-color: #D21241;float:right; border-color: #D21241;
-box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;padding-right: 15px" nz-button
-        [nzType]="'default'" (click)="showModal()"><span><i style="color: white;font-size: large" nz-icon
-                                                            nzType="unlock" nzTheme="fill"></i></span></button>
+<!--<button style="background-color: #D21241;float:right; border-color: #D21241;-->
+<!--box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;padding-right: 15px" nz-button-->
+<!--        [nzType]="'default'" (click)="showModal()"><span><i style="color: white;font-size: large" nz-icon-->
+<!--                                                            nzType="unlock" nzTheme="fill"></i></span></button>-->
 <!--<nz-modal  [(nzVisible)]="isVisible3" nzTitle="Login" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">-->
 <!--  <ng-container *nzModalContent>-->
 <!--    <nz-input-group [nzSuffix]="suffixTemplate">-->
@@ -1070,54 +1121,56 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 
 <!--  </div>-->
 <p style="color:#D21241;margin-top:50px; text-align: center"> Designed And Developed By TECHNOGRAPHY</p>
 <!--</div>-->
-
-<nz-modal style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Cart" (nzOnCancel)="handleCancel()"
-          [nzCancelText]="null"
-          [nzOkText]="null">
+<nz-modal
+  style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Preview" (nzOnCancel)="handleCancel()"
+  [nzCancelText]="null"
+  [nzOkText]="null">
 
   <div *nzModalContent style="color: #D21241;">
-    <nz-card
-      style="width:100%;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;"
-      *ngFor="let i of cart">
-      <div nz-row>
-        <div nz-col nzSpan="22">
-          <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+    <nz-row>
+      <nz-card
+        style="width:100%;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+        *ngFor="let i of cart">
+        <div nz-row>
+          <div nz-col nzSpan="22">
+            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+          </div>
+          <div nz-col nzSpan="2">
+            <button nz-button nzType="primary" [nzSize]="'small'"
+                    style="background-color: #D21241;border-color: #D21241;width:30px;height:30px;margin-right: 10px"
+                    (click)="deleteQty(i)"><i nz-icon nzType="delete"></i></button>
+          </div>
         </div>
-        <div nz-col nzSpan="2">
-          <button nz-button nzType="primary" [nzSize]="'small'"
-                  style="background-color: #D21241;border-color: #D21241;width:30px;height:30px;margin-right: 10px"
-                  (click)="deleteQty(i)"><i nz-icon nzType="delete"></i></button>
+        <div nz-row style="margin-top: 10px;">
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold">Protien</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left;color: #475057">
+            <p nz-typography style="font-weight: bold">Toast</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold">Egg Style</p>
+          </div>
         </div>
-      </div>
-      <div nz-row style="margin-top: 10px;">
-        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-          <p nz-typography style="font-weight: bold">Protien</p>
+        <div nz-row style="margin-top: -5px">
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.protien}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.toast}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
+          </div>
         </div>
-        <div nz-col nzSpan="6" style="text-align:left;color: #475057">
-          <p nz-typography style="font-weight: bold">Toast</p>
-        </div>
-        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-          <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
-        </div>
-        <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-          <p nz-typography style="font-weight: bold">Egg Style</p>
-        </div>
-      </div>
-      <div nz-row style="margin-top: -5px">
-        <div nz-col nzSpan="6" style="text-align:left">
-          <p nz-typography style="font-weight: bold;color: #475057">{{i.protien}}</p>
-        </div>
-        <div nz-col nzSpan="6" style="text-align:left">
-          <p nz-typography style="font-weight: bold;color: #475057">{{i.toast}}</p>
-        </div>
-        <div nz-col nzSpan="6" style="text-align:left">
-          <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
-        </div>
-        <div nz-col nzSpan="6" style="text-align:left">
-          <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
-        </div>
-      </div>
-    </nz-card>
+      </nz-card>
+    </nz-row>
 
     <nz-mention [nzSuggestions]="suggestions">
       <!--      <p style="font-weight: bold">Favourite</p>-->
@@ -1138,16 +1191,16 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 
         <div nz-col nzSpan="12">
           <button nz-button nzType="default" [disabled]="!right_now_enable" *ngIf="right_now_enable"
                   style="background-color: #D21241;border-color:#D21241; height: 30px;color: white;width: 100%;font-weight: bold"
-          (click)="setCurrentTime()">
+                  (click)="setCurrentTime()">
             RIGHT NOW
           </button>
         </div>
       </div>
-      <p style="padding-top:10px;font-weight: bold">Note</p>
-      <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" nzMentionTrigger></textarea>
+      <p style="padding-top:10px;font-weight: bold;">Note</p>
+      <textarea nz-input [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
     </nz-mention>
     <div style="text-align:right;margin-top: 10px;margin-right: 22px">
-      <button nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+      <button *ngIf="showSendtokitchen===1" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
       color: white;" (click)="sendToKitchen()">{{buttonText}}
       </button>
     </div>

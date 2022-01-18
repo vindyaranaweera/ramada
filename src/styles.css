@@ -22,3 +22,7 @@ body{
 .ant-picker-footer{
   display: none;
 }
+.ant-btn-primary{
+  background-color: #D21241;
+  border-color: #D21241;
+}

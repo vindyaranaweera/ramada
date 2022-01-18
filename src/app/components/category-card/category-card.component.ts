@@ -19,6 +19,8 @@ export class CategoryCardComponent implements OnInit {
   text: string = '';
   @Input()
   name:string='';
+  @Input()
+  select:string='';
 
   constructor() {
   }

@@ -5,13 +5,14 @@
 
   </nz-card>
   <img src="{{image}}"
-       [style.width]="width" style="height: 150px;border: white solid 5px; border-radius: 50%;  position: relative;background-color: #fafafa; margin-top: -580px;margin-left: -10px; zoom: inherit;
+       [style.width]="width" style="height:150px;border: white solid 5px; border-radius: 50%;  position: relative;background-color: #fafafa; margin-top: -580px;margin-left: -10px; zoom: inherit;
      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;"/>
 
   <ng-template #coverTemplate>
     <p [style.color]="text_color"
-       style="margin-top: 70%; text-align: center; color:white; font-size:20px; font-weight: bold">{{text}} </p>
+       style="margin-top: 70%; text-align:center; color:white; font-size:20px; font-weight:bold;margin-bottom:5px">{{text}} </p>
     <p [style.color]="text_color"
-       style="margin-top:-10px;text-align: center; color:white; font-size:15px; font-weight: bold">{{name}} </p>
+       style="margin-top:-10px;text-align:center; color:white; font-size:15px; font-weight:bold">{{name}} </p>
+
   </ng-template>
 </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {FormControl, Validators} from "@angular/forms";
 import {ro_RO} from "ng-zorro-antd/i18n";
@@ -20,7 +20,8 @@ interface cartItems {
   styleUrls: ['./guest-ui.component.css']
 })
 export class GuestUiComponent implements OnInit {
-
+  showSendtokitchen=1;
+  showDelete=1;
   panel = 1;
   cart: cartItems[] = [];
   totalQuantity = 0;
@@ -72,6 +73,8 @@ export class GuestUiComponent implements OnInit {
   }
 
   handleOk(cate: any): void {
+    this.isVisible = true;
+    console.log(this.cart);
     console.log('Button ok clicked!');
     if (cate === 'Pancake') {
       this.click(cate, '', '', this.hash, '');
@@ -127,6 +130,8 @@ export class GuestUiComponent implements OnInit {
   }
 
   showCart() {
+    this.showDelete=0;
+    this.showSendtokitchen=0;
     this.isVisible = true;
     console.log(this.cart);
   }
@@ -197,6 +202,10 @@ export class GuestUiComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+
+    // if(this.showDelete===0){
+    //   this.showDelete=1;
+    // }
 
   }
 
