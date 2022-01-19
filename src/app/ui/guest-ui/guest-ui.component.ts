@@ -88,6 +88,7 @@ export class GuestUiComponent implements OnInit {
       this.click(cate, '', '', this.hash, '');
     }
     this.isVisible2 = false;
+    alert('YOU HAVE 2 ORDERS LEFT!')
   }
 
 
@@ -138,7 +139,7 @@ export class GuestUiComponent implements OnInit {
 
   sendToKitchen() {
     this.isVisible = false;
-    alert('YOU HAVE 2 ORDERS LEFT!')
+    alert('MAKE SURE TIME WAS SELECTED!')
   }
 
   removeQty(i: any) {
