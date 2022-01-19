@@ -138,7 +138,7 @@ export class GuestUiComponent implements OnInit {
 
   sendToKitchen() {
     this.isVisible = false;
-    alert('Please Make Sure Your Time Was Selected')
+    alert('YOU HAVE 2 ORDERS LEFT!')
   }
 
   removeQty(i: any) {
@@ -185,7 +185,7 @@ export class GuestUiComponent implements OnInit {
     }
   }
 
-  deleteQty(i: any) {
+  deleteQty(i:any) {
     let index = this.cart.indexOf(i);
     this.modal.confirm({
       nzTitle: '<i>Your Item Has Been Removed!</i>',
@@ -201,15 +201,15 @@ export class GuestUiComponent implements OnInit {
   }
 
   handleCancel(): void {
-    this.isVisible = false;
-
+    console.log('Button cancel clicked!');
+    this.isVisible =false;
     // if(this.showDelete===0){
     //   this.showDelete=1;
     // }
 
   }
 
-  handleCancel1(): void {
+  handleCancel1():void {
     this.isVisible2 = false;
   }
 
