@@ -2,6 +2,9 @@ body ::-webkit-scrollbar {
   display: none;
 }
 body{
+  background-color: white;
+  padding: 0;
+  margin: 0;
   /*background-color: #000c17;*/
 }
 
@@ -23,6 +26,11 @@ body{
   display: none;
 }
 .ant-btn-primary{
+  background-color:#D21241;
+  border-color:#D21241;
+
+}
+.ant-btn-primary:hover{
   background-color:#D21241;
   border-color:#D21241;
 

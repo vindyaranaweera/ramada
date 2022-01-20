@@ -53,6 +53,7 @@ export class GuestUiComponent implements OnInit {
   right_now_enable = false;
 
   public myInnerWidth:any;
+  showSide:any=0;
 
   constructor(private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
@@ -384,6 +385,14 @@ export class GuestUiComponent implements OnInit {
       this.myInnerWidth = window.innerWidth;
       console.log("SCREEN : "+this.myInnerWidth);
     }, 1000);
+  }
+
+  clickSide(){
+    if(this.showSide===0){
+      this.showSide=1;
+    }else {
+      this.showSide=0;
+    }
   }
 }
 
