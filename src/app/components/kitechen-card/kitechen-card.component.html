@@ -1,0 +1,46 @@
+<div nz-col >
+  <nz-card [style.background-color]="bgColor" style="font-size: 20px;text-align: center;font-weight: bold" [nzTitle]="Heading">
+    <ng-template  style="text-align: center" #Heading>
+    <h2 style="font-weight: bold; margin-top: 5px">{{cardTitle}}</h2>
+  </ng-template>
+    <div class="cardData">
+      <p *ngIf="eggAvailable===1" >Egg Style :</p>
+    </div>
+    <div class="cardData">
+    <p *ngIf="eggAvailable===1"> {{eggStyle}}</p>
+    </div>
+    <div class="cardData">
+    <p>Protein : </p>
+    </div>
+    <div class="cardData">
+    <p>{{protien}}</p>
+    </div>
+    <div class="cardData">
+      <p>Toast : </p>
+    </div>
+    <div class="cardData">
+      <p >{{toast}}</p>
+    </div>
+    <div class="cardData">
+      <p>Hashbrown : </p>
+    </div>
+    <div class="cardData">
+      <p>{{hashbrown}}</p>
+    </div>
+    <div class="cardData">
+      <h4 style="font-weight: bold;
+">Room-No:</h4>
+    </div>
+    <div class="cardData">
+      <h4 style="font-weight: bold;">{{roomNo}}</h4>
+    </div>
+    <div class="cardData">
+      <h4 style="font-weight: bold;">Time:</h4>
+    </div>
+    <div class="cardData">
+      <h4 style="font-weight: bold;">{{time}}</h4>
+    </div>
+    <button nz-button nzType="primary" style="margin-top:20px;width: 99%;height: 40px;font-weight: bold;font-size:20px; padding-top: 2px">Done</button>
+
+  </nz-card>
+</div>
