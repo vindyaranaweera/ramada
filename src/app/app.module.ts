@@ -42,6 +42,7 @@ import {NzRateModule} from "ng-zorro-antd/rate";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { KitechenCardComponent } from './components/kitechen-card/kitechen-card.component';
 import { KitchenButtonComponent } from './components/kitchen-button/kitchen-button.component';
+import { Kitchen2Component } from './kitchen2/kitchen2.component';
 
 registerLocaleData(en);
 
@@ -56,7 +57,8 @@ registerLocaleData(en);
     OrderCardComponent,
     KitchenComponent,
     KitechenCardComponent,
-    KitchenButtonComponent
+    KitchenButtonComponent,
+    Kitchen2Component
   ],
     imports: [
         BrowserModule,

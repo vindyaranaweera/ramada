@@ -8,11 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 export class KitchenButtonComponent implements OnInit {
 
   @Input()
-  bgColor:any
+  bgColor:any;
 
   @Input()
-  roomNumber:any
+  roomNumber:any;
+
+  @Input()
+  textcolor="white";
+
   constructor() { }
+
 
   ngOnInit(): void {
   }

@@ -4,6 +4,7 @@ import {GuestUiComponent} from "./ui/guest-ui/guest-ui.component";
 import {interfaceComponent} from "./interface/interface.component";
 import {FrontofficeComponent} from "./frontoffice/frontoffice.component";
 import {KitchenComponent} from "./kitchen/kitchen.component";
+import {Kitchen2Component} from "./kitchen2/kitchen2.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'kitchen',
     component: KitchenComponent
+  },
+  {
+    path: 'kitchen2',
+    component: Kitchen2Component
   }
 ];
 
