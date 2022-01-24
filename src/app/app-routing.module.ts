@@ -5,11 +5,14 @@ import {interfaceComponent} from "./interface/interface.component";
 import {FrontofficeComponent} from "./frontoffice/frontoffice.component";
 import {KitchenComponent} from "./kitchen/kitchen.component";
 import {Kitchen2Component} from "./kitchen2/kitchen2.component";
+import {LogComponent} from "./log/log.component";
+
 
 const routes: Routes = [
+
   {
     path: '',
-    component: GuestUiComponent
+    component: LogComponent
   },
   {
     path: 'interface',
@@ -26,7 +29,11 @@ const routes: Routes = [
   {
     path: 'kitchen2',
     component: Kitchen2Component
-  }
+  },
+  {
+    path: 'guestUi',
+    component: GuestUiComponent
+  },
 ];
 
 @NgModule({

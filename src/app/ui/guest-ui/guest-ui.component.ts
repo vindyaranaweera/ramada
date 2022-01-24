@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {FormControl, Validators} from "@angular/forms";
 import {ro_RO} from "ng-zorro-antd/i18n";
@@ -54,13 +54,16 @@ export class GuestUiComponent implements OnInit {
 
   public myInnerWidth:any;
   showSide:any=0;
-
+  public getScreenWidth: any;
+  public getScreenHeight: any;
   constructor(private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
   }
 
   ngOnInit(): void {
-    this.getScreenWidth();
+    this.getScreenWidth = window.innerWidth;
+    this.myInnerWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
     console.log(new Date().getHours()+'sdfsdf');
     if (new Date().getHours() > 3 && new Date().getHours() < 9) {
       this.right_now_enable = true;
@@ -115,6 +118,14 @@ export class GuestUiComponent implements OnInit {
   Whitebread: any;
   Hashbrown: any;
   myForm: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.myInnerWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+    // alert(this.getScreenWidth);
+  }
 
 
   click(category: string, protein: string, toast: string, hashbrown: string, eggstyle: string) {
@@ -378,13 +389,6 @@ export class GuestUiComponent implements OnInit {
 
   setCurrentTime() {
     this.currentTime = new Date();
-  }
-
-  getScreenWidth() {
-    setInterval(() => {
-      this.myInnerWidth = window.innerWidth;
-      console.log("SCREEN : "+this.myInnerWidth);
-    }, 1000);
   }
 
   clickSide(){

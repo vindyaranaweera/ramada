@@ -1,0 +1,42 @@
+<div nz-row style=" height: 100%;width:100%" [nzGutter]="0">
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <div class="inner-box"></div>
+  </div>
+
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box">
+      <!--      <nz-card-->
+      <!--        style="width:300px;margin-left: 20%;margin-top: 100px;height: 400px;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;">-->
+      <div nz-row style="text-align: center; margin-top: 20vh; padding-right: 0;width: 100%">
+        <div nz-col nzSpan="24" style="text-align: center; margin-top: 20px; background-color: white;">
+          <img style="width: 130px;height: 60px;margin-top: 50px" src="../../../assets/i01_abc (1).jpg">
+          <p style="font-weight:15px;font-family:Calibri;margin-top: 3px">Enjoy your Breakfast. Enjoy your day</p>
+        </div>
+      </div>
+      <br>
+      <nz-form-control style="padding-top: 20px;margin-top: 10px;text-align: center"
+                       nzErrorTip="Please input your Code!">
+        <nz-input-group nzPrefixIcon="key" style="color:#d21241;" [style.width]="getScreenWidth > 1000 ? '25%':'70%'">
+          <input type="text" nz-input placeholder=" Access Code" [(ngModel)]="password"
+                 style="text-align: center;font-weight: bold"/>
+        </nz-input-group>
+        <br>
+        <button style="font-weight: bold;width: 60%;margin-top: 10px" nz-button nzBlock [style.width]="getScreenWidth > 1000 ? '20%':'70%'"
+                class="login-form-button login-form-margin"
+                [nzType]="'primary'"
+                (click)=" handlelogin()">Sign in
+        </button>
+      </nz-form-control>
+      <!--      </nz-card>-->
+    </div>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <div class="inner-box"></div>
+  </div>
+
+</div>
+<p style="color:#D21241;text-align: center;margin-top: -80px">Developed By Technography
+</p>
+
+
+

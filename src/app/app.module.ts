@@ -43,6 +43,10 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { KitechenCardComponent } from './components/kitechen-card/kitechen-card.component';
 import { KitchenButtonComponent } from './components/kitchen-button/kitchen-button.component';
 import { Kitchen2Component } from './kitchen2/kitchen2.component';
+import { LogComponent } from './log/log.component';
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+
 
 registerLocaleData(en);
 
@@ -58,7 +62,10 @@ registerLocaleData(en);
     KitchenComponent,
     KitechenCardComponent,
     KitchenButtonComponent,
-    Kitchen2Component
+    Kitchen2Component,
+    LogComponent,
+
+
   ],
     imports: [
         BrowserModule,
@@ -88,7 +95,9 @@ registerLocaleData(en);
         NzDropDownModule,
         NzSelectModule,
         NzRateModule,
-        NzSwitchModule
+        NzSwitchModule,
+        NzFormModule,
+        NzDatePickerModule
     ],
   providers: [{ provide: NZ_I18N, useValue: en_US },DatePipe],
   bootstrap: [AppComponent]

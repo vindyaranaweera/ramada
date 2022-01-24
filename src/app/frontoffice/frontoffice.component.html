@@ -40,8 +40,17 @@
   <div nz-col nzSpan="10" style="margin-top: 15px;text-align: right;padding-right: 15px">
     <button nz-button nzType="default"
             style="background-color: #fafafa;border-color: #fafafa;color: #D21241;font-weight: bold"
-            (click)="changeScreen(2)">Rooms
+            (click)="showModal()" > New Room
     </button>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="ADD NEW ROOM" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <ng-container *nzModalContent>
+        <p>Room Number  <nz-input-number [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number></p> <br>
+        <p>CheckIn Date <nz-date-picker style="margin-left: 10px" [nzFormat]="dateFormat"></nz-date-picker> </p> <br>
+        <p>CheckOut Date  <nz-date-picker [nzFormat]="dateFormat"></nz-date-picker></p> <br>
+      </ng-container>
+    </nz-modal>
+
+
   </div>
   <div style="margin-left:40px" nz-row>
     <app-room-card [isAvailable]="true" [order_status]="3" number="001"
@@ -148,165 +157,35 @@ margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23
     <!--    </div>-->
     <!--    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">Orders</h3>-->
     <!--    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;">Total:</h3>-->
-    <div style="margin-left: 100px;width: 1400px;height: 300px;" nz-row>
-
-      <div nz-row [nzGutter]="[16, 24]">
-        <div nz-col class="gutter-row" [nzSpan]="6">
-          <div class="inner-box">
-            <h5 nz-typography style="color: #fafafa;margin-left:20px;margin-top:12px;width: 350px;">
-              <div nz-row style="margin-top: 10px">
-                <div nz-col nzSpan="24" style="padding-left: 1px;margin-right: 1px">
-                  <nz-card
-                    style="width:100%;border-radius:5px;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
-                    <div nz-row>
-                      <div nz-col nzSpan="20">
-                        <h5 nz-typography style="font-weight: bold;color: #D21241">Pancake- <b>[1]</b></h5>
-                      </div>
-                      <div nz-col nzSpan="">
-                        <b>001</b>
-                      </div>
-                    </div>
-                    <div nz-row style="margin-top: 10px;">
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Protien</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Toast</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Egg Style</p>
+    <nz-content style="position: fixed; width: 100vw; height:100vh;">
+      <div nz-row [nzGutter]="20" style="height: 100%;">
+        <div nz-col class="gutter-row" [nzSpan]="span2" style="background: #d21241; height:100%;overflow: scroll;">
+          <div class="inner-box" style="background-color: white;overflow: scroll;height: 100%;margin-top: -10px;width: 100%">
+            <div style="height: 100%; overflow: scroll;" nz-row [nzGutter]="0">
+              <div nz-col class="gutter-row" [nzSpan]="span4">
+              </div>
+              <div nz-col class="gutter-row" style="overflow: scroll;height:100%;" [nzSpan]="span5">
+                <div class="inner-box" style="height: 100%;overflow: scroll">
+                  <div nz-row [nzGutter]="0" style="overflow: scroll;height:100%;padding-bottom:50px ">
+                    <div *ngFor="let order of orders" nz-col class="gutter-row"
+                         [nzSpan]="span">
+                      <div class="inner-box"  style="margin-top: 10px; margin-right: 10px">
+                        <app-kitechen-card  [cardTitle]="order.title" [protien]="order.protein" [toast]="order.toast"
+                                           [hashbrown]="order.hashbrown" [eggAvailable]="order.eggAvailable"
+                                           [eggStyle]="order.eggStyle" [bgColor]="order.orderColor"
+                                           [roomNo]="order.roomNo" [time]="order.time" ></app-kitechen-card>
                       </div>
                     </div>
-                    <div nz-row style="margin-top: -5px">
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">BBQ</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">White</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">YES</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">N/A</p>
-                      </div>
-                    </div>
-                    <div style="text-align: center;margin-top: 5px">
-                      <p>Time:</p>
-                    </div>
-                  </nz-card>
+                  </div>
                 </div>
               </div>
-            </h5>
-          </div>
-        </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-          <div class="inner-box">
-            <h5 nz-typography style="color: #fafafa;margin-left:20px;margin-top:12px;width: 350px;margin-left: 85px">
-              <div nz-row style="margin-top: 10px">
-                <div nz-col nzSpan="24" style="padding-left: 1px;margin-right: 1px">
-                  <nz-card
-                    style="width:100%;border-radius:5px;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
-                    <div nz-row>
-                      <div nz-col nzSpan="20">
-                        <h5 nz-typography style="font-weight: bold;color: #D21241">Pancake- <b>[1]</b></h5>
-                      </div>
-                      <div nz-col nzSpan="">
-                        <b>002</b>
-                      </div>
-                    </div>
-                    <div nz-row style="margin-top: 10px;">
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Protien</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Toast</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Egg Style</p>
-                      </div>
-                    </div>
-                    <div nz-row style="margin-top: -5px">
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">BBQ</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">White</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">YES</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">N/A</p>
-                      </div>
-                    </div>
-                    <div style="text-align: center;margin-top: 5px">
-                      <p>Time:</p>
-                    </div>
-                  </nz-card>
-                </div>
+              <div nz-col class="gutter-row" [nzSpan]="span4">
               </div>
-            </h5>
+            </div>
           </div>
         </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-          <div class="inner-box">
-            <h5 nz-typography style="color: #fafafa;margin-left:20px;margin-top:12px;width: 350px;margin-left: 150px">
-              <div nz-row style="margin-top: 10px">
-                <div nz-col nzSpan="24" style="padding-left: 1px;margin-right: 1px">
-                  <nz-card
-                    style="width:100%;border-radius:5px;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
-                    <div nz-row>
-                      <div nz-col nzSpan="20">
-                        <h5 nz-typography style="font-weight: bold;color: #D21241">Pancake- <b>[1]</b></h5>
-                      </div>
-                      <div nz-col nzSpan="">
-                        <b>003</b>
-                      </div>
-                    </div>
-                    <div nz-row style="margin-top: 10px;">
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Protien</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Toast</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
-                        <p nz-typography style="font-weight: bold">Egg Style</p>
-                      </div>
-                    </div>
-                    <div nz-row style="margin-top: -5px">
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">BBQ</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">White</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">YES</p>
-                      </div>
-                      <div nz-col nzSpan="6" style="text-align:left">
-                        <p nz-typography style="font-weight: bold;color: #475057">N/A</p>
-                      </div>
-                    </div>
-                    <div style="text-align: center;margin-top: 5px">
-                      <p>Time:</p>
-                    </div>
-                  </nz-card>
-                </div>
-              </div>
-            </h5>
-          </div>
-        </div>
+      </div>
+    </nz-content>
 
 
 <!--        <app-order-card [btnStatus]="0"[orderStatus]="100" [roomNumber]="'Room Number  001'"></app-order-card>-->
@@ -317,13 +196,14 @@ margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23
 <!--        <app-order-card [btnStatus]="0" [orderStatus]="100"[roomNumber]="'Room Number 006'"></app-order-card>-->
       </div>
     </div>
-  </div>
+
+
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="Rooms" [nzCancelText]="null" [nzOkText]="null">
     <div *nzModalContent style="color: #D21241"></div>
     <nz-card style="width:100%;margin-bottom: 1px;color: #D21241" *ngFor="let i of Rooms">
     </nz-card>
   </nz-modal>
-</div>
+
 <div style="text-align: center;margin-top: 20px"><span nz-typography><strong>Design & Developed By Technography</strong></span>
 </div>

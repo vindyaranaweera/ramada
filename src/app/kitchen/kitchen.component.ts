@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-kitchen',
@@ -126,9 +127,12 @@ export class KitchenComponent implements OnInit {
   span4:any=2;
   span5:any=20;
   myInnerWidth:any;
-  constructor() {
+  constructor(private router: Router) {
   }
-
+  goToPage(link:String):void
+  {
+    this.router.navigate([`${link}`])
+  }
   ngOnInit(): void {
     this.getScreenWidth();
   }
