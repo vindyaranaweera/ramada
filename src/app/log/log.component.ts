@@ -10,6 +10,7 @@ export class LogComponent implements OnInit {
   password: any;
   public getScreenWidth: any;
   public getScreenHeight: any;
+  passwordVisible = false;
 
   constructor(private router: Router) {
   }

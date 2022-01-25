@@ -29,7 +29,7 @@
             <div class="inner-box scr0ll"
                  style="width: 100vw;margin-bottom:5px;margin-top: 20px;padding-top: 70px;"
                  [style.justify-content]="getScreenWidth<900 ?'':'center'"
-                 [style.justify-items]="getScreenWidth<900 ?'':'center'">
+                 [style.justify-items]="getScreenWidth<900 ?'':'center'" [style.padding-right]="getScreenWidth<900?'50px':'0'">
               <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/001.jpg" width="100px" text="Cheese Omelette"
                                    name="5 Choices Available" background="#D21241" text_color="white"
@@ -73,7 +73,7 @@
           <div style="padding-top: -20px" nz-col class="gutter-row" [nzSpan]="24">
             <div class="inner-box scr0ll"
                  style="width: 100vw;margin-bottom:5px;margin-top: 20px;padding-top: 70px" [style.justify-content]="getScreenWidth<900 ?'':'center'"
-                 [style.justify-items]="getScreenWidth<900 ?'':'center'">
+                 [style.justify-items]="getScreenWidth<900 ?'':'center'" [style.padding-right]="getScreenWidth<900?'50px':'0'">
               <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/001.jpg" width="100px" text="Cheese Omelette"
                                    name="5 Choices Available" background="#D21241" text_color="white"

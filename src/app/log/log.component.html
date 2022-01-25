@@ -16,12 +16,18 @@
       <br>
       <nz-form-control style="padding-top: 20px;margin-top: 10px;text-align: center"
                        nzErrorTip="Please input your Code!">
-        <nz-input-group nzPrefixIcon="key" style="color:#d21241;" [style.width]="getScreenWidth > 1000 ? '25%':'70%'">
-          <input type="text" nz-input placeholder=" Access Code" [(ngModel)]="password"
+        <nz-input-group [nzSuffix]="suffixTemplate"   style="color:#d21241;" [style.width]="getScreenWidth > 1000 ? '25%':'70%'">
+          <input  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  placeholder="input password" nz-input placeholder=" Access Code" [(ngModel)]="password"
                  style="text-align: center;font-weight: bold"/>
         </nz-input-group>
+        <ng-template #suffixTemplate>
+          <i nz-icon style="cursor: pointer" [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+        </ng-template>
         <br>
-        <button style="font-weight: bold;width: 60%;margin-top: 10px" nz-button nzBlock [style.width]="getScreenWidth > 1000 ? '20%':'70%'"
+        <button style="font-weight: bold;width: 60%;margin-top: 10px" nz-button nzBlock
+                [style.width]="getScreenWidth > 1000 ? '20%':'70%'"
                 class="login-form-button login-form-margin"
                 [nzType]="'primary'"
                 (click)=" handlelogin()">Sign in

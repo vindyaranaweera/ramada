@@ -1,21 +1,58 @@
 .cardData {
+  /*background-color: #1d39c4;*/
   text-align: left;
   width: 50%;
   /*background-color: #d21241;*/
   padding: 0;
   margin: 0;
   float: left;
+  font-size: 15px;
 }
-.cardData:nth-child(10) h4, .cardData:nth-child(12) h4{
-  color:#000c17;
+
+.cardData p {
+  margin: 0;
+  padding: 0;
+}
+
+.cardData:nth-child(10) h4, .cardData:nth-child(12) h4 {
+  color: #000c17;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
+  margin-bottom: 5px;
+  /*background-color: #722ed1;*/
 }
+
+.cardData:nth-child(9) {
+  padding-top: 3px;
+}
+
+.cardData:nth-child(11) {
+  padding-top: 4px;
+}
+
+.cardData:nth-child(2) {
+  margin-top: -3px;
+}
+
+.cardData:nth-child(4) {
+  margin-top: -3px;
+}
+
+.cardData:nth-child(6) {
+  margin-top: -2px;
+}
+
+.cardData:nth-child(8) {
+  margin-top: -3px;
+}
+
 .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10) {
-  color:#000c17;
+  color: #000c17;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 17px;
+  /*background-color: #722ed1;*/
 }
+
 @media only Screen and (max-width: 1180px ) {
   .cardData {
     width: 100%;
@@ -28,7 +65,6 @@
     padding: 0;
     margin: 0;
   }
-
 
 
   .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10) {
@@ -54,3 +90,12 @@
   }
 }
 
+.myCrd {
+  transition: all 100s !important;
+  transform-style: initial;
+  transition:300ms linear;
+}
+
+#CrdId:checked ~ .myCrd {
+  transform: rotateY(360deg);
+}

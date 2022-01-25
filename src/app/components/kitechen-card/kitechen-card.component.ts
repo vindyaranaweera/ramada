@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-kitechen-card',
@@ -34,10 +34,28 @@ export class KitechenCardComponent implements OnInit {
   @Input()
   bgColor:any;
 
+  @Input()
+  cardId:any;
+
+  isChecked:any;
+
+
+  @Output() resizeCardID = new EventEmitter<any>();
+
+  span=8;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  cardClick(){
+   if( this.isChecked==="checked"){
+     this.isChecked="";
+   }else {
+     this.isChecked="checked";
+   }
+    this.resizeCardID.emit(this.cardId);
+    console.log(this.cardId);
+  }
 }
