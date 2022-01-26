@@ -1,7 +1,7 @@
 <div nz-col>
 <!--  <input id="CrdId" checked="{{isChecked}}" style="" type="checkbox">-->
   <nz-card class="myCrd" (click)="cardClick()" [style.background-color]="bgColor"
-           [style.width]="widthChangeEnable===1?'200%':'100%'" [style.height]="widthChangeEnable===1?'70vh':'100%'"
+           [style.width]="widthChangeEnable===1?cardWidth:'100%'" [style.height]="widthChangeEnable===1?cardHeight:'100%'"
            style=" transition: 1s; text-align: center;font-weight: bold" [nzTitle]="Heading">
     <ng-template style="text-align: center; margin: 0; padding: 0" #Heading>
       <h3 style="font-weight: bold; font-size: 20px; margin: 0px">{{cardTitle}}</h3>

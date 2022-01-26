@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {delay} from "rxjs";
 
@@ -129,11 +129,14 @@ export class KitchenComponent implements OnInit {
   span5: any = 20;
   myInnerWidth: any;
 
-  sizeEnable=0;
   cardId: any;
   oldCardId: string = "";
 
-  constructor(private router: Router) {
+  @ViewChild('new') private mainDiv: ElementRef;
+
+
+  constructor(private router: Router, mainDiv:ElementRef) {
+    this.mainDiv=mainDiv
   }
 
   goToPage(link: String): void {
@@ -144,6 +147,7 @@ export class KitchenComponent implements OnInit {
     console.log(this.oldCardId);
     console.log(this.cardId);
     this.getScreenWidth();
+    console.log(window.innerHeight);
   }
 
   getScreenWidth() {
@@ -163,37 +167,55 @@ export class KitchenComponent implements OnInit {
   }
 
   setCardSize(crdId: any) {
-    this.sizeEnable=1;
     let elem: any;
     let elemID = crdId.toString();
     let oldElem: any;
-    if (this.oldCardId != "" || this.oldCardId === elemID) {
-      elem = document.getElementById(elemID);
-      console.log("element 1st" + elem.getAttribute('class'));
-      if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-16') {
-        elem.setAttribute('class', 'gutter-row ant-col ant-col-8');
-        oldElem = document.getElementById(this.oldCardId);
-        oldElem.setAttribute('class', 'gutter-row ant-col ant-col-8');
-        console.log("old element 1:" + oldElem);
-      } else {
-        elem.setAttribute('class', 'gutter-row ant-col ant-col-16');
-        oldElem = document.getElementById(this.oldCardId);
-        if (this.oldCardId === elemID) {
-          oldElem.setAttribute('class', 'gutter-row ant-col ant-col-8');
+
+    elem = document.getElementById(elemID);
+    if (this.oldCardId === "" || this.oldCardId === elemID) {
+      if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-16' ||elem.getAttribute('class') === 'gutter-row ant-col ant-col-24') {
+        if (this.myInnerWidth < 821) {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-12');
         } else {
-          oldElem.setAttribute('class', 'gutter-row ant-col ant-col-8');
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-8')
         }
-        console.log("old element 2:" + oldElem);
+        this.oldCardId = elemID;
+      } else {
+        if (this.myInnerWidth < 821) {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-24');
+        } else {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-16');
+        }
+        this.oldCardId = elemID;
       }
-      this.oldCardId = elemID;
     } else {
-      let elem: any;
-      console.log("old element 3:" + oldElem);
-      let elemID = crdId.toString();
-      elem = document.getElementById(elemID);
-      console.log('span is : ' + elem.getAttribute('class'));
-      elem.setAttribute('class', 'gutter-row ant-col ant-col-16');
-      this.oldCardId = elemID;
+      if (this.myInnerWidth < 821) {
+        if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-24') {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-12')
+          this.oldCardId = elemID;
+        } else {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-24');
+          this.oldCardId = elemID;
+        }
+      } else {
+        if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-16') {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-8')
+          this.oldCardId = elemID;
+        } else {
+          elem.setAttribute('class', 'gutter-row ant-col ant-col-16');
+          this.oldCardId = elemID;
+        }
+
+      }
     }
+
+
+    // this.mainDiv.nativeElement.scroll({
+    //   top: this.mainDiv.nativeElement.scrollHeight,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
+
   }
+
 }
