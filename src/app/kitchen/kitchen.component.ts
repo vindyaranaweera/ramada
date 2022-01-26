@@ -129,6 +129,7 @@ export class KitchenComponent implements OnInit {
   span5: any = 20;
   myInnerWidth: any;
 
+  sizeEnable=0;
   cardId: any;
   oldCardId: string = "";
 
@@ -162,6 +163,7 @@ export class KitchenComponent implements OnInit {
   }
 
   setCardSize(crdId: any) {
+    this.sizeEnable=1;
     let elem: any;
     let elemID = crdId.toString();
     let oldElem: any;

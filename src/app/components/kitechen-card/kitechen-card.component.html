@@ -1,26 +1,28 @@
-<div nz-col >
-  <input id="CrdId" checked="{{isChecked}}" style="display: none" type="checkbox">
-  <nz-card class="myCrd" (click)="cardClick()" [style.background-color]="bgColor" style="transition-property: width; transition: 5s; text-align: center;font-weight: bold" [nzTitle]="Heading">
-    <ng-template  style="text-align: center; margin: 0; padding: 0" #Heading>
-    <h3 style="font-weight: bold; font-size: 20px; margin: 0px">{{cardTitle}}</h3>
-  </ng-template>
+<div nz-col>
+<!--  <input id="CrdId" checked="{{isChecked}}" style="" type="checkbox">-->
+  <nz-card class="myCrd" (click)="cardClick()" [style.background-color]="bgColor"
+           [style.width]="widthChangeEnable===1?'200%':'100%'" [style.height]="widthChangeEnable===1?'70vh':'100%'"
+           style=" transition: 1s; text-align: center;font-weight: bold" [nzTitle]="Heading">
+    <ng-template style="text-align: center; margin: 0; padding: 0" #Heading>
+      <h3 style="font-weight: bold; font-size: 20px; margin: 0px">{{cardTitle}}</h3>
+    </ng-template>
     <div class="cardData">
-      <p >Egg Style :</p>
+      <p>Egg Style :</p>
     </div>
     <div class="cardData">
-    <p > {{eggStyle}}</p>
+      <p> {{eggStyle}}</p>
     </div>
     <div class="cardData">
-    <p>Protein : </p>
+      <p>Protein : </p>
     </div>
     <div class="cardData">
-    <p>{{protien}}</p>
+      <p>{{protien}}</p>
     </div>
     <div class="cardData">
       <p>Toast : </p>
     </div>
     <div class="cardData">
-      <p >{{toast}}</p>
+      <p>{{toast}}</p>
     </div>
     <div class="cardData">
       <p>Hashbrown : </p>
@@ -41,7 +43,9 @@
     <div class="cardData">
       <h4 style="font-weight: bold;">{{time}}</h4>
     </div>
-    <button nz-button nzType="primary" style="margin-top:10px;padding-bottom:0;width: 99%;height: 40px;font-weight: bold;font-size:20px;"><p style="margin-top: -3px;">Done</p></button>
+    <button nz-button nzType="primary"
+            style="margin-top:10px;padding-bottom:0;width: 99%;height: 40px;font-weight: bold;font-size:20px;"><p
+      style="margin-top: -3px;">Done</p></button>
 
   </nz-card>
 </div>

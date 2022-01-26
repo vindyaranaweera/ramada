@@ -90,12 +90,15 @@
   }
 }
 
-.myCrd {
-  transition: all 100s !important;
-  transform-style: initial;
-  transition:300ms linear;
-}
 
-#CrdId:checked ~ .myCrd {
-  transform: rotateY(360deg);
-}
+/*.myCrd {*/
+/*  transition: all 100s ;*/
+/*  transform-style: preserve-3d;*/
+/*}*/
+/*!*.myCrd:hover{*!*/
+/*!*  transform: rotateY(360deg);*!*/
+/*!*}*!*/
+
+/*#CrdId:checked ~ .myCrd {*/
+/*  transform: rotateY(360deg);*/
+/*}*/

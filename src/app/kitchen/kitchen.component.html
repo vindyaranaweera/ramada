@@ -56,7 +56,7 @@
                   <div style="" [id]="i" *ngFor="let order of orders; let i=index" nz-col class="gutter-row"
                        [nzSpan]="span">
                     <div class="inner-box"  style="margin-top: 10px; margin-right: 10px">
-                      <app-kitechen-card [cardId]="i" (resizeCardID)="setCardSize($event)" [cardTitle]="order.title" [protien]="order.protein" [toast]="order.toast"
+                      <app-kitechen-card [widthChangeEnable]="sizeEnable" [cardId]="i" (resizeCardID)="setCardSize($event)" [cardTitle]="order.title" [protien]="order.protein" [toast]="order.toast"
                                          [hashbrown]="order.hashbrown" [eggAvailable]="order.eggAvailable"
                                          [eggStyle]="order.eggStyle" [bgColor]="order.orderColor"
                                          [roomNo]="order.roomNo" [time]="order.time" ></app-kitechen-card>

@@ -37,6 +37,8 @@ export class KitechenCardComponent implements OnInit {
   @Input()
   cardId:any;
 
+  @Input()
+  widthChangeEnable=0;
   isChecked:any;
 
 
