@@ -20,6 +20,9 @@ interface cartItems {
   styleUrls: ['./guest-ui.component.css']
 })
 export class GuestUiComponent implements OnInit {
+
+  isPreview=0;
+  cartItem:any
   showSendtokitchen=1;
   showDelete=1;
   panel = 1;
@@ -28,7 +31,8 @@ export class GuestUiComponent implements OnInit {
   isVisible: boolean = false;
   isVisible2 = false;
   suggestions: any;
-  buttonText = "Send To Kitchen";
+  buttonText:any;
+
   time: any;
   private myWindow: any;
   fIcon = 0;
@@ -38,6 +42,9 @@ export class GuestUiComponent implements OnInit {
   eggstyle = '';
   isVisible3 = false;
   password: any;
+  orderTitle:any;
+
+  visibleCart:any;
 
   bacon: boolean = false;
   sausage: boolean = false;
@@ -74,6 +81,21 @@ export class GuestUiComponent implements OnInit {
   changeItemPanel(number: number) {
     this.panel = number;
     this.isVisible2 = true;
+    if(number===1){
+      this.orderTitle="Cheese Omelette"
+    }
+    if(number===2){
+      this.orderTitle="Pancake"
+    }
+    if(number===3){
+      this.orderTitle="Egg & Cheese Sandwich"
+    }
+    if(number===4){
+      this.orderTitle="French Toast"
+    }
+    if(number===5){
+      this.orderTitle="Eggs"
+    }
   }
 
   handleOk(cate: any): void {
@@ -148,7 +170,9 @@ export class GuestUiComponent implements OnInit {
     this.isVisible = true;
     console.log(this.cart);
   }
-
+  hideCart(visibility:boolean){
+    this.visibleCart=visibility;
+  }
   sendToKitchen() {
     this.isVisible = false;
     alert('MAKE SURE TIME WAS SELECTED!')
@@ -222,8 +246,9 @@ export class GuestUiComponent implements OnInit {
 
   }
 
-  handleCancel1():void {
-    this.isVisible2 = false;
+  handleCancel1(visibility:boolean):void {
+    this.isVisible2 = visibility
+
   }
 
   addToFavourite() {
@@ -374,22 +399,18 @@ export class GuestUiComponent implements OnInit {
     }
   }
 
-  disabledHours(): number[] {
-    return [0, 1, 2, 3, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,];
+  setCartItem(item:any){
+    this.cartItem=item;
   }
 
-  disabledMinutes(hour: number): number[] {
-    if (hour === 4) {
-      return [20, 21, 22, 23, 24, 25,];
-    } else {
-      return [];
-    }
+  enablePreview(){
+    this.isPreview=1;
+    this.visibleCart=true;
+    console.log("Is working ")
   }
 
 
-  setCurrentTime() {
-    this.currentTime = new Date();
-  }
+
 
   clickSide(){
     if(this.showSide===0){

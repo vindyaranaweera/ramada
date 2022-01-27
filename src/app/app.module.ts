@@ -46,6 +46,8 @@ import { Kitchen2Component } from './kitchen2/kitchen2.component';
 import { LogComponent } from './log/log.component';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import { SelectOrderComponent } from './models/select-order/select-order.component';
+import { CartComponent } from './models/cart/cart.component';
 
 
 registerLocaleData(en);
@@ -64,6 +66,8 @@ registerLocaleData(en);
     KitchenButtonComponent,
     Kitchen2Component,
     LogComponent,
+    SelectOrderComponent,
+    CartComponent,
 
 
   ],

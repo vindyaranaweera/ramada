@@ -1,0 +1,134 @@
+<nz-modal *ngIf=" ShowModel>0"
+          [(nzVisible)]="isVisible2"
+          [nzCloseIcon]="close"
+          [nzContent]="modalContent"
+          [nzFooter]="null"
+          [nzBodyStyle]="{'background-color':'#D21241'}"
+          (nzOnCancel)="handleCancel1()"
+>
+  <ng-template #close>
+    <i nz-icon nzType="close-square" nzTheme="fill" style="color: #fafafa;font-size: 30px;margin-top: 5px"></i>
+  </ng-template>
+  <ng-template style="background-color: #D21241" #modalContent>
+    <b style="color: #fafafa;font-size: 20px">{{orderTitle}}</b>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <nz-input-group nzCompact *ngIf="ShowModel===5">
+      <p style="font-weight: bold;color: white;font-size:17px" >Style Your Egg</p><br>
+      <div>
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
+          <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
+          <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/dssb.jpg" (click)="changeSunny(true)" *ngIf="!sunny"
+                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+            <img src="../../../ramada/assets/dssb.jpg" (click)="changeSunny(false)" *ngIf="sunny"
+                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+            <p style="margin-left: 35px;font-weight: bold;color: white">Sunny Sideup</p>
+          </div>
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/huhu.jpg" (click)="changeOver(true)" *ngIf="!over"
+                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+            <img src="../../../ramada/assets/huhu.jpg" (click)="changeOver(false)" *ngIf="over"
+                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="margin-left:23px;font-weight: bold;color: white">OverEasy</p>
+          </div>
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/errr.jpg" (click)="changeScrambled(true)" *ngIf="!scrambled"
+                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+            <img src="../../../ramada/assets/errr.jpg" (click)="changeScrambled(false)" *ngIf="scrambled"
+                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="margin-left: 15px;font-weight: bold;color: white">Scrambled</p>
+          </div>
+        </div>
+      </div>
+    </nz-input-group>
+    <br *ngIf="ShowModel===5">
+    <nz-input-group nzCompact>
+      <br>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Protien</p><br>
+      <div>
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
+             style="width:470px;height: 120px;margin-top: 10px;">
+          <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
+          <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"
+                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+            <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(false)" *ngIf="extra_egg"
+                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="margin-left: 20px;font-weight: bold;color: white">Extra Egg</p>
+          </div>
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/003.jpg" (click)="changeBacon(true)" *ngIf="!bacon"
+                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+            <img src="../../../ramada/assets/003.jpg" (click)="changeBacon(false)" *ngIf="bacon"
+                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+            <p style="margin-left: 30px;font-weight: bold;color: white">Bacon</p>
+          </div>
+          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+            <img src="../../../ramada/assets/004.jpg" (click)="changeSausage(true)" *ngIf="!sausage"
+                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+            <img src="../../../ramada/assets/004.jpg" (click)="changeSausage(false)" *ngIf="sausage"
+                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="margin-left: 30px;font-weight: bold;color: white">Sausage</p>
+          </div>
+        </div>
+      </div>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
+      <img src="../../../ramada/assets/toast.jpg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+      <img src="../../../ramada/assets/toast.jpg" (click)="changeBrownbread(false)" *ngIf="Brownbread"
+           style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+
+      <img src="../../../ramada/assets/hi.jpg" (click)="changeWhitebread(true)" *ngIf="!Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../ramada/assets/hi.jpg" (click)="changeWhitebread(false)" *ngIf="Whitebread"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <br>
+      <p style="margin-left: 25px;font-weight: bold;color: white">Brown Bread</p>
+      <p style="margin-left: 35px;font-weight: bold;color: white">White Bread</p>
+    </nz-input-group>
+    <br>
+    <nz-input-group nzCompact>
+      <p style="font-weight: bold;color: white;font-size:17px">Select Hashbrown</p><br>
+      <img src="../../../ramada/assets/005.jpg" (click)="changeHashbrown(true)" *ngIf="!hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+      <img src="../../../ramada/assets/005.jpg" (click)="changeHashbrown(false)" *ngIf="hashbrown"
+           style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+
+      <!--             <nz-rate [ngModel]="1"></nz-rate>-->
+    </nz-input-group>
+    <nz-alert *ngIf="showAlert"
+              nzType="error"
+              nzMessage="Error"
+              nzDescription="Please Select Items Before Add To Cart "
+              nzShowIcon
+    ></nz-alert>
+    <nz-divider style="background-color: #fafafa;"></nz-divider>
+    <div nz-row style="margin-top: 10px">
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="6">
+        <nz-rate [ngModel]="0" [nzCount]="1"></nz-rate>
+      </div>
+      <div nz-col nzSpan="6">
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button nzType="primary"
+          (click)="handleCancel()">Cancel
+        </button>
+      </div>
+      <div nz-col nzSpan="6">
+        <button
+          style="background:white;border-color: #D21241;font-weight: bold;color: #D21241;border-radius: 5px;margin-left:-40px"
+          nz-button
+          nzType="primary"
+          (click)="handleOk(orderTitle)">Ready For Breakfast
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</nz-modal>
+

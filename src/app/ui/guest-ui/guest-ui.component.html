@@ -1,5 +1,5 @@
 <div [style.width.px]="getScreenWidth" [style.height.px]="getScreenHeight">
-  <div nz-row style="text-align: center;" [style.margin-top.px]="getScreenHeight<900 ? 150:100">
+  <div nz-row style="text-align: center; " [style.margin-top.px]="getScreenHeight<900 ? 50:90">
     <div nz-col nzSpan="9" style="text-align: center;  justify-content: center;">
 
     </div>
@@ -12,10 +12,10 @@
     </div>
     <nz-divider nzText="BREAKFAST MENU" nzOrientation="center"></nz-divider>
   </div>
-  <nz-affix [nzOffsetTop]="50">
+  <nz-affix [nzOffsetTop]="50" style="position: absolute; z-index: 10">
     <nz-button-group>
       <button nz-button style="border-color: #d21241;"><b style="color: #d21241">0 OUT OF 2</b></button>
-      <button nz-button nzType="primary" style="background-color: #d21241;border-color: white">
+      <button nz-button nzType="primary" style="background-color: #d21241;border-color: white" (click)="enablePreview()">
         <i nz-icon
            nzType="eye"></i>
       </button>
@@ -108,6 +108,8 @@
     </div>
   </div>
 </div>
+<app-select-order  (setPreview)="isPreview=$event" (cart)="setCartItem($event)" (visibleCart)="visibleCart = $event" (visibility)="handleCancel1($event)" [isVisible2]="isVisible2" [ShowModel]="panel" [orderTitle]="orderTitle"></app-select-order>
+<app-cart  [isPreview]="isPreview"  (setCartVisibility)="visibleCart = $event" [cartItem]="cartItem" [isVisible]="visibleCart"></app-cart>
 
 
 <!--<nz-affix style="text-align: right;" [nzOffsetTop]="getScreenHeight/3" [nzOffsetBottom]="getScreenHeight/3">'-->

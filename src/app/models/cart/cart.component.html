@@ -1,0 +1,85 @@
+<nz-modal
+  style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Preview" (nzOnCancel)="handleCancel()"
+  [nzCancelText]="null"
+  [nzOkText]="null">
+
+  <div *nzModalContent style="color: #D21241;">
+    <nz-row>
+      <nz-card
+        style="width:100%;margin-bottom: 1px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+        *ngFor="let i of cartItem">
+        <div nz-row>
+          <div nz-col nzSpan="22">
+            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+          </div>
+          <div nz-col nzSpan="2">
+            <button *ngIf="isPreview===0" nz-button nzType="primary" [nzSize]="'small'"
+                    style="background-color: #D21241;border-color: #D21241;width:30px;height:30px;margin-right: 10px"
+                    (click)="deleteQty(i)"><i nz-icon nzType="delete"></i></button>
+          </div>
+        </div>
+        <div nz-row style="margin-top: 10px;">
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold">Protien</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left;color: #475057">
+            <p nz-typography style="font-weight: bold">Toast</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+            <p nz-typography style="font-weight: bold">Egg Style</p>
+          </div>
+        </div>
+        <div nz-row style="margin-top: -5px">
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.protien}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.toast}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
+          </div>
+          <div nz-col nzSpan="6" style="text-align:left">
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
+          </div>
+        </div>
+      </nz-card>
+    </nz-row>
+
+    <nz-mention  *ngIf="showSendtokitchen===1&& isPreview==0" [nzSuggestions]="suggestions">
+      <!--      <p style="font-weight: bold">Favourite</p>-->
+      <!--      <p style="font-weight: bold" *ngFor="let item of cart">{{item.protein}}{{item.toast}}{{item.hashbrown}}{{item.eggstyle}}</p>-->
+      <!--      <textarea rows="4" nz-input ></textarea><br><br>-->
+      <nz-divider></nz-divider>
+      <p style="font-weight:bold">Time</p>
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <nz-time-picker
+            [(ngModel)]="currentTime"
+            [nzDisabledHours]="disabledHours"
+            [nzDisabledMinutes]="disabledMinutes"
+            [nzMinuteStep]="5"
+            nzFormat="HH:mm" [nzHideDisabledOptions]="true">
+          </nz-time-picker>
+        </div>
+        <div nz-col nzSpan="12">
+          <button nz-button nzType="default" [disabled]="!right_now_enable" *ngIf="right_now_enable"
+                  style="background-color: #D21241;border-color:#D21241; height: 30px;color: white;width: 100%;font-weight: bold"
+                  (click)="setCurrentTime()">
+            RIGHT NOW
+          </button>
+        </div>
+      </div>
+      <p style="padding-top:10px;font-weight: bold;">Note</p>
+      <textarea nz-input [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
+    </nz-mention>
+    <div style="text-align:right;margin-top: 10px;margin-right: 22px">
+      <button *ngIf="showSendtokitchen===1&& isPreview==0" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+      color: white;" (click)="sendToKitchen()">{{cartItem.length>0?'Send To Kitchen':'Back To Items'}}
+      </button>
+    </div>
+  </div>
+</nz-modal>
