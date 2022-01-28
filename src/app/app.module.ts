@@ -48,6 +48,12 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import { SelectOrderComponent } from './models/select-order/select-order.component';
 import { CartComponent } from './models/cart/cart.component';
+import { FavouriteCardComponent } from './components/favourite-card/favourite-card.component';
+import {NzPopoverModule} from "ng-zorro-antd/popover";
+import { OrdersComponent } from './frontoffice/orders/orders.component';
+import { RoomsComponent } from './frontoffice/rooms/rooms.component';
+import {NzTagModule} from "ng-zorro-antd/tag";
+import { AddGuestComponent } from './models/add-guest/add-guest.component';
 
 
 registerLocaleData(en);
@@ -68,6 +74,10 @@ registerLocaleData(en);
     LogComponent,
     SelectOrderComponent,
     CartComponent,
+    FavouriteCardComponent,
+    OrdersComponent,
+    RoomsComponent,
+    AddGuestComponent,
 
 
   ],
@@ -101,7 +111,9 @@ registerLocaleData(en);
         NzRateModule,
         NzSwitchModule,
         NzFormModule,
-        NzDatePickerModule
+        NzDatePickerModule,
+        NzPopoverModule,
+        NzTagModule
     ],
   providers: [{ provide: NZ_I18N, useValue: en_US },DatePipe],
   bootstrap: [AppComponent]

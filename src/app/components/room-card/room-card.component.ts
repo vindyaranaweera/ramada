@@ -8,12 +8,16 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class RoomCardComponent implements OnInit {
 
   @Input()
+  cardType:any;
+  @Input()
   number: any = 0;
   @Input()
   order_status: any = 0;
   @Input()
   isAvailable: boolean = true;
-  @Output() messageEvent = new EventEmitter<string>();
+  @Input()
+  orderColor:any;
+  @Output() showPopup = new EventEmitter<number>();
 
   constructor() {
   }
@@ -21,7 +25,12 @@ export class RoomCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showRoomDetails(number: any) {
-    this.messageEvent.emit(number.toString());
+  showRoomDetails() {
+      if(this.isAvailable){
+        this.showPopup.emit(1);
+      }else {
+        this.showPopup.emit(0);
+      }
+    // this.messageEvent.emit(number.toString());
   }
 }

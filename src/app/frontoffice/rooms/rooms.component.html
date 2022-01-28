@@ -1,0 +1,20 @@
+<div nz-row
+     style="overflow:hidden;height:80vh;background-color:#D21241;margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+  <div nz-col nzSpan="8">
+    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;height: 50px">Rooms</h3>
+  </div>
+
+  <div nz-col nzSpan="16" style="text-align: right">
+
+  </div>
+  <div nz-row
+       style="overflow: scroll; height:90%;background-color:transparent; padding-bottom: 10px">
+    <div style="margin-left:30px; overflow: scroll" nz-row>
+      <app-room-card [cardType]="'room'" *ngFor="let items of roomList" [isAvailable]="items.availability" [order_status]="3" [number]="items.roomNo"
+                     (showPopup)="showRoom($event)"></app-room-card>
+    </div>
+  </div>
+  <app-add-guest [isVisible]="guestVisibility" [visibleType]="visibleType" (resetVisibility)="guestVisibility=$event"></app-add-guest>
+</div>
+
+

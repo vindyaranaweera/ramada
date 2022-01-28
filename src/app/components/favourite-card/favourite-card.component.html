@@ -1,0 +1,21 @@
+<div>
+  <ng-template #contentTemplate>
+    <p>protein: {{protein}}</p>
+    <p>toast: {{toast}}</p>
+    <p>hashBrown: {{hashBrown}}</p>
+    <p *ngIf="eggAvailable===1">eggStyle:{{eggStyle}}</p>
+  </ng-template>
+  <nz-card nz-popover
+           nzPopoverTitle=""
+           [nzPopoverPlacement]="'top'"
+           [(nzPopoverVisible)]="visible"
+           (nzPopoverVisibleChange)="change($event)"
+           [nzPopoverTrigger]="'click'"
+           [nzPopoverContent]="contentTemplate" nzHoverable style="height:160px;background-color:#D21241;box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" [nzCover]="coverTemplate">
+    <nz-card-meta nzTitle="" nzDescription=""></nz-card-meta>
+
+  </nz-card>
+  <ng-template #coverTemplate>
+
+  </ng-template>
+</div>

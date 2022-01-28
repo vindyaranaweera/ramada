@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 
 export class FrontofficeComponent implements OnInit {
-  room = 2;
+  room = 1;
   Rooms: any = [];
   isVisible: boolean = false;
   suggestions: any;

@@ -21,6 +21,47 @@ interface cartItems {
 })
 export class GuestUiComponent implements OnInit {
 
+  FavouritList:any=[{
+    protein: 'Sausage',
+    toast: 'Brown Bread',
+    hashbrown: 'yes',
+    eggAvailable: 0,
+    eggStyle: 'N/A',
+    title: 'Egg & Cheese Sandwich'
+  },
+    {
+      protein: 'Bacon',
+      toast: 'Brown Bread',
+      hashbrown: 'yes',
+      eggAvailable: 0,
+      eggStyle: 'N/A',
+      title: 'Pancake'
+    },
+    {
+      protein: 'Extra Egg',
+      toast: 'White Bread',
+      hashbrown: 'yes',
+      eggAvailable: 1,
+      eggStyle: 'Scrambled',
+      title: 'Egg',
+    },
+    {
+      protein: 'Bacon',
+      toast: 'Brown Bread',
+      hashbrown: 'yes',
+      eggAvailable: 0,
+      eggStyle: 'N/A',
+      title: 'French Toast',
+    },
+    {
+      protein: 'Sausage',
+      toast: 'Brown Bread',
+      hashbrown: 'yes',
+      eggAvailable: 0,
+      eggStyle: 'N/A',
+      title: 'Cheese Omelette',
+    }]
+
   isPreview=0;
   cartItem:any
   showSendtokitchen=1;

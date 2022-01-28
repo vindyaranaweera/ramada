@@ -1,0 +1,56 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle>Custom Modal Title</ng-template>
+
+  <ng-template #modalContent>
+    <nz-input-group  [nzPrefix]="guestName">
+      <input type="text" nz-input placeholder="Guest name" />
+    </nz-input-group>
+    <ng-template #guestName><i nz-icon nzType="user"></i></ng-template>
+    <br />
+    <br />
+    <nz-input-group  [nzPrefix]="guestContactNo">
+      <input type="text" nz-input placeholder="Contact number" />
+    </nz-input-group>
+    <ng-template #guestContactNo><i nz-icon nzType="mobile" nzTheme="outline"></i></ng-template>
+    <br />
+    <br />
+    <nz-input-group  [nzPrefix]="guestID">
+      <input type="text" nz-input placeholder="ID number" />
+    </nz-input-group>
+    <ng-template #guestID><i nz-icon nzType="idcard" nzTheme="outline"></i></ng-template>
+    <br />
+    <br />
+    <nz-date-picker style="margin-right: 30px" nzPlaceHolder="Check In Date" [(ngModel)]="checkInDate" (ngModelChange)="onChange($event)"></nz-date-picker>
+    <nz-date-picker nzPlaceHolder="Check Out Date" [(ngModel)]="checkOutDate" (ngModelChange)="onChange($event)"></nz-date-picker>
+    <br/>
+    <br/>
+    Total Packs<br/>
+    <nz-button-group >
+      <input disabled
+        #inputElement
+        style="width: 80px; margin-top: 10px; height: 32px"
+        nz-input
+        nz-tooltip
+        nzTooltipTrigger="focus"
+        nzTooltipPlacement="topLeft"
+        nzOverlayClassName="numeric-input"
+        [ngModel]="count"
+        placeholder="Input a number"
+        (ngModelChange)="onChange($event)"
+      />
+      <button style="margin-top: 10px" nz-button (click)="minCount()"><i nz-icon nzType="minus"></i></button>
+      <button style="margin-top: 10px" nz-button (click)="addCount()"><i nz-icon nzType="plus"></i></button>
+    </nz-button-group>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleOk()"
+            >{{visibleType === 1 ? 'Check In' : 'Check Out'}}</button>
+  </ng-template>
+</nz-modal>
