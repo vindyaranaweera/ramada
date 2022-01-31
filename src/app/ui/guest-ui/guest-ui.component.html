@@ -81,7 +81,7 @@
               <div *ngFor="let items of FavouritList;let i = index;" class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
                 <app-favourite-card [title]="items.title" [eggAvailable]="items.eggAvailable"
                                     [hashBrown]="items.hashbrown" [eggStyle]="items.eggStyle" [protein]="items.protein"
-                                    [toast]="items.toast" image="../../../assets/{{i===0?'cheese omlet.png':i===1?'egg and cheese sandwich.png':i===2?'egg.png':i===3?'hash brown.png':'pancake.png'}}" ></app-favourite-card>
+                                    [toast]="items.toast" image="../../../ramada/assets/{{i===0?'cheese omlet.png':i===1?'egg and cheese sandwich.png':i===2?'egg.png':i===3?'hash brown.png':'pancake.png'}}" ></app-favourite-card>
               </div>
             </div>
           </div>
