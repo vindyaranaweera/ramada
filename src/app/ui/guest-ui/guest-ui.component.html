@@ -4,13 +4,13 @@
 
     </div>
     <div nz-col nzSpan="5" style="justify-content: center;">
-      <img src="../../../ramada/assets/i01_abc (1).jpg"
+      <img src="../../../ramada/assets/log.png"
            [style.width.px]="getScreenWidth>1000? getScreenWidth/8:getScreenWidth/4"
            [style.margin-left.px]="getScreenWidth>1000?50:0">
     </div>
     <div nz-col nzSpan="10" style="text-align: center;  justify-content: center;">
     </div>
-    <nz-divider nzText="BREAKFAST MENU" nzOrientation="center"></nz-divider>
+    <nz-divider nzText="BREAKFAST MENU" nzOrientation="center" style="text-align: center"></nz-divider>
   </div>
   <nz-affix [nzOffsetTop]="50" style="position: absolute; z-index: 10">
     <nz-button-group>
@@ -78,10 +78,10 @@
                  [style.justify-content]="getScreenWidth<900 ?'':'center'"
                  [style.justify-items]="getScreenWidth<900 ?'':'center'"
                  [style.padding-right]="getScreenWidth<900?'50px':'0'">
-              <div *ngFor="let items of FavouritList" class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+              <div *ngFor="let items of FavouritList;let i = index;" class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
                 <app-favourite-card [title]="items.title" [eggAvailable]="items.eggAvailable"
                                     [hashBrown]="items.hashbrown" [eggStyle]="items.eggStyle" [protein]="items.protein"
-                                    [toast]="items.toast"></app-favourite-card>
+                                    [toast]="items.toast" image="../../../assets/{{i===0?'cheese omlet.png':i===1?'egg and cheese sandwich.png':i===2?'egg.png':i===3?'hash brown.png':'pancake.png'}}" ></app-favourite-card>
               </div>
             </div>
           </div>
@@ -95,7 +95,6 @@
                   [orderTitle]="orderTitle"></app-select-order>
 <app-cart [isPreview]="isPreview" (setCartVisibility)="visibleCart = $event" [cartItem]="cartItem"
           [isVisible]="visibleCart"></app-cart>
-
 
 <!--<nz-affix style="text-align: right;" [nzOffsetTop]="getScreenHeight/3" [nzOffsetBottom]="getScreenHeight/3">'-->
 <!--  <div [ngStyle]="{'width':myInnerWidth<768 ?'100px':'120px'}"-->
@@ -352,7 +351,7 @@
 <!--</nz-modal>-->
 
 <!--<nz-modal *ngIf="panel === 3"-->
-<!--          [(nzVisible)]="isVisible2"-->
+<!--          [(nzVisible)]="isVisible2"-->s
 <!--          [nzFooter]="null"-->
 <!--          [nzCloseIcon]="close"-->
 <!--          [nzContent]="modalContent"-->
@@ -369,7 +368,9 @@
 <!--      <div>-->
 <!--        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row-->
 <!--             style="width:470px;height: 120px;margin-top: 10px;">-->
-<!--          <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>-->
+<!--          <567890-\
+5 7 8 e4aDHJK
+  0 div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>-->
 <!--          <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">-->
 <!--            <img src="../../../ramada/assets/e2.jpg" (click)="changeExtraEgg(true)" *ngIf="!extra_egg"-->
 <!--                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">-->

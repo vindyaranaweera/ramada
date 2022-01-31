@@ -25,6 +25,9 @@ export class FavouriteCardComponent implements OnInit {
   @Input()
   title:any;
 
+  @Input()
+  image:any;
+
   visible: boolean = false;
 
   constructor() { }

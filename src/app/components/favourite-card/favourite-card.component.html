@@ -11,11 +11,11 @@
            [(nzPopoverVisible)]="visible"
            (nzPopoverVisibleChange)="change($event)"
            [nzPopoverTrigger]="'click'"
-           [nzPopoverContent]="contentTemplate" nzHoverable style="height:160px;background-color:#D21241;box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" [nzCover]="coverTemplate">
-    <nz-card-meta nzTitle="" nzDescription=""></nz-card-meta>
-
+           [nzPopoverContent]="contentTemplate" nzHoverable style="height:150px;width:150px;border-radius: 20px" [nzCover]="coverTemplate">
+    <img src="{{image}}" style="width: 150px;height: 100%;margin-top: -21px;margin-left: -26px">
   </nz-card>
+  <!--    <nz-card-meta nzTitle="" nzDescription="" ></nz-card-meta>-->
+  <!--  </nz-card>-->
   <ng-template #coverTemplate>
-
   </ng-template>
 </div>
