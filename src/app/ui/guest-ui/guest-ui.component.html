@@ -1,5 +1,5 @@
-<div [style.width.px]="getScreenWidth" [style.height.px]="getScreenHeight">
-  <div nz-row style="text-align: center; " [style.margin-top.px]="getScreenHeight<900 ? 50:90">
+<div  [style.width.px]="getScreenWidth" [style.height.px]="getScreenHeight">
+  <div nz-row style="padding:0;text-align: center; " [style.margin-top.px]="getScreenHeight<900 ? 50:90">
     <div nz-col nzSpan="9" style="text-align: center;  justify-content: center;">
 
     </div>
@@ -12,7 +12,7 @@
     </div>
     <nz-divider nzText="BREAKFAST MENU" nzOrientation="center" style="text-align: center"></nz-divider>
   </div>
-  <nz-affix [nzOffsetTop]="50" style="position: absolute; z-index: 10">
+  <nz-affix [nzOffsetTop]="50" style="position: relative; z-index: 10">
     <nz-button-group>
       <button nz-button style="border-color: #d21241;"><b style="color: #d21241">0 OUT OF 2</b></button>
       <button nz-button nzType="primary" style="background-color: #d21241;border-color:white"
@@ -65,10 +65,10 @@
       </div>
     </div>
   </div>
-  <div nz-row style="margin-top: 170px">
-    <nz-divider nzText="YOUR FAVORITES" nzOrientation="center"></nz-divider>
+  <div *ngIf="favouriteList.length>0" nz-row style="margin-top: 170px">
+    <nz-divider   nzText="YOUR FAVORITES" nzOrientation="center"></nz-divider>
   </div>
-  <div nz-row style="margin-top: -90px;">
+  <div *ngIf="favouriteList.length>0" nz-row style="margin-top: -90px;">
     <div nz-row>
       <div nz-col nzSpan="23">
         <div nz-row style="height:30vh;padding-top: 5px;">
