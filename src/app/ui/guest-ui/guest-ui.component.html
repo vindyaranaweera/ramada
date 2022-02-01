@@ -78,10 +78,11 @@
                  [style.justify-content]="getScreenWidth<900 ?'':'center'"
                  [style.justify-items]="getScreenWidth<900 ?'':'center'"
                  [style.padding-right]="getScreenWidth<900?'50px':'0'">
-              <div *ngFor="let items of FavouritList;let i = index;" class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
-                <app-favourite-card [title]="items.title" [eggAvailable]="items.eggAvailable"
-                                    [hashBrown]="items.hashbrown" [eggStyle]="items.eggStyle" [protein]="items.protein"
-                                    [toast]="items.toast" image="../../../ramada/assets/{{i===0?'cheese omlet.png':i===1?'egg and cheese sandwich.png':i===2?'egg.png':i===3?'hash brown.png':'pancake.png'}}" ></app-favourite-card>
+              <div *ngFor="let items of favouriteList;let i = index;" class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+                <app-favourite-card (deleteItemIndex)="deleteFavouriteItem($event)" [itemIndex]="i" [title]="items.category" [eggAvailable]="items.eggAvailable"
+                                    [hashBrown]="items.hashbrown" [eggStyle]="items.eggstyle" [protein]="items.protien"
+                                    [toast]="items.toast"
+                                    [image]="items.image" ></app-favourite-card>
               </div>
             </div>
           </div>
@@ -90,7 +91,7 @@
     </div>
   </div>
 </div>
-<app-select-order (setPreview)="isPreview=$event" (cart)="setCartItem($event)" (visibleCart)="visibleCart = $event"
+<app-select-order (setFavourIteList)="addFavouriteList($event)" (setPreview)="isPreview=$event" (cart)="setCartItem($event)" (visibleCart)="visibleCart = $event"
                   (visibility)="handleCancel1($event)" [isVisible2]="isVisible2" [ShowModel]="panel"
                   [orderTitle]="orderTitle"></app-select-order>
 <app-cart [isPreview]="isPreview" (setCartVisibility)="visibleCart = $event" [cartItem]="cartItem"

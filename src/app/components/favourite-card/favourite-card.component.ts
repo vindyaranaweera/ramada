@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-favourite-card',
@@ -28,6 +28,11 @@ export class FavouriteCardComponent implements OnInit {
   @Input()
   image:any;
 
+  @Input()
+  itemIndex:any
+
+  @Output()deleteItemIndex= new EventEmitter<any>();
+
   visible: boolean = false;
 
   constructor() { }
@@ -42,5 +47,9 @@ export class FavouriteCardComponent implements OnInit {
 
   change(value: boolean): void {
     console.log(value);
+  }
+
+  deleteItem(){
+    this.deleteItemIndex.emit(this.itemIndex);
   }
 }

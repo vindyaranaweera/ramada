@@ -43,7 +43,7 @@ export class GuestUiComponent implements OnInit {
       hashbrown: 'yes',
       eggAvailable: 1,
       eggStyle: 'Scrambled',
-      title: 'Egg',
+        title: 'Egg',
     },
     {
       protein: 'Bacon',
@@ -73,6 +73,8 @@ export class GuestUiComponent implements OnInit {
   isVisible2 = false;
   suggestions: any;
   buttonText:any;
+
+  favouriteList:any=[];
 
   time: any;
   private myWindow: any;
@@ -104,6 +106,13 @@ export class GuestUiComponent implements OnInit {
   showSide:any=0;
   public getScreenWidth: any;
   public getScreenHeight: any;
+
+  passwordVisible: any;
+  Brownbread: any;
+  Whitebread: any;
+  Hashbrown: any;
+  myForm: any;
+
   constructor(private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
   }
@@ -157,30 +166,6 @@ export class GuestUiComponent implements OnInit {
     this.isVisible2 = false;
     alert('YOU HAVE 2 ORDERS LEFT!')
   }
-
-
-  // click(category: string, item: string) {
-  //   let found = false;
-  //   for (let i = 0; i < this.cart.length; i++) {
-  //     if (category === this.cart[i].category && item === this.cart[i].item) {
-  //       this.cart[i].qty++;
-  //       found = true;
-  //       break;
-  //     }
-  //   }
-  //
-  //   if (!found) {
-  //     this.cart.push({
-  //       category:category,
-  //       item: item,
-  //       qty: 1
-  //     });
-  //   }
-  passwordVisible: any;
-  Brownbread: any;
-  Whitebread: any;
-  Hashbrown: any;
-  myForm: any;
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -450,8 +435,14 @@ export class GuestUiComponent implements OnInit {
     console.log("Is working ")
   }
 
+  addFavouriteList(favouriteItem:any){
+    this.favouriteList=favouriteItem;
+    console.log(this.favouriteList);
+  }
 
-
+  deleteFavouriteItem(itemIndex:any){
+    this.favouriteList.splice(itemIndex,1);
+  }
 
   clickSide(){
     if(this.showSide===0){

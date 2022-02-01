@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+
 interface cartItems {
   category: string;
   qty: number;
@@ -7,6 +8,17 @@ interface cartItems {
   hashbrown: string;
   eggstyle: string;
 }
+
+interface favouriteItems {
+  category: string;
+  protien: string;
+  toast: string;
+  hashbrown: string;
+  eggstyle: string;
+  image:string;
+  eggAvailable:any;
+}
+
 @Component({
   selector: 'app-select-order',
   templateUrl: './select-order.component.html',
@@ -15,20 +27,21 @@ interface cartItems {
 export class SelectOrderComponent implements OnInit {
 
   @Input()
-  ShowModel:any;
+  ShowModel: any;
 
   @Input()
   isVisible2 = false;
 
   @Input()
-  orderTitle:any;
+  orderTitle: any;
 
   @Output() visibility = new EventEmitter<boolean>();
   @Output() visibleCart = new EventEmitter<boolean>();
-  @Output() cart=new EventEmitter<any>();
-  @Output() setPreview=new EventEmitter<any>();
+  @Output() cart = new EventEmitter<any>();
+  @Output() setPreview = new EventEmitter<any>();
+  @Output() setFavourIteList=new EventEmitter<any>();
 
-  public myInnerWidth:any;
+  public myInnerWidth: any;
   isVisible: boolean = false;
 
   bacon: boolean = false;
@@ -42,24 +55,32 @@ export class SelectOrderComponent implements OnInit {
   Brownbread: any;
   Whitebread: any;
   Hashbrown: any;
-  cartItem:cartItems[]=[];
+  cartItem: cartItems[] = [];
+  favouriteItemList: favouriteItems[] = [];
 
   protien = '';
   hash = "No";
   toast = '';
   eggstyle = "N/A";
+  image:any;
+  isEggsAvailable=0;
 
-  showAlert=false;
-  constructor() {  }
+  activeFavourite=0;
+
+  showAlert = false;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.myInnerWidth = window.innerWidth;
   }
+
   changeBrownbread(b: boolean) {
     this.Brownbread = b;
     if (this.Brownbread) {
       this.Whitebread = false;
-      this.toast="Brownbread";
+      this.toast = "Brownbread";
     }
   }
 
@@ -67,7 +88,7 @@ export class SelectOrderComponent implements OnInit {
     this.Whitebread = b;
     if (this.Whitebread) {
       this.Brownbread = false;
-      this.toast="Whitebread";
+      this.toast = "Whitebread";
     }
   }
 
@@ -75,8 +96,8 @@ export class SelectOrderComponent implements OnInit {
     this.sunny = b;
     if (this.sunny) {
       this.over = false;
-      this.scrambled=false;
-      this.eggstyle="Sunny Sideup";
+      this.scrambled = false;
+      this.eggstyle = "Sunny Sideup";
     }
   }
 
@@ -85,7 +106,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.over) {
       this.sunny = false;
       this.scrambled = false;
-      this.eggstyle="Sunny Sideup"
+      this.eggstyle = "Sunny Sideup"
     }
   }
 
@@ -94,7 +115,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.scrambled) {
       this.sunny = false;
       this.over = false;
-      this.eggstyle="Scrambled";
+      this.eggstyle = "Scrambled";
     }
   }
 
@@ -103,7 +124,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.sausage) {
       this.bacon = false;
       this.extra_egg = false;
-      this.protien="Sausage";
+      this.protien = "Sausage";
     }
   }
 
@@ -112,7 +133,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.extra_egg) {
       this.bacon = false;
       this.sausage = false;
-      this.protien="Sausage";
+      this.protien = "Sausage";
     }
   }
 
@@ -121,16 +142,16 @@ export class SelectOrderComponent implements OnInit {
     if (this.bacon) {
       this.sausage = false;
       this.extra_egg = false;
-      this.protien="Bacon";
+      this.protien = "Bacon";
     }
   }
 
   changeHashbrown(b: boolean) {
     this.hashbrown = b;
     if (this.hashbrown) {
-      this.hash="Yes";
-    }else {
-      this.hash="N/A";
+      this.hash = "Yes";
+    } else {
+      this.hash = "N/A";
     }
   }
 
@@ -140,25 +161,30 @@ export class SelectOrderComponent implements OnInit {
     this.visibility.emit(this.isVisible2);
   }
 
-  resetItems(){
-    this.bacon= false;
-    this.sausage= false;
-    this.extra_egg= false;
-    this.hashbrown= false;
-    this.sunny= false;
-    this.over= false;
-    this.scrambled= false;
-    this.Whitebread=false;
-    this.showAlert=false;
-    this.Brownbread=false;
+  resetItems() {
+    this.bacon = false;
+    this.sausage = false;
+    this.extra_egg = false;
+    this.hashbrown = false;
+    this.sunny = false;
+    this.over = false;
+    this.scrambled = false;
+    this.Whitebread = false;
+    this.showAlert = false;
+    this.Brownbread = false;
+    this.activeFavourite=0
   }
-  clearVariables(){
+
+  clearVariables() {
     this.protien = '';
     this.hash = "No";
     this.toast = '';
     this.eggstyle = "N/A";
+    this.image='';
+    this.isEggsAvailable=0;
   }
-  handleCancel1():void {
+
+  handleCancel1(): void {
     this.isVisible2 = false;
     this.visibility.emit(this.isVisible2);
     this.resetItems();
@@ -166,15 +192,15 @@ export class SelectOrderComponent implements OnInit {
 
   handleOk(cate: any): void {
     this.isVisible = true;
-    if(this.hash!=""&& this.protien!="" && this.toast!=""&&this.eggstyle!=""){
+    if (this.hash != "" && this.protien != "" && this.toast != "" && this.eggstyle != "") {
 
       this.cartItem.push({
-        category:this.orderTitle,
-        hashbrown:this.hash,
-        protien:this.protien,
-        toast:this.toast,
-        eggstyle:this.eggstyle,
-        qty:1
+        category: this.orderTitle,
+        hashbrown: this.hash,
+        protien: this.protien,
+        toast: this.toast,
+        eggstyle: this.eggstyle,
+        qty: 1
       })
       this.resetItems();
       this.isVisible2 = false;
@@ -183,8 +209,43 @@ export class SelectOrderComponent implements OnInit {
       this.cart.emit(this.cartItem);
       this.clearVariables();
       this.setPreview.emit(0);
-    }else{
-     this.showAlert=true;
+    } else {
+      this.showAlert = true;
     }
+  }
+
+  addToFavourite() {
+    if(this.activeFavourite===0){
+      if(this.ShowModel===5){
+        this.isEggsAvailable=1;
+      }
+      if(this.orderTitle==='Egg & Cheese Sandwich'){
+        this.image="../../../assets/categories/egg and cheese sandwich.png"
+      }else if(this.orderTitle==='Pancake'){
+        this.image="../../../assets/categories/pancake.png"
+      }else if(this.orderTitle==='Eggs'){
+        this.image="../../../assets/categories/eggs.png"
+      }else if(this.orderTitle==='Cheese Omelette'){
+        this.image="../../../assets/categories/cheese omlette.png"
+      }else {
+        this.image="../../../assets/categories/french toast.png"
+      }
+      this.favouriteItemList.push({
+        category: this.orderTitle,
+        hashbrown: this.hash,
+        protien: this.protien,
+        toast: this.toast,
+        eggstyle: this.eggstyle,
+        image:this.image,
+        eggAvailable:this.isEggsAvailable
+      });
+      this.activeFavourite=1;
+      this.setFavourIteList.emit(this.favouriteItemList);
+      this.clearVariables();
+    }else{
+      this.activeFavourite=0
+      this.favouriteItemList.splice(this.favouriteItemList.length-1);
+    }
+
   }
 }
