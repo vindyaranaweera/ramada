@@ -242,15 +242,15 @@ export class SelectOrderComponent implements OnInit {
                     this.isEggsAvailable = 1;
                 }
                 if (this.orderTitle === 'Egg & Cheese Sandwich') {
-                    this.image = "../../../assets/categories/egg and cheese sandwich.png"
+                    this.image = "../../../ramada/assets/categories/egg and cheese sandwich.png"
                 } else if (this.orderTitle === 'Pancake') {
-                    this.image = "../../../assets/categories/pancake.png"
+                    this.image = "../../../ramada/assets/categories/pancake.png"
                 } else if (this.orderTitle === 'Eggs') {
-                    this.image = "../../../assets/categories/eggs.png"
+                    this.image = "../../../ramada/assets/categories/eggs.png"
                 } else if (this.orderTitle === 'Cheese Omelette') {
-                    this.image = "../../../assets/categories/cheese omlette.png"
+                    this.image = "../../../ramada/assets/categories/cheese omlette.png"
                 } else {
-                    this.image = "../../../assets/categories/french toast.png"
+                    this.image = "../../../ramada/assets/categories/french toast.png"
                 }
                 this.favouriteItemList.push({
                     category: this.orderTitle,
