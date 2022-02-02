@@ -1,5 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-
+interface cartItems {
+  category: string;
+  qty: number;
+  protien: string;
+  toast: string;
+  hashbrown: string;
+  eggstyle: string;
+}
 @Component({
   selector: 'app-favourite-card',
   templateUrl: './favourite-card.component.html',
@@ -32,9 +39,11 @@ export class FavouriteCardComponent implements OnInit {
   itemIndex:any
 
   @Output()deleteItemIndex= new EventEmitter<any>();
+  @Output() cart = new EventEmitter<any>();
+  @Output() visibleCart= new EventEmitter<any>();
 
   visible: boolean = false;
-
+  cartItem: cartItems[] = [];
   constructor() { }
 
   ngOnInit(): void {
@@ -51,5 +60,22 @@ export class FavouriteCardComponent implements OnInit {
 
   deleteItem(){
     this.deleteItemIndex.emit(this.itemIndex);
+  }
+
+  addCartItem(){
+    this.cartItem.push({
+      category: this.title,
+      hashbrown: this.hashBrown,
+      protien: this.protein,
+      toast: this.toast,
+      eggstyle: this.eggStyle,
+      qty: 1
+    })
+    this.cart.emit(this.cartItem);
+    this.visibleCart.emit(true);
+    for (let i=0;i<this.cartItem.length;){
+      this.cartItem.splice(0);
+    }
+    console.log(this.cartItem);
   }
 }

@@ -4,6 +4,10 @@
     <p>toast: {{toast}}</p>
     <p>hashBrown: {{hashBrown}}</p>
     <p *ngIf="eggAvailable===1">eggStyle:{{eggStyle}}</p>
+    <button (click)="addCartItem()" nz-button nzType="primary" style="width: 180px;">
+      Ready For Breakfast
+      <i nz-icon nzType="right"></i>
+    </button>
   </ng-template>
   <nz-card [style.padding-bottom]="'0'" nz-popover
            nzPopoverTitle="{{title}}"

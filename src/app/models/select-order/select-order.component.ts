@@ -200,6 +200,9 @@ export class SelectOrderComponent implements OnInit {
         this.eggstyle = "N/A";
         this.image = '';
         this.isEggsAvailable = 0;
+        for(let i=0; i<this.cartItem.length;){
+          this.cartItem.splice(0);
+        }
     }
 
     handleCancel1(): void {

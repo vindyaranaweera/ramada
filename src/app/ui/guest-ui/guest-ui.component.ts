@@ -4,6 +4,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {ro_RO} from "ng-zorro-antd/i18n";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 interface cartItems {
   category: string;
@@ -21,49 +22,8 @@ interface cartItems {
 })
 export class GuestUiComponent implements OnInit {
 
-  FavouritList:any=[{
-    protein: 'Sausage',
-    toast: 'Brown Bread',
-    hashbrown: 'yes',
-    eggAvailable: 0,
-    eggStyle: 'N/A',
-    title: 'Egg & Cheese Sandwich'
-  },
-    {
-      protein: 'Bacon',
-      toast: 'Brown Bread',
-      hashbrown: 'yes',
-      eggAvailable: 0,
-      eggStyle: 'N/A',
-      title: 'Pancake'
-    },
-    {
-      protein: 'Extra Egg',
-      toast: 'White Bread',
-      hashbrown: 'yes',
-      eggAvailable: 1,
-      eggStyle: 'Scrambled',
-        title: 'Egg',
-    },
-    {
-      protein: 'Bacon',
-      toast: 'Brown Bread',
-      hashbrown: 'yes',
-      eggAvailable: 0,
-      eggStyle: 'N/A',
-      title: 'French Toast',
-    },
-    {
-      protein: 'Sausage',
-      toast: 'Brown Bread',
-      hashbrown: 'yes',
-      eggAvailable: 0,
-      eggStyle: 'N/A',
-      title: 'Cheese Omelette',
-    }]
-
   isPreview=0;
-  cartItem:any
+  cartItem:cartItems[]=[];
   showSendtokitchen=1;
   showDelete=1;
   panel = 1;
@@ -113,7 +73,7 @@ export class GuestUiComponent implements OnInit {
   Hashbrown: any;
   myForm: any;
 
-  constructor(private modal: NzModalService, router: Router, public datepipe: DatePipe) {
+  constructor(private message: NzMessageService,private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
   }
 
@@ -426,15 +386,32 @@ export class GuestUiComponent implements OnInit {
   }
 
   setCartItem(item:any){
-    this.cartItem=item;
+    for(let i=0;i<item.length;i++){
+      this.cartItem.push({
+        category:(item[i].category),
+        qty:(item[i].qty),
+        toast:(item[i].toast),
+        eggstyle:(item[i].eggstyle),
+        protien:(item[i].protien),
+        hashbrown:(item[i].hashbrown)
+      });
+    }
+    console.log(item)
+    console.log(this.cartItem)
   }
 
   enablePreview(){
-    this.isPreview=1;
-    this.visibleCart=true;
-    console.log("Is working ")
+    if(this.cartItem.length>0){
+      this.isPreview=1;
+      this.visibleCart=true;
+      console.log("Is working ")
+    }else{
+      this.createErrorMessage('error');
+    }
   }
-
+  createErrorMessage(type: string): void {
+    this.message.create(type, `This is a message of ${type}`);
+  }
   addFavouriteList(favouriteItem:any){
     this.favouriteList=favouriteItem;
     console.log(this.favouriteList);

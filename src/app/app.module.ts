@@ -54,6 +54,7 @@ import { OrdersComponent } from './frontoffice/orders/orders.component';
 import { RoomsComponent } from './frontoffice/rooms/rooms.component';
 import {NzTagModule} from "ng-zorro-antd/tag";
 import { AddGuestComponent } from './models/add-guest/add-guest.component';
+import {NzMessageService} from "ng-zorro-antd/message";
 
 
 registerLocaleData(en);
@@ -115,7 +116,7 @@ registerLocaleData(en);
         NzPopoverModule,
         NzTagModule
     ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },DatePipe],
+  providers: [{ provide: NZ_I18N, useValue: en_US },DatePipe,NzMessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
