@@ -1,10 +1,10 @@
-<div style="margin-top: -50px;" [style.width.px]="getScreenWidth" [style.height.px]="getScreenHeight">
+<div style="margin-top: -50px;" [style.margin-left.px]="getScreenWidth<1024?-5:-10" [style.width.px]="getScreenWidth" [style.height.px]="getScreenHeight">
   <div nz-row style="padding:0;text-align: center;" [style.margin-top.px]="getScreenHeight<900 ? 50:90">
     <div nz-col nzSpan="9" style="text-align: center;  justify-content: center;">
 
     </div>
     <div nz-col nzSpan="5" style="justify-content: center;">
-      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="../../../assets/newlogo.png"
+      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="../../../ramada/assets/newlogo.png"
            [style.height.px]="getScreenWidth<768?60:100"
            [style.width.px]="getScreenWidth>1000? getScreenWidth/8:getScreenWidth/4"
            [style.margin-left.px]="getScreenWidth>1000?50:0">
@@ -12,7 +12,7 @@
     <div nz-col nzSpan="10" style="text-align: center;  justify-content: center;">
     </div>
     <nz-divider nzText="BREAKFAST MENU" nzOrientation="center" style="text-align: center;"></nz-divider>
-    <nz-affix [nzOffsetTop]="50" style="position:relative; z-index: 10">
+    <nz-affix [nzOffsetTop]="50" style="margin-left:5px;position:relative; z-index: 10">
       <nz-button-group>
         <button nz-button style="border-color: #d21241;"><b style="color: #d21241">0 OUT OF 2</b></button>
         <button nz-button nzType="primary" style="background-color: #d21241;border-color:white"
@@ -23,40 +23,40 @@
       </nz-button-group>
     </nz-affix>
   </div>
-  <div nz-row style="margin-top: -40px;position: absolute">
-    <div nz-row style="margin-bottom: 10px; position: absolute">
-      <div nz-col nzSpan="23" style="position: absolute">
+  <div nz-row style="margin-left:0;padding-left:0;margin-top: -40px;position: absolute;">
+    <div nz-row style="margin-bottom: 10px; position: absolute;">
+      <div nz-col nzSpan="23" style="position: absolute; ">
         <div nz-row [style.margin-left.px]="getScreenWidth<1000?5:10"
-             style="height:30vh;padding-top: 5px;position: absolute">
-          <div style="padding-top: -20px;position: absolute" nz-col class="gutter-row" [nzSpan]="24">
-            <div class="inner-box scr0ll"
+             style="height:30vh;padding-top: 5px;position: absolute;">
+          <div style="padding-top: -20px;position: absolute;" nz-col class="gutter-row" [nzSpan]="24">
+            <div class="inner-box scr0ll" [style.padding-left.px]="getScreenWidth<1024?50:0"
                  style="width: 100vw;margin-bottom:5px;margin-top: 20px;padding-top: 70px;"
-                 [style.justify-content]="getScreenWidth<900 ?'':'center'"
-                 [style.justify-items]="getScreenWidth<900 ?'':'center'"
-                 [style.padding-right]="getScreenWidth<900?'50px':'0'">
-              <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+                 [style.justify-content]="getScreenWidth<1025?'':'center'"
+                 [style.justify-items]="getScreenWidth<1025 ?'':'center'"
+                 [style.padding-right]="getScreenWidth<1025?'50px':'0'">
+              <div class="myCol" [ngClass]="getScreenWidth<1025 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/001.jpg" width="100px" text="Cheese Omelette"
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(1);">
                 </app-category-card>
               </div>
-              <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+              <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/006.jpg" width="100px" text="Pancake"
                                    name="3 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(2);"></app-category-card>
               </div>
-              <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+              <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/new.jpg" width="100px" text="Egg & Cheese Sandwich"
 
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(3);"></app-category-card>
               </div>
-              <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+              <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/pan.jpg" width="100px" text="French Toast"
                                    name="3 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(4);"></app-category-card>
               </div>
-              <div class="myCol" [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'">
+              <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="../../../ramada/assets/e2.jpg" width="100px" text="Eggs"
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(5);"></app-category-card>
@@ -76,13 +76,13 @@
         <div nz-row style="height:30vh;padding-top: 5px;position: relative">
           <div style="padding-top:-20px;position: relative" nz-col class="gutter-row" [nzSpan]="24">
             <div class="inner-box scr0ll"
-                 style="width: 100vw;margin-bottom:5px;margin-top: 20px;padding-top: 70px"
-                 [style.justify-content]="getScreenWidth<900 ?'':'center'"
-                 [style.justify-items]="getScreenWidth<900 ?'':'center'"
-                 [style.padding-right]="getScreenWidth<900?'50px':'0'">
+                 style="width: 100vw;margin-bottom:5px;margin-top: 20px;padding-top: 70px; padding-left: 40px"
+                 [style.justify-content]="getScreenWidth<913 ?'':'center'"
+                 [style.justify-items]="getScreenWidth<913 ?'':'center'"
+                 [style.padding-right]="getScreenWidth<913?'50px':'0'">
               <div *ngFor="let items of favouriteList;let i = index;" class="myCol"
-                   [ngClass]="getScreenWidth<900 ? 'myCol':'myCol2'"
-                   [style.margin-left.px]="getScreenWidth<400&&favouriteList.length<2?80:0||getScreenWidth<820&&favouriteList.length<2?95:0||getScreenWidth<900&&favouriteList.length<2?300:0||getScreenWidth<900&&favouriteList.length<3?150:0||getScreenWidth<900&&favouriteList.length<4?80:0||getScreenWidth<900&&favouriteList.length<5?50:0">
+                   [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'"
+                   [style.margin-left.px]="getScreenWidth<400&&favouriteList.length<2?80:0||getScreenWidth<820&&favouriteList.length<2?95:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<2?300:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<3?150:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<4?80:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<5?50:0">
                 <app-favourite-card (visibleCart)="visibleCart=$event" (cart)="setCartItem($event)"
                                     (deleteItemIndex)="deleteFavouriteItem($event)" [itemIndex]="i"
                                     [title]="items.category" [eggAvailable]="items.eggAvailable"
