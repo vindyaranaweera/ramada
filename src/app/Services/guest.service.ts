@@ -8,7 +8,7 @@ import {environment} from "../../environments/environment";
 })
 export class GuestService {
 
-  private apiServerUrl="environment.apiBaseUrl";
+  private apiServerUrl='http://localhost:8080';
 
   constructor(private http:HttpClient) { }
 

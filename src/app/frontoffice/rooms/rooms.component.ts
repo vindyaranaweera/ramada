@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FrontOfficeService} from "../../Services/front-office.service";
 
 @Component({
   selector: 'app-rooms',
@@ -153,6 +154,9 @@ export class RoomsComponent implements OnInit {
 
   dateFormat: any;
   isVisible: boolean = false;
+
+  currentRoom:any
+
 
   constructor() {
   }

@@ -10,11 +10,11 @@
   <div nz-row
        style="overflow: scroll; height:90%;background-color:transparent; padding-bottom: 10px">
     <div style="margin-left:30px; overflow: scroll" nz-row>
-      <app-room-card [cardType]="'room'" *ngFor="let items of roomList" [isAvailable]="items.availability" [order_status]="3" [number]="items.roomNo"
+      <app-room-card (setRoomNo)="currentRoom=$event" [cardType]="'room'" *ngFor="let items of roomList" [isAvailable]="items.availability" [order_status]="3" [number]="items.roomNo"
                      (showPopup)="showRoom($event)"></app-room-card>
     </div>
   </div>
-  <app-add-guest [isVisible]="guestVisibility" [visibleType]="visibleType" (resetVisibility)="guestVisibility=$event"></app-add-guest>
+  <app-add-guest [roomNo]="currentRoom" [isVisible]="guestVisibility" [visibleType]="visibleType" (resetVisibility)="guestVisibility=$event"></app-add-guest>
 </div>
 
 

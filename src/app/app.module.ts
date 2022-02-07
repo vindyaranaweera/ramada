@@ -55,6 +55,7 @@ import { RoomsComponent } from './frontoffice/rooms/rooms.component';
 import {NzTagModule} from "ng-zorro-antd/tag";
 import { AddGuestComponent } from './models/add-guest/add-guest.component';
 import {NzMessageService} from "ng-zorro-antd/message";
+import {GuestService} from "./Services/guest.service";
 
 
 registerLocaleData(en);
@@ -78,9 +79,7 @@ registerLocaleData(en);
     FavouriteCardComponent,
     OrdersComponent,
     RoomsComponent,
-    AddGuestComponent,
-
-
+    AddGuestComponent
   ],
     imports: [
         BrowserModule,

@@ -18,6 +18,7 @@ export class RoomCardComponent implements OnInit {
   @Input()
   orderColor:any;
   @Output() showPopup = new EventEmitter<number>();
+  @Output() setRoomNo = new EventEmitter<any>();
 
   constructor() {
   }
@@ -31,6 +32,7 @@ export class RoomCardComponent implements OnInit {
       }else {
         this.showPopup.emit(0);
       }
+      this.setRoomNo.emit(this.number);
     // this.messageEvent.emit(number.toString());
   }
 }
