@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FrontOfficeService} from "../../Services/front-office.service";
+import {AddGuestComponent} from "../../models/add-guest/add-guest.component";
 
 @Component({
   selector: 'app-room-card',
   templateUrl: './room-card.component.html',
-  styleUrls: ['./room-card.component.css']
+  styleUrls: ['./room-card.component.css'],
 })
 export class RoomCardComponent implements OnInit {
 
@@ -19,6 +21,7 @@ export class RoomCardComponent implements OnInit {
   orderColor:any;
   @Output() showPopup = new EventEmitter<number>();
   @Output() setRoomNo = new EventEmitter<any>();
+
 
   constructor() {
   }

@@ -31,7 +31,7 @@ const routes: Routes = [
     component: Kitchen2Component
   },
   {
-    path: 'guestUi',
+    path: 'guestUi/:bookingId',
     component: GuestUiComponent
   },
 ];

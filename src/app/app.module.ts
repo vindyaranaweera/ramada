@@ -79,7 +79,7 @@ registerLocaleData(en);
     FavouriteCardComponent,
     OrdersComponent,
     RoomsComponent,
-    AddGuestComponent
+    AddGuestComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,4 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {GuestService} from "../../Services/guest.service";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {NzModalService} from "ng-zorro-antd/modal";
 interface cartItems {
   category: string;
   qty: number;
@@ -38,17 +41,33 @@ export class FavouriteCardComponent implements OnInit {
   @Input()
   itemIndex:any
 
+  @Input()
+  ItemId:any;
+
   @Output()deleteItemIndex= new EventEmitter<any>();
   @Output() cart = new EventEmitter<any>();
   @Output() visibleCart= new EventEmitter<any>();
+  @Output() reFreshFavouriteList=new EventEmitter<any>();
+
 
   visible: boolean = false;
   cartItem: cartItems[] = [];
-  constructor() { }
+  constructor(private guestService:GuestService,private message: NzMessageService,private modal: NzModalService) { }
 
   ngOnInit(): void {
+    if (this.title === 'Egg & Cheese Sandwich') {
+      this.image = "../../../ramada/assets/categories/egg and cheese sandwich.png"
+    } else if (this.title === 'Pancake') {
+      this.image = "../../../ramada/assets/categories/pancake.png"
+    } else if (this.title === 'Eggs') {
+      this.eggAvailable=1;
+      this.image = "../../../ramada/assets/categories/eggs.png"
+    } else if (this.title === 'Cheese Omelette') {
+      this.image = "../../../ramada/assets/categories/cheese omlette.png"
+    } else {
+      this.image = "../../../ramada/assets/categories/french toast.png"
+    }
   }
-
 
   clickMe(): void {
     // this.visible = false;
@@ -59,7 +78,22 @@ export class FavouriteCardComponent implements OnInit {
   }
 
   deleteItem(){
-    this.deleteItemIndex.emit(this.itemIndex);
+    this.modal.confirm({
+      nzTitle: '<i>Confirm Remove</i>',
+      nzContent: '<b><p>Are You Sure Want To Delete This Item From Your Favourite</p></b>',
+      nzOnOk: () =>this.deleteFavourite()
+    });
+  }
+  deleteFavourite(){
+    this.guestService.removeFavourite(this.ItemId).subscribe(response=>{
+      console.log(response);
+      if(response===true){
+        this.createMessage('success','This item removed from your Favourites');
+        this.reFreshFavouriteList.emit(true);
+      }else{
+        this.createMessage('warning','something went wrong')
+      }
+    });
   }
 
   addCartItem(){
@@ -77,5 +111,9 @@ export class FavouriteCardComponent implements OnInit {
       this.cartItem.splice(0);
     }
     console.log(this.cartItem);
+  }
+
+  createMessage(type: string,message:string): void {
+    this.message.create(type, message);
   }
 }

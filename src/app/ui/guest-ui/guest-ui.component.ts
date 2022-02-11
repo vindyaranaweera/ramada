@@ -2,9 +2,10 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {FormControl, Validators} from "@angular/forms";
 import {ro_RO} from "ng-zorro-antd/i18n";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {GuestService} from "../../Services/guest.service";
 
 interface cartItems {
   category: string;
@@ -12,7 +13,7 @@ interface cartItems {
   protien: string;
   toast: string;
   hashbrown: string;
-  eggstyle: string;
+  egg_style: string;
 }
 
 @Component({
@@ -35,6 +36,7 @@ export class GuestUiComponent implements OnInit {
   buttonText:any;
 
   favouriteList:any=[];
+  favouriteImagePath="../../../ramada/assets/categories/"
 
   time: any;
   private myWindow: any;
@@ -73,8 +75,14 @@ export class GuestUiComponent implements OnInit {
   Hashbrown: any;
   myForm: any;
 
-  constructor(private message: NzMessageService,private modal: NzModalService, router: Router, public datepipe: DatePipe) {
+  getValueInRoute:any;
+  bookingId:any;
+  guestId:any;
+  totalPacks:any;
+
+  constructor(private guestService:GuestService,public  getPRoute:ActivatedRoute,private message: NzMessageService,private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
+
   }
 
   ngOnInit(): void {
@@ -86,6 +94,11 @@ export class GuestUiComponent implements OnInit {
       this.right_now_enable = true;
       console.log('condition true')
     }
+
+    this.getValueInRoute= this.getPRoute.params.subscribe(params => {
+      this.bookingId = params['bookingId'];
+    });
+    this.getBookingDetails();
   }
 
   changeItemPanel(number: number) {
@@ -135,7 +148,6 @@ export class GuestUiComponent implements OnInit {
     // alert(this.getScreenWidth);
   }
 
-
   click(category: string, protein: string, toast: string, hashbrown: string, eggstyle: string) {
     let found = false;
     this.cart.push({
@@ -144,7 +156,7 @@ export class GuestUiComponent implements OnInit {
       protien: this.getProtien(),
       toast: this.getToast(category),
       hashbrown: this.getHashbrown(),
-      eggstyle: this.getEgg(category),
+      egg_style: this.getEgg(category),
     });
     console.log(this.cart);
     this.updateTotalQty();
@@ -156,9 +168,11 @@ export class GuestUiComponent implements OnInit {
     this.isVisible = true;
     console.log(this.cart);
   }
+
   hideCart(visibility:boolean){
     this.visibleCart=visibility;
   }
+
   sendToKitchen() {
     this.isVisible = false;
     alert('MAKE SURE TIME WAS SELECTED!')
@@ -391,7 +405,7 @@ export class GuestUiComponent implements OnInit {
         category:(item[i].category),
         qty:(item[i].qty),
         toast:(item[i].toast),
-        eggstyle:(item[i].eggstyle),
+        egg_style:(item[i].egg_style),
         protien:(item[i].protien),
         hashbrown:(item[i].hashbrown)
       });
@@ -401,17 +415,19 @@ export class GuestUiComponent implements OnInit {
   }
 
   enablePreview(){
-    if(this.cartItem.length>0){
-      this.isPreview=1;
-      this.visibleCart=true;
-      console.log("Is working ")
-    }else{
-      this.createErrorMessage('error');
-    }
+    // if(this.cartItem.length>0){
+    //   this.isPreview=1;
+    //   this.visibleCart=true;
+    //   console.log("Is working ")
+    // }else{
+    //   // this.createErrorMessage('error');
+    // }
   }
+
   createErrorMessage(type: string): void {
-    this.message.create(type, `This is a message of ${type}`);
+    this.message.create(type, `this not working currently`);
   }
+
   addFavouriteList(favouriteItem:any){
     this.favouriteList=favouriteItem;
     console.log(this.favouriteList);
@@ -426,6 +442,28 @@ export class GuestUiComponent implements OnInit {
       this.showSide=1;
     }else {
       this.showSide=0;
+    }
+  }
+
+  getBookingDetails(){
+    this.guestService.getBookingDetails(this.bookingId).subscribe(response=>{
+      console.log(response);
+      this.guestId=response.guest;
+      this.totalPacks=response.packs;
+      this.getFavouriteList();
+    });
+  }
+
+  getFavouriteList(){
+    this.guestService.getAllFavourites(this.guestId).subscribe(response=>{
+      console.log(response);
+      this.favouriteList=response;
+    });
+  }
+
+  reFreshFavouriteList(status:boolean){
+    if(status===true){
+      this.getFavouriteList();
     }
   }
 }

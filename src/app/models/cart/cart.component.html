@@ -1,5 +1,5 @@
 <nz-modal
-  style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Preview" (nzOnCancel)="handleCancel()"
+  style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Cart" (nzOnCancel)="handleCancel()"
   [nzCancelText]="null"
   [nzOkText]="null">
 
@@ -10,7 +10,7 @@
         *ngFor="let i of cartItem">
         <div nz-row>
           <div nz-col nzSpan="22">
-            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{i.qty }}</h5>
+            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{qty }}</h5>
           </div>
           <div nz-col nzSpan="2">
             <button *ngIf="isPreview===0" nz-button nzType="primary" [nzSize]="'small'"
@@ -43,42 +43,71 @@
             <p nz-typography style="font-weight: bold;color: #475057">{{i.hashbrown}}</p>
           </div>
           <div nz-col nzSpan="6" style="text-align:left">
-            <p nz-typography style="font-weight: bold;color: #475057">{{i.eggstyle}}</p>
+            <p nz-typography style="font-weight: bold;color: #475057">{{i.egg_style}}</p>
           </div>
         </div>
       </nz-card>
     </nz-row>
 
-    <nz-mention  *ngIf="showSendtokitchen===1&& isPreview==0" [nzSuggestions]="suggestions">
+    <nz-mention *ngIf="showSendtokitchen===1&& isPreview==0" [nzSuggestions]="suggestions">
       <!--      <p style="font-weight: bold">Favourite</p>-->
       <!--      <p style="font-weight: bold" *ngFor="let item of cart">{{item.protein}}{{item.toast}}{{item.hashbrown}}{{item.eggstyle}}</p>-->
       <!--      <textarea rows="4" nz-input ></textarea><br><br>-->
       <nz-divider></nz-divider>
-      <p style="font-weight:bold">Time</p>
       <div nz-row>
-        <div nz-col nzSpan="12">
-          <nz-time-picker
-            [(ngModel)]="currentTime"
-            [nzDisabledHours]="disabledHours"
-            [nzDisabledMinutes]="disabledMinutes"
-            [nzMinuteStep]="5"
-            nzFormat="HH:mm" [nzHideDisabledOptions]="true">
+        <div>
+          <p style="font-weight: bold;color: #d21241;margin-top: 10px; margin-bottom: 0">Quantity </p>
+          <nz-button-group style="float: left">
+            <input disabled
+                   style="width: 32px; margin-top: 10px; height: 32px"
+                   nz-input
+                   nz-tooltip
+                   nzTooltipTrigger="focus"
+                   nzTooltipPlacement="topLeft"
+                   nzOverlayClassName="numeric-input"
+                   [ngModel]="qty"
+                   placeholder="Input a number"
+                   (ngModelChange)="onChange($event)"
+            />
+            <button style="margin-top: 10px" nz-button (click)="minCount()"><i nz-icon nzType="minus"></i></button>
+            <button style="margin-top: 10px" nz-button (click)="addCount()"><i nz-icon nzType="plus"></i></button>
+          </nz-button-group>
+        </div>
+      </div>
+      <br/>
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <p style="font-weight:bold">Date</p>
+          <nz-date-picker style="margin-right: 10px;height: 30px" [nzDisabledDate]="!right_now_enable?disabledCurrentDate:disabledBeforeDate" [nzMode]="'date'"
+                          [nzFormat]="'yyyy/MM/dd'"
+                          [(ngModel)]="date"></nz-date-picker>
+        </div>
+        <div nz-col nzSpan="8">
+          <p style="font-weight:bold">Time</p>
+          <nz-time-picker style="margin-right: 10px"
+                          [(ngModel)]="timePickerTime"
+                          [nzDisabledHours]="disabledHours"
+                          [nzDisabledMinutes]="disabledMinutes"
+                          [nzMinuteStep]="5"
+                          nzFormat="HH:mm" [nzHideDisabledOptions]="true">
           </nz-time-picker>
         </div>
-        <div nz-col nzSpan="12">
+        <div nz-col nzSpan="8">
+          <p style="font-weight:bold;color: transparent">Time</p>
+
           <button nz-button nzType="default" [disabled]="!right_now_enable" *ngIf="right_now_enable"
-                  style="background-color: #D21241;border-color:#D21241; height: 30px;color: white;width: 100%;font-weight: bold"
+                  style="margin-right: 10px;background-color: #D21241;border-color:#D21241; height: 30px;color: white;width: 100%;font-weight: bold"
                   (click)="setCurrentTime()">
             RIGHT NOW
           </button>
         </div>
       </div>
       <p style="padding-top:10px;font-weight: bold;">Note</p>
-      <textarea nz-input [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
+      <textarea nz-input [(ngModel)]="note" [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
     </nz-mention>
-    <div style="text-align:right;margin-top: 10px;margin-right: 22px">
+    <div style="text-align:right;margin-top: 10px;">
       <button *ngIf="showSendtokitchen===1&& isPreview==0" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
-      color: white;" (click)="sendToKitchen()">{{cartItem.length>0?'Send To Kitchen':'Back To Items'}}
+      color: white;" (click)="sendToKitchen()">{{cartItem.length > 0 ? 'Send To Kitchen' : 'Back To Items'}}
       </button>
     </div>
   </div>

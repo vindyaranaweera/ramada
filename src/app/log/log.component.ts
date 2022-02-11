@@ -59,7 +59,8 @@ export class LogComponent implements OnInit {
           this.router.navigate(['kitchen']);
           this.createMessage('success',r.message);
         } else if (r.accessType === 3) {
-          this.router.navigate(['guestUi']);
+          console.log(r);
+          this.router.navigate(['guestUi',r.bookingId]);
           this.createMessage('success',r.message);
         }else {
           this.createMessage('error',r.message);

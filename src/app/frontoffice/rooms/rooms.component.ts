@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FrontOfficeService} from "../../Services/front-office.service";
+import {AddGuestComponent} from "../../models/add-guest/add-guest.component";
 
 @Component({
   selector: 'app-rooms',
@@ -149,6 +150,7 @@ export class RoomsComponent implements OnInit {
 
 
   ]
+  showRoomslist:any=[]
   guestVisibility:any
   visibleType:any;
 
@@ -157,11 +159,19 @@ export class RoomsComponent implements OnInit {
 
   currentRoom:any
 
-
-  constructor() {
+  constructor(private frontOfficeService:FrontOfficeService) {
   }
 
   ngOnInit(): void {
+    this.reFreshPage(true);
+  }
+
+  reFreshPage(value:boolean){
+    if(value===true){
+      this.frontOfficeService.getAllRooms().subscribe(response=>{
+        this.showRoomslist=response;
+      })
+    }
   }
 
   showRoom(visibility:number) {
@@ -169,6 +179,7 @@ export class RoomsComponent implements OnInit {
       this.visibleType=1
     }else {
       this.visibleType=0;
+
     }
     this.guestVisibility=true;
   }
