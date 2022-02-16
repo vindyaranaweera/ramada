@@ -1,0 +1,60 @@
+<nz-row>
+  <nz-card
+    style="width:100%;margin-bottom: 1px;font-size:12px;color:#D21241;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+    >
+    <div nz-row>
+      <div nz-col nzSpan="22">
+        <h5 nz-typography style="font-weight: bold;color: #D21241">{{category}}- {{qty }}</h5>
+      </div>
+      <div nz-col nzSpan="2">
+        <button nz-button nzType="primary" [nzSize]="'small'"
+                style="background-color: #D21241;border-color: #D21241;width:30px;height:30px;margin-right: 10px"
+                (click)="deleteQty()"><i nz-icon nzType="delete"></i></button>
+      </div>
+    </div>
+    <div nz-row style="margin-top: 10px;">
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold">Protien</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left;color: #475057">
+        <p nz-typography style="font-weight: bold">Toast</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold;margin-left:-10px">Hashbrown</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align: left;color: #475057">
+        <p nz-typography style="font-weight: bold">Egg Style</p>
+      </div>
+    </div>
+    <div nz-row style="margin-top: -5px">
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{protien}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{toast}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{hashbrown}}</p>
+      </div>
+      <div nz-col nzSpan="6" style="text-align:left">
+        <p nz-typography style="font-weight: bold;color: #475057">{{egg_style}}</p>
+      </div>
+      <div nz-row style="width: 100%;float: right">
+        <div nz-col nzSpan="8" style="text-align:left;padding-top:5px">
+          <p nz-typography style="margin:0;font-weight: bold; color: #d21241">Required Date</p>
+          <p nz-typography  style="margin:0;padding:0;color:black;font-weight: bold">{{date}}</p>
+        </div>
+        <div nz-col nzSpan="8" style="text-align:left;padding-top:5px">
+          <p nz-typography style="margin:0;color: #d21241;font-weight: bold">Required Time</p>
+          <p nz-typography style="margin:0;padding:0;color:black;font-weight: bold">{{time}} </p>
+        </div>
+        <div nz-col nzSpan="8" style="text-align:left">
+          <button nz-button nzType="primary" [nzSize]="'small'"
+                  style="float:right;background-color: #D21241;font-weight: bold; margin-top:10px;border-color: #D21241;height:30px;margin-right: 5px;margin-left: 78%"
+                  (click)="updateOrder()">Edit Order </button>
+        </div>
+
+      </div>
+    </div>
+  </nz-card>
+</nz-row>
