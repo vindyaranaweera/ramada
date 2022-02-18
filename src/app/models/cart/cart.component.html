@@ -10,7 +10,7 @@
         *ngFor="let i of cartItem">
         <div nz-row>
           <div nz-col nzSpan="22">
-            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{qty }}</h5>
+            <h5 nz-typography style="font-weight: bold;color: #D21241">{{i.category}}- {{qty}}</h5>
           </div>
           <div nz-col nzSpan="2">
             <button *ngIf="isPreview===0" nz-button nzType="primary" [nzSize]="'small'"

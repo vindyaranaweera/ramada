@@ -13,7 +13,7 @@ export class KitchenService {
 
   public getAllOrders(date:any):Observable<any>{
     let queryParams = new HttpParams().append("reqDate",date);
-    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/sort_order_by_date_andtime`,queryParams);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_active_orders`,queryParams);
   }
 
   public getRoomNumber(bookingId:any){

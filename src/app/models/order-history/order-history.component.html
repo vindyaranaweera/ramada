@@ -1,0 +1,15 @@
+<nz-modal
+  style="background-color: #D21241" [(nzVisible)]="isVisible" nzTitle="Order History" (nzOnCancel)="handleCancel()"
+  [nzCancelText]="null"
+  [nzOkText]="null">
+
+  <div *nzModalContent style="color: #D21241;">
+    <app-edite-order-card *ngFor="let i of editOrderList" [category]="i.detailsPayload.category"
+                          [egg_style]="i.detailsPayload.egg_style" [hashbrown]="i.detailsPayload.hashbrown"
+                          [protien]="i.detailsPayload.protien" [toast]="i.detailsPayload.toast" [date]="i.req_date"
+                          [time]="i.req_time" [bookingId]="i.booking" [note]="i.detailsPayload.note" [qty]="i.detailsPayload.qty"
+                          [status]="i.status" [finishedAt]="i.finishedAt" [OrderId]="i.id" [PlacedDate]="i.date"
+                          [placedTime]="i.time" [orderDetailsId]="i.detailsPayload.id"
+                          (sendOtherDetails)="otherDetailsList=$event "(sendEditOrderDetails)="showOrder($event) "></app-edite-order-card>
+  </div>
+</nz-modal>

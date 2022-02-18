@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {delay} from "rxjs";
+import {KitchenService} from "../Services/kitchen.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-kitchen',
@@ -121,6 +123,7 @@ export class KitchenComponent implements OnInit {
       time: '09.00'
     },
   ];
+  order:any=[];
 
   span: any = 8;
   span2: any = 20;
@@ -135,7 +138,7 @@ export class KitchenComponent implements OnInit {
   @ViewChild('new') private mainDiv: ElementRef;
 
 
-  constructor(private router: Router, mainDiv:ElementRef) {
+  constructor(private datePipe:DatePipe, private router: Router, mainDiv:ElementRef,private kitchenService:KitchenService) {
     this.mainDiv=mainDiv
   }
 
@@ -144,16 +147,17 @@ export class KitchenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.oldCardId);
-    console.log(this.cardId);
+    // console.log(this.oldCardId);
+    // console.log(this.cardId);
     this.getScreenWidth();
-    console.log(window.innerHeight);
+    // console.log(window.innerHeight);
+    this.setOrders();
   }
 
   getScreenWidth() {
     setInterval(() => {
       this.myInnerWidth = window.innerWidth;
-      console.log("SCREEN : " + this.myInnerWidth);
+      // console.log("SCREEN : " + this.myInnerWidth);
       if (this.myInnerWidth < 821) {
         this.span = 12;
       }
@@ -218,4 +222,17 @@ export class KitchenComponent implements OnInit {
 
   }
 
+  setOrders(){
+    let date=this.datePipe.transform(new Date(),'YYYY/MM/dd');
+    this.kitchenService.getAllOrders(date).subscribe(response=>{
+      console.log(response);
+      this.order=response;
+    });
+  }
+
+  refreshPage(value:boolean){
+    if(value===true){
+      this.setOrders();
+    }
+  }
 }

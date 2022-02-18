@@ -21,6 +21,10 @@ export class RoomCardComponent implements OnInit {
   orderColor:string|any;
   @Input()
   bookingId:any;
+  @Input()
+  orderStatus:any;
+  @Input()
+  orderQty:any;
 
   @Input()setRoomOrderNumber(value:any){
     console.log("dshfihaifdofjas")
@@ -57,7 +61,7 @@ export class RoomCardComponent implements OnInit {
   getRoomNumber(){
     this.frontOfficeService.getRoomNumber(this.bookingId).subscribe(response=>{
       console.log(response);
-      // let roomNo:any=response.room
+      this.number=response.message
     });
   }
 }

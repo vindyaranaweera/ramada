@@ -77,4 +77,9 @@ export class FrontOfficeService {
     let queryParams = new HttpParams().append("id", bookingId);
     return this.http.post<any>(`${this.apiServerUrl}/api/booking_controller/get_roomno_by_bookingid`,queryParams);
   }
+
+  public getCanceledOrderCount(date:any){
+    let queryParams = new HttpParams().append("reqDate", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_canceled_order_count`,queryParams);
+  }
 }

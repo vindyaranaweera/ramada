@@ -8,7 +8,12 @@
 <nz-card *ngIf="cardType==='order'"
          style="width:120px;box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px;"
          [style.background-color]="orderColor" [style.border.color]="orderColor">
+  <nz-badge style="position: absolute; margin-left: 58px;margin-top: -22px" [nzCount]="orderQty" [nzStyle]="{ backgroundColor: '#d21241',border:'#d21241' }">
+  </nz-badge>
+  <img *ngIf="orderStatus>4" src="assets/Background (1).png"
+       style="width: 80px;height: 80px;margin-top: -21px;margin-left: -20px; position: absolute">
   <span nz-typography style="text-align: center"><strong
-    style="font-size: x-large;font-weight: bold;color: #D21241">{{number}}</strong></span>
+    style="font-size: x-large;font-weight: bold;color: black"
+    [style.color]="orderStatus>4?'black':'#d21241'">{{number}}</strong> </span>
 </nz-card>
 

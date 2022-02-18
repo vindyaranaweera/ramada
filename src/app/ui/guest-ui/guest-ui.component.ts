@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit, Output} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {FormControl, Validators} from "@angular/forms";
 import {ro_RO} from "ng-zorro-antd/i18n";
@@ -23,20 +23,20 @@ interface cartItems {
 })
 export class GuestUiComponent implements OnInit {
 
-  isPreview=0;
-  cartItem:cartItems[]=[];
-  showSendtokitchen=1;
-  showDelete=1;
+  isPreview = 0;
+  cartItem: cartItems[] = [];
+  showSendtokitchen = 1;
+  showDelete = 1;
   panel = 1;
   cart: cartItems[] = [];
   totalQuantity = 0;
   isVisible: boolean = false;
   isVisible2 = false;
   suggestions: any;
-  buttonText:any;
+  buttonText: any;
 
-  favouriteList:any=[];
-  favouriteImagePath="../../../ramada/assets/categories/"
+  favouriteList: any = [];
+  favouriteImagePath = "../../../ramada/assets/categories/"
 
   time: any;
   private myWindow: any;
@@ -47,9 +47,10 @@ export class GuestUiComponent implements OnInit {
   eggstyle = '';
   isVisible3 = false;
   password: any;
-  orderTitle:any;
+  orderTitle: any;
 
-  visibleCart:any;
+  visibleCart: any;
+  visibleOrderHistory: any;
 
   bacon: boolean = false;
   sausage: boolean = false;
@@ -64,8 +65,8 @@ export class GuestUiComponent implements OnInit {
   currentTime: Date | null = new Date();
   right_now_enable = false;
 
-  public myInnerWidth:any;
-  showSide:any=0;
+  public myInnerWidth: any;
+  showSide: any = 0;
   public getScreenWidth: any;
   public getScreenHeight: any;
 
@@ -75,12 +76,16 @@ export class GuestUiComponent implements OnInit {
   Hashbrown: any;
   myForm: any;
 
-  getValueInRoute:any;
-  bookingId:any;
-  guestId:any;
-  totalPacks:any;
+  getValueInRoute: any;
+  bookingId: any;
+  guestId: any;
+  totalPacks: any;
+  totalOrders:any;
 
-  constructor(private guestService:GuestService,public  getPRoute:ActivatedRoute,private message: NzMessageService,private modal: NzModalService, router: Router, public datepipe: DatePipe) {
+  editOrderList: any
+  otherDetailsList:any;
+
+  constructor(private guestService: GuestService, public getPRoute: ActivatedRoute, private message: NzMessageService, private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
 
   }
@@ -89,35 +94,39 @@ export class GuestUiComponent implements OnInit {
     this.getScreenWidth = window.innerWidth;
     this.myInnerWidth = window.innerWidth;
     this.getScreenHeight = window.innerHeight;
-    console.log(new Date().getHours()+'sdfsdf');
+    console.log(new Date().getHours() + 'sdfsdf');
     if (new Date().getHours() > 3 && new Date().getHours() < 9) {
       this.right_now_enable = true;
       console.log('condition true')
     }
 
-    this.getValueInRoute= this.getPRoute.params.subscribe(params => {
+    this.getValueInRoute = this.getPRoute.params.subscribe(params => {
       this.bookingId = params['bookingId'];
     });
     this.getBookingDetails();
+    this.setTotalOrders();
+    setInterval(()=>{
+      this.setTotalOrders();
+    },2000);
   }
 
   changeItemPanel(number: number) {
     this.panel = number;
     this.isVisible2 = true;
-    if(number===1){
-      this.orderTitle="Cheese Omelette"
+    if (number === 1) {
+      this.orderTitle = "Cheese Omelette"
     }
-    if(number===2){
-      this.orderTitle="Pancake"
+    if (number === 2) {
+      this.orderTitle = "Pancake"
     }
-    if(number===3){
-      this.orderTitle="Egg & Cheese Sandwich"
+    if (number === 3) {
+      this.orderTitle = "Egg & Cheese Sandwich"
     }
-    if(number===4){
-      this.orderTitle="French Toast"
+    if (number === 4) {
+      this.orderTitle = "French Toast"
     }
-    if(number===5){
-      this.orderTitle="Eggs"
+    if (number === 5) {
+      this.orderTitle = "Eggs"
     }
   }
 
@@ -163,14 +172,14 @@ export class GuestUiComponent implements OnInit {
   }
 
   showCart() {
-    this.showDelete=0;
-    this.showSendtokitchen=0;
+    this.showDelete = 0;
+    this.showSendtokitchen = 0;
     this.isVisible = true;
     console.log(this.cart);
   }
 
-  hideCart(visibility:boolean){
-    this.visibleCart=visibility;
+  hideCart(visibility: boolean) {
+    this.visibleCart = visibility;
   }
 
   sendToKitchen() {
@@ -222,7 +231,7 @@ export class GuestUiComponent implements OnInit {
     }
   }
 
-  deleteQty(i:any) {
+  deleteQty(i: any) {
     let index = this.cart.indexOf(i);
     this.modal.confirm({
       nzTitle: '<i>Your Item Has Been Removed!</i>',
@@ -239,14 +248,14 @@ export class GuestUiComponent implements OnInit {
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
-    this.isVisible =false;
+    this.isVisible = false;
     // if(this.showDelete===0){
     //   this.showDelete=1;
     // }
 
   }
 
-  handleCancel1(visibility:boolean):void {
+  handleCancel1(visibility: boolean): void {
     this.isVisible2 = visibility
 
   }
@@ -399,72 +408,83 @@ export class GuestUiComponent implements OnInit {
     }
   }
 
-  setCartItem(item:any){
-    for(let i=0;i<item.length;i++){
+  setCartItem(item: any) {
+    for (let i = 0; i < item.length; i++) {
       this.cartItem.push({
-        category:(item[i].category),
-        qty:(item[i].qty),
-        toast:(item[i].toast),
-        egg_style:(item[i].egg_style),
-        protien:(item[i].protien),
-        hashbrown:(item[i].hashbrown)
+        category: (item[i].category),
+        qty: (item[i].qty),
+        toast: (item[i].toast),
+        egg_style: (item[i].egg_style),
+        protien: (item[i].protien),
+        hashbrown: (item[i].hashbrown)
       });
     }
     console.log(item)
     console.log(this.cartItem)
   }
 
-  enablePreview(){
-    // if(this.cartItem.length>0){
-    //   this.isPreview=1;
-    //   this.visibleCart=true;
-    //   console.log("Is working ")
-    // }else{
-    //   // this.createErrorMessage('error');
-    // }
+  showOrderHistory() {
+    this.visibleOrderHistory = true;
   }
 
   createErrorMessage(type: string): void {
     this.message.create(type, `this not working currently`);
   }
 
-  addFavouriteList(favouriteItem:any){
-    this.favouriteList=favouriteItem;
+  addFavouriteList(favouriteItem: any) {
+    this.favouriteList = favouriteItem;
     console.log(this.favouriteList);
   }
 
-  deleteFavouriteItem(itemIndex:any){
-    this.favouriteList.splice(itemIndex,1);
+  deleteFavouriteItem(itemIndex: any) {
+    this.favouriteList.splice(itemIndex, 1);
   }
 
-  clickSide(){
-    if(this.showSide===0){
-      this.showSide=1;
-    }else {
-      this.showSide=0;
+  clickSide() {
+    if (this.showSide === 0) {
+      this.showSide = 1;
+    } else {
+      this.showSide = 0;
     }
   }
 
-  getBookingDetails(){
-    this.guestService.getBookingDetails(this.bookingId).subscribe(response=>{
+  getBookingDetails() {
+    this.guestService.getBookingDetails(this.bookingId).subscribe(response => {
       console.log(response);
-      this.guestId=response.guest;
-      this.totalPacks=response.packs;
+      this.guestId = response.guest;
+      this.totalPacks = response.packs;
       this.getFavouriteList();
     });
   }
 
-  getFavouriteList(){
-    this.guestService.getAllFavourites(this.guestId).subscribe(response=>{
+  getFavouriteList() {
+    this.guestService.getAllFavourites(this.guestId).subscribe(response => {
       console.log(response);
-      this.favouriteList=response;
+      this.favouriteList = response;
     });
   }
 
-  reFreshFavouriteList(status:boolean){
-    if(status===true){
+  reFreshFavouriteList(status: boolean) {
+    if (status === true) {
       this.getFavouriteList();
     }
+  }
+
+  setOtherList(list:any){
+    this.otherDetailsList=list
+  }
+
+  editOrder(list: any) {
+    console.log(this.otherDetailsList)
+    this.editOrderList = list;
+    this.isVisible2 = true;
+  }
+
+  setTotalOrders(){
+    let date=this.datepipe.transform(new Date(),'YYYY/MM/dd');
+    this.guestService.setTotalOrders(this.bookingId,date).subscribe(response=>{
+      this.totalOrders=response.message
+    });
   }
 }
 

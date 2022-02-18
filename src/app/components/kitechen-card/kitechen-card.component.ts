@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {KitchenService} from "../../Services/kitchen.service";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-kitechen-card',
@@ -8,68 +10,90 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class KitechenCardComponent implements OnInit {
 
   @Input()
-  cardTitle:any;
+  cardTitle: any;
 
   @Input()
-  protien:any;
+  protien: any;
 
   @Input()
-  toast:any;
+  toast: any;
 
   @Input()
-  hashbrown:any;
+  hashbrown: any;
 
   @Input()
-  roomNo:any;
+  roomNo: any;
 
   @Input()
-  time:any;
+  time: any;
 
   @Input()
-  eggAvailable:any=0;
+  eggAvailable: any = 0;
 
   @Input()
-  eggStyle:any;
+  eggStyle: any;
 
   @Input()
-  bgColor:any;
+  bgColor: any;
 
   @Input()
-  cardId:any;
+  qty: any
 
-  widthChangeEnable=0;
+  @Input()
+  notes: any = ''
 
-  myInnerHeight:any
-  myInnerWidth:any
+  @Input()
+  cardId: any;
 
-  isChecked:any;
+  @Input()
+  bookingID: any;
 
-  cardHeight:any
-  cardWidth:any
+  @Input()
+  orderId: any;
 
+  widthChangeEnable = 0;
 
+  myInnerHeight: any
+  myInnerWidth: any
+
+  isChecked: any;
+
+  cardHeight: any
+  cardWidth: any
+  rFresh=false;
+
+  @Output()reFreshPage=new EventEmitter<any>();
   @Output() resizeCardID = new EventEmitter<any>();
 
-  span=8;
+  span = 8;
 
-  constructor() { }
+  constructor(private modal: NzModalService, private kitchenService: KitchenService) {
+    setInterval(()=>{
+      if(this.rFresh===true){
+        this.reFreshPage.emit(true);
+        this.rFresh=false;
+      }
+    });
+
+  }
 
   ngOnInit(): void {
     this.getScreenHeght();
+    this.getRoomNumber();
   }
 
-  cardClick(){
-   if( this.isChecked==="checked"){
-     this.isChecked="";
-   }else {
-     this.isChecked="checked";
-   }
-   if(this.widthChangeEnable===1){
-     this.widthChangeEnable=0;
-   }else {
-     this.widthChangeEnable=1;
-     this.widthChangeEnable=1;
-   }
+  cardClick() {
+    if (this.isChecked === "checked") {
+      this.isChecked = "";
+    } else {
+      this.isChecked = "checked";
+    }
+    if (this.widthChangeEnable === 1) {
+      this.widthChangeEnable = 0;
+    } else {
+      this.widthChangeEnable = 1;
+      this.widthChangeEnable = 1;
+    }
     this.resizeCardID.emit(this.cardId);
     console.log(this.cardId);
   }
@@ -77,21 +101,43 @@ export class KitechenCardComponent implements OnInit {
   getScreenHeght() {
     setInterval(() => {
       this.myInnerHeight = window.innerHeight;
-      this.myInnerWidth=window.innerWidth;
+      this.myInnerWidth = window.innerWidth;
       console.log("SCREEN HEIGHT: " + this.myInnerHeight);
-      if(this.myInnerHeight<601){
-        this.cardHeight='100%'
-      }else if(this.myInnerHeight<1025) {
-        this.cardHeight='60vh'
-      }else{
-        this.cardHeight='70vh'
+      if (this.myInnerHeight < 601) {
+        this.cardHeight = '100%'
+      } else if (this.myInnerHeight < 1025) {
+        this.cardHeight = '60vh'
+      } else {
+        this.cardHeight = '70vh'
       }
-      if(this.myInnerWidth<1025&&this.myInnerHeight<1025){
-        this.cardWidth='45vw';
-        this.cardHeight='70vh'
-      }else{
-          this.cardWidth='46vw'
+      if (this.myInnerWidth < 1025 && this.myInnerHeight < 1025) {
+        this.cardWidth = '45vw';
+        this.cardHeight = '70vh'
+      } else {
+        this.cardWidth = '46vw'
       }
     }, 1000);
+  }
+
+  getRoomNumber() {
+    this.kitchenService.getRoomNumber(this.bookingID).subscribe(response => {
+      console.log(response);
+      this.roomNo = response.message
+    });
+  }
+
+  completeOrder() {
+    this.modal.confirm({
+      nzTitle: '<i>Complete Order</i>',
+      nzContent: '<b><p>Are You Sure Want To Complete This Order</p></b>',
+      nzOnOk: () => this.setOrderStatus()
+    });
+  }
+
+  setOrderStatus() {
+    this.kitchenService.completeOrder(this.orderId, 4).subscribe(response => {
+      console.log(response);
+      this.rFresh=true;
+    });
   }
 }
