@@ -13,15 +13,13 @@
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total
-                Breakfast :100</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total Breakfast : {{totalOrders}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="1">
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Remaining:
-                10000</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Remaining: {{totalNotCompleteOrderCount}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="1">
               <div class="inner-box"></div>
@@ -38,7 +36,7 @@
             </div>
             <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box">
-                <div style="background-color:white;border-radius: 15px;margin-right: 10px"><h2
+                <div (click)="viewAllOrders()" style="background-color:white;border-radius: 15px;margin-right: 10px;cursor: pointer"><h2
                   style="padding: 0;margin-top: 20px;color:#d21241;font-weight: bolder">View All </h2></div>
               </div>
             </div>
@@ -83,9 +81,9 @@
       <div nz-col class="gutter-row" [nzSpan]="span3"
            style="background: white; height: 100%; overflow: scroll;margin-top: 5px;">
         <div class="inner-box" style=" overflow: scroll; padding-bottom: 50px">
-          <app-kitchen-button *ngFor="let order of order"
-                              [bgColor]="order.detailsPayload.category=== 'Egg & Cheese Sandwich'?'#3ba0e9':order.detailsPayload.category=== 'Eggs'?'#92D050':order.detailsPayload.category=== 'Pancake'?'#ffcd00':order.detailsPayload.category=== 'Cheese Omelette'?'#f4ff3e':'#ff4da8'"
-                              [bookingId]="order.booking"></app-kitchen-button>
+          <app-kitchen-button [id]="room" [buttonType]="1" *ngFor="let room of rooms"
+                              [bgColor]="'#d21241'" [isSelected]="room === selectedRoom"
+                              [roomNumber]="room" (filterOrdersByRoomNo)="filterOrdersByRoomNo($event)" (click)="changeSelectedButton(room)"></app-kitchen-button>
         </div>
       </div>
     </div>

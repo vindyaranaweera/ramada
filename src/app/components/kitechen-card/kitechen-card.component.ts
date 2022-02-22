@@ -135,7 +135,7 @@ export class KitechenCardComponent implements OnInit {
   }
 
   setOrderStatus() {
-    this.kitchenService.completeOrder(this.orderId, 4).subscribe(response => {
+    this.kitchenService.completeOrder(this.orderId, 3).subscribe(response => {
       console.log(response);
       this.rFresh=true;
     });

@@ -227,7 +227,10 @@ export class AddGuestComponent implements OnInit {
       }
       console.log(guestBody)
       this.frontOfficeService.saveGuest(guestBody).subscribe(response => {
-
+        console.log('before');
+        console.log(response);
+        console.log('after');
+        this.guestDBId=parseInt(response.message);
         this.frontOfficeService.getRoomId(this.roomNo).subscribe(response => {
           console.log("reddvsv " + response)
           let BookingBody: any = {

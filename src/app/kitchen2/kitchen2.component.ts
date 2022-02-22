@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-kitchen2',
@@ -119,10 +120,27 @@ export class Kitchen2Component implements OnInit {
     },
   ];
 
+  routerNavigate:any
+  selectedButton=1;
 
-  constructor() { }
+  constructor( private router:Router) {
+    this.routerNavigate=router;
+  }
 
   ngOnInit(): void {
   }
 
+  goBack(){
+    this.router.navigate(['kitchen']);
+  }
+
+  setSelection(value:any){
+    if(value===1){
+      this.selectedButton=1;
+    }else if(value===2){
+      this.selectedButton=2;
+    }else {
+      this.selectedButton=3;
+    }
+  }
 }
