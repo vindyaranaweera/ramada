@@ -100,8 +100,8 @@ export class AddGuestComponent implements OnInit {
     }
     this.frontOfficeService.findGuest(key).subscribe(response => {
       if (response != null) {
-        this.guestDBId = response.id;
         this.getGuestName = response.name;
+        this.guestDBId = response.id;
         this.getGuestContactNo = response.contactNumber;
         this.guestWasExist = 1;
       }
@@ -230,7 +230,9 @@ export class AddGuestComponent implements OnInit {
         console.log('before');
         console.log(response);
         console.log('after');
-        this.guestDBId=parseInt(response.message);
+        if(response.message!="updated successfully"){
+          this.guestDBId=parseInt(response.message);
+        }
         this.frontOfficeService.getRoomId(this.roomNo).subscribe(response => {
           console.log("reddvsv " + response)
           let BookingBody: any = {

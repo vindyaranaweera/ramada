@@ -1,6 +1,7 @@
 <nz-layout style="height: 100vh; background-color: #d21241">
   <nz-header style="height:100px;background-color: #d21241;">
-    <div style="background-color: #d21241;width:100%;height: 100%;" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div style="background-color: #d21241;width:100%;height: 100%;" nz-row
+         [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div style="background-color:white" nz-col class="gutter-row" [nzSpan]="4">
         <div class="inner-box"><img src="../../../assets/log.png" class="myImage" style="height: 60px;width: 100px">
         </div>
@@ -14,7 +15,7 @@
             <div nz-col class="gutter-row" [nzSpan]="6">
               <div class="inner-box"><h2
                 style="padding: 0;margin-top: 11px;color: white;font-weight: bolder;margin-left: 10px">Total
-                Not Pick-Up: 10</h2></div>
+                Not Pick-Up: {{totalOfNotPickups}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="7">
               <div class="inner-box"></div>
@@ -23,12 +24,12 @@
               <div class="inner-box">
                 <div class="navButton" (click)="goBack()" style="margin-left: 35px; margin-right: 20px"><h2
                   style="cursor:pointer; padding:0;margin-top:12px;color:#d21241;font-weight: bolder;text-align: center;background-color: white;border-radius: 15px;">
-                 Go Back </h2></div>
+                  Go Back </h2></div>
               </div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="4">
-              <div class="inner-box" >
-                <div class="navButton"><h2
+              <div class="inner-box">
+                <div class="navButton" style="cursor: pointer" (click)="viewAll()"><h2
                   style="padding:0;margin-top: 12px;color:#d21241;font-weight: bolder;text-align: center;background-color: white;border-radius: 15px;margin-left: 10px;">
                   View All </h2></div>
               </div>
@@ -50,9 +51,12 @@
               <div nz-col class="gutter-row" [nzSpan]="22">
                 <div class="inner-box">
                   <div nz-row [nzGutter]="0" style="padding-bottom: 30px">
-                    <div nz-col class="gutter-row" *ngFor="let order of orders" [nzSpan]="6">
+                    <div nz-col class="gutter-row" *ngFor="let order of allPreparedOrders" [nzSpan]="6">
                       <div class="inner-box">
-                        <app-kitchen-button style="width: 70px;text-align: center;" [bgColor]="'#15ff57'"
+                        <app-kitchen-button style="width: 70px;text-align: center;" [orderId]="order.orderId"
+                                            [OrderStatus]="order.status"
+                                            [buttonType]="2" [bgColor]="order.status===3?'#d21241':'#15ff57'"
+                                            (sendOrderId)="orderId=$event" (sendOrderStatus)="changeOrderStatus($event)"
                                             [roomNumber]="order.roomNo" [textcolor]="'black'">
                         </app-kitchen-button>
                       </div>
@@ -66,14 +70,28 @@
             </div>
           </nz-content>
           <div style="box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;background-color: white">
-            <nz-footer style="background-color: white;box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset; padding-top: 20px">
-              <button
-                style="background-color: #f1fc43;border-color: #999797;color: #000c17;font-size: 20px;width: 150px;height: 60px;font-weight: bold;border-radius: 15px;margin-left: 0"
-                nz-button nzType="primary">100s
+            <nz-footer
+              style="background-color: white;box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset; padding-top: 20px">
+              <button (click)="filterPickupsByRoomNumberRange(1)" *ngIf="viewType===1"
+                      [style.background-color]="changeFilterRange===1?'white':'#d21241'"
+                      [style.border]="changeFilterRange===1?'2px solid #d21241':'2px solid white'"
+                      [style.color]="changeFilterRange===1?'#d21241':'white'"
+                      style="font-size: 20px;width: 150px;height: 60px;font-weight: bold;border-radius: 15px;margin-left: 0"
+                      nz-button nzType="primary">All
               </button>
-              <button
-                style="background-color: #f1fc43;border-color:#999797;color: #000c17;font-size: 20px;width: 150px;height: 60px;font-weight: bold;border-radius: 15px;margin-left: 50px"
-                nz-button nzType="primary">200s
+              <button (click)="filterPickupsByRoomNumberRange(100)" *ngIf="viewType===1"
+                      [style.background-color]="changeFilterRange===100?'white':'#d21241'"
+                      [style.border]="changeFilterRange===100?'2px solid #d21241':'2px solid white'"
+                      [style.color]="changeFilterRange===100?'#d21241':'white'"
+                      style="background-color: #f1fc43;border-color: #999797;color: #000c17;font-size: 20px;width: 150px;height: 60px;font-weight: bold;border-radius: 15px;margin-left: 50px"
+                      nz-button nzType="primary">100s
+              </button>
+              <button (click)="filterPickupsByRoomNumberRange(200)" *ngIf="viewType===1"
+                      [style.background-color]="changeFilterRange===200?'white':'#d21241'"
+                      [style.border]="changeFilterRange===200?'2px solid #d21241':'2px solid white'"
+                      [style.color]="changeFilterRange===200?'#d21241':'white'"
+                      style="background-color: #f1fc43;border-color:#999797;color: #000c17;font-size: 20px;width: 150px;height: 60px;font-weight: bold;border-radius: 15px;margin-left: 50px"
+                      nz-button nzType="primary">200s
               </button>
             </nz-footer>
           </div>
@@ -82,18 +100,27 @@
       <div style="background-color: #d21241; padding: 0" nz-col class="gutter-row" [nzSpan]="4">
         <div style="width: 97%; height: 100%;padding:20px 0 0 0; background-color: white">
           <nz-divider></nz-divider>
-          <div (click)="setSelection(1)" [style.background-color]="selectedButton===1?'white':'#d21241'" [style.border]="selectedButton!=1?'2px solid white':'2px solid #d21241'" style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"><h2
-            style="padding:0;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px" [style.color]="selectedButton!=1?'white':'#d21241'">
+          <div (click)="setSelection(1)" [style.background-color]="selectedButton===1?'white':'#d21241'"
+               [style.border]="selectedButton!=1?'2px solid white':'2px solid #d21241'"
+               style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"><h2
+            style="padding:0;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px"
+            [style.color]="selectedButton!=1?'white':'#d21241'">
             View
             All</h2></div>
           <nz-divider></nz-divider>
-          <div (click)="setSelection(2)" [style.background-color]="selectedButton===2?'white':'#d21241'" style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px" [style.border]="selectedButton!=2?'2px solid white':'2px solid #d21241'"><h2
-            style="padding:0;color:white;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px" [style.color]="selectedButton===2?'#d21241':'white'">
+          <div (click)="setSelection(2)" [style.background-color]="selectedButton===2?'white':'#d21241'"
+               style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"
+               [style.border]="selectedButton!=2?'2px solid white':'2px solid #d21241'"><h2
+            style="padding:0;color:white;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px"
+            [style.color]="selectedButton===2?'#d21241':'white'">
             Not
             Picked-Up</h2></div>
           <nz-divider></nz-divider>
-          <div (click)="setSelection(3)" [style.background-color]="selectedButton===3?'white':'#d21241'" style="cursor:pointer;background-color:#d21241;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px" [style.border]="selectedButton!=3?'2px solid white':'2px solid #d21241'"><h2
-            [style.color]="selectedButton===3?'#d21241':'white'" style="padding:0;color:white;font-weight: bolder;text-align:center;padding-top:13px;border-color:#53596a;padding-top:19px">
+          <div (click)="setSelection(3)" [style.background-color]="selectedButton===3?'white':'#d21241'"
+               style="cursor:pointer;background-color:#d21241;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"
+               [style.border]="selectedButton!=3?'2px solid white':'2px solid #d21241'"><h2
+            [style.color]="selectedButton===3?'#d21241':'white'"
+            style="padding:0;color:white;font-weight: bolder;text-align:center;padding-top:13px;border-color:#53596a;padding-top:19px">
             Picked
             Up</h2></div>
           <nz-divider></nz-divider>
@@ -103,8 +130,9 @@
            style="background: white; height: 100%; overflow: scroll;padding-bottom: 20px;padding-left: 10px;">
         <div class="inner-box">
           <div class="inner-box">
-            <app-kitchen-button style="text-align: center" *ngFor="let order of orders" [roomNumber]="order.roomNo"
-                                [bgColor]="order.orderColor"></app-kitchen-button>
+            <app-kitchen-button style="text-align: center" *ngFor="let room of roomNumberList" [roomNumber]="room.roomNo"
+                                [bgColor]="'#d21241'" [isSelected]="room.roomNo===selectedRoom"
+                                (click)="changeSelectedRoom(room.roomNo)"></app-kitchen-button>
           </div>
         </div>
       </div>
