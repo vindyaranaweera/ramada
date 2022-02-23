@@ -43,4 +43,13 @@ export class KitchenService {
   public getFilteredOrdersByRoomNo(roomNo:any,date:any){
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_orders_by_roomno?reqDate=`+date+`&roomNo=`+roomNo,'');
   }
+
+  public getAllPreparedOrders(range:any,date:any){
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/all_complete_orders?reqDate=`+date+`&i=`+range,'');
+  }
+
+  public getTotalOfNotPickUpOrders(date:any){
+    let queryParams = new HttpParams().append("reqDate", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/not_pickup_order_count`,queryParams);
+  }
 }

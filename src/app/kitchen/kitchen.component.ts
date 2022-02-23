@@ -235,6 +235,7 @@ export class KitchenComponent implements OnInit {
   }
 
   setOrders() {
+    this.selectedRoom='';
     let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
     this.kitchenService.getAllOrders(date).subscribe(response => {
       console.log(response);
