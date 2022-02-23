@@ -227,6 +227,10 @@ export class AddGuestComponent implements OnInit {
       }
       console.log(guestBody)
       this.frontOfficeService.saveGuest(guestBody).subscribe(response => {
+        console.log('before');
+        console.log(response);
+        console.log('after');
+        this.guestDBId=parseInt(response.message);
         this.frontOfficeService.getRoomId(this.roomNo).subscribe(response => {
           console.log("reddvsv " + response)
           let BookingBody: any = {
@@ -292,15 +296,22 @@ export class AddGuestComponent implements OnInit {
   }
 
   checkOutGuest() {
-    this.frontOfficeService.checkOutBooking(this.bookingId).subscribe(response=>{
-      if(response.status===false){
-        this.createMessage('error',response.message);
-      }else{
-        this.createMessage('success',response.message);
-        this.refreshRoomPage.emit(true);
+    this.modal.confirm({
+      nzTitle: '<i>Confirm Checking Out</i>',
+      nzContent: '<b><p>Are You Sure Want To Check Out This Booking <h1 style="font-weight: bold">Room No '+this.roomNo+'</h1></p></b>',
+      nzOnOk: () => {
+        this.frontOfficeService.checkOutBooking(this.bookingId).subscribe(response=>{
+          if(response.status===false){
+            this.createMessage('error',response.message);
+          }else{
+            this.createMessage('success',response.message);
+            this.refreshRoomPage.emit(true);
+          }
+          this.resetVariables();
+        });
       }
-      this.resetVariables();
     });
+
   }
 
   createMessage(type: string, message: string): void {

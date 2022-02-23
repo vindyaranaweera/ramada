@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {delay} from "rxjs";
+import {KitchenService} from "../Services/kitchen.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-kitchen',
@@ -121,6 +123,8 @@ export class KitchenComponent implements OnInit {
       time: '09.00'
     },
   ];
+  order: any = [];
+  rooms: any = [];
 
   span: any = 8;
   span2: any = 20;
@@ -132,11 +136,19 @@ export class KitchenComponent implements OnInit {
   cardId: any;
   oldCardId: string = "";
 
+  totalOrders: any;
+  totalNotCompleteOrderCount: any;
+  currentDate = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+
+
+  //--------------
+  selectedRoom = '';
+
   @ViewChild('new') private mainDiv: ElementRef;
 
 
-  constructor(private router: Router, mainDiv:ElementRef) {
-    this.mainDiv=mainDiv
+  constructor(private datePipe: DatePipe, private router: Router, mainDiv: ElementRef, private kitchenService: KitchenService) {
+    this.mainDiv = mainDiv
   }
 
   goToPage(link: String): void {
@@ -144,16 +156,20 @@ export class KitchenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.oldCardId);
-    console.log(this.cardId);
+    // console.log(this.oldCardId);
+    // console.log(this.cardId);
     this.getScreenWidth();
-    console.log(window.innerHeight);
+    // console.log(window.innerHeight);
+    this.setOrders();
+    this.setTotalOrderCount();
+    this.setNoteCompleteOrderCount();
+    this.setRoomNumbers();
   }
 
   getScreenWidth() {
     setInterval(() => {
       this.myInnerWidth = window.innerWidth;
-      console.log("SCREEN : " + this.myInnerWidth);
+      // console.log("SCREEN : " + this.myInnerWidth);
       if (this.myInnerWidth < 821) {
         this.span = 12;
       }
@@ -173,7 +189,7 @@ export class KitchenComponent implements OnInit {
 
     elem = document.getElementById(elemID);
     if (this.oldCardId === "" || this.oldCardId === elemID) {
-      if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-16' ||elem.getAttribute('class') === 'gutter-row ant-col ant-col-24') {
+      if (elem.getAttribute('class') === 'gutter-row ant-col ant-col-16' || elem.getAttribute('class') === 'gutter-row ant-col ant-col-24') {
         if (this.myInnerWidth < 821) {
           elem.setAttribute('class', 'gutter-row ant-col ant-col-12');
         } else {
@@ -218,4 +234,58 @@ export class KitchenComponent implements OnInit {
 
   }
 
+  setOrders() {
+    let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+    this.kitchenService.getAllOrders(date).subscribe(response => {
+      console.log(response);
+      this.order = response;
+    });
+  }
+
+  setTotalOrderCount() {
+    this.kitchenService.getTotalOrderCountByDate(this.currentDate).subscribe(response => {
+      console.log(response);
+      this.totalOrders = response;
+    });
+  }
+
+  setNoteCompleteOrderCount() {
+    this.kitchenService.getNotCompleteOrderCount(this.currentDate).subscribe(response => {
+      console.log(response);
+      this.totalNotCompleteOrderCount = response;
+    });
+  }
+
+  refreshPage(value: boolean) {
+    if (value === true) {
+      this.setOrders();
+      this.setTotalOrderCount();
+      this.setNoteCompleteOrderCount();
+    }
+  }
+
+  setRoomNumbers() {
+    this.kitchenService.getRoomNumberList(this.currentDate).subscribe(response => {
+      console.log(response);
+      this.rooms = response;
+    });
+  }
+
+  filterOrdersByRoomNo(roomNo: any) {
+    this.kitchenService.getFilteredOrdersByRoomNo(roomNo, this.currentDate).subscribe(response => {
+      console.log(response);
+      this.order = response;
+    });
+  }
+
+  viewAllOrders() {
+    this.setOrders();
+    this.setTotalOrderCount();
+    this.setNoteCompleteOrderCount();
+    this.setRoomNumbers();
+  }
+
+  changeSelectedButton(room: any) {
+    this.selectedRoom = room;
+  }
 }

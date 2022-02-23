@@ -55,4 +55,31 @@ export class FrontOfficeService {
   public updateGuest(bookingBody:any){
     return this.http.post<any>(`${this.apiServerUrl}/api/booking_controller/update_booking`,bookingBody);
   }
+
+  public getOrderDetails(date:any){
+    let queryParams = new HttpParams().append("reqDate", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/order_count`,queryParams);
+  }
+
+  public getCategoryCount(date:any,category:any){
+    let body={reqDate:date,cate:category}
+    let queryParams = new HttpParams().append("reqDate", date);
+    let queryParams2 = new HttpParams().append("cate",category);
+    return this.http.post<any>(`${this.apiServerUrl}/api/orderdtetails_controller/category_count?reqDate=`+date+`&cate=`+category,'');
+  }
+
+  public getAllOrders(date:any){
+    let queryParams = new HttpParams().append("reqDate", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/sort_order_by_date_andtime`,queryParams);
+  }
+
+  public getRoomNumber(bookingId:any){
+    let queryParams = new HttpParams().append("id", bookingId);
+    return this.http.post<any>(`${this.apiServerUrl}/api/booking_controller/get_roomno_by_bookingid`,queryParams);
+  }
+
+  public getCanceledOrderCount(date:any){
+    let queryParams = new HttpParams().append("reqDate", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_canceled_order_count`,queryParams);
+  }
 }

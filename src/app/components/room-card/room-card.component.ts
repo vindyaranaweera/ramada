@@ -18,15 +18,30 @@ export class RoomCardComponent implements OnInit {
   @Input()
   isAvailable: boolean = true;
   @Input()
-  orderColor:any;
+  orderColor:string|any;
+  @Input()
+  bookingId:any;
+  @Input()
+  orderStatus:any;
+  @Input()
+  orderQty:any;
+
+  @Input()setRoomOrderNumber(value:any){
+    console.log("dshfihaifdofjas")
+  }
+
   @Output() showPopup = new EventEmitter<number>();
   @Output() setRoomNo = new EventEmitter<any>();
 
 
-  constructor() {
+  constructor(private frontOfficeService:FrontOfficeService) {
   }
 
   ngOnInit(): void {
+    if(this.bookingId!=null){
+      this.number=this.bookingId;
+      this.getRoomNumber();
+    }
   }
 
   showRoomDetails() {
@@ -37,5 +52,16 @@ export class RoomCardComponent implements OnInit {
       }
       this.setRoomNo.emit(this.number);
     // this.messageEvent.emit(number.toString());
+  }
+
+  test() {
+    console.log(this.bookingId);
+  }
+
+  getRoomNumber(){
+    this.frontOfficeService.getRoomNumber(this.bookingId).subscribe(response=>{
+      console.log(response);
+      this.number=response.message
+    });
   }
 }

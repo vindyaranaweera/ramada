@@ -84,6 +84,7 @@ export class FavouriteCardComponent implements OnInit {
       nzOnOk: () =>this.deleteFavourite()
     });
   }
+
   deleteFavourite(){
     this.guestService.removeFavourite(this.ItemId).subscribe(response=>{
       console.log(response);

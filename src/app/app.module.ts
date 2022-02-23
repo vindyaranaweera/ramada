@@ -56,6 +56,8 @@ import {NzTagModule} from "ng-zorro-antd/tag";
 import { AddGuestComponent } from './models/add-guest/add-guest.component';
 import {NzMessageService} from "ng-zorro-antd/message";
 import {GuestService} from "./Services/guest.service";
+import { OrderHistoryComponent } from './models/order-history/order-history.component';
+import { EditeOrderCardComponent } from './components/edite-order-card/edite-order-card.component';
 
 
 registerLocaleData(en);
@@ -80,6 +82,8 @@ registerLocaleData(en);
     OrdersComponent,
     RoomsComponent,
     AddGuestComponent,
+    OrderHistoryComponent,
+    EditeOrderCardComponent,
   ],
     imports: [
         BrowserModule,

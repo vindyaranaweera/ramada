@@ -1,4 +1,5 @@
-<div class="myButton" [style.background-color]="bgColor">
+<div (click)="ButtonClicked()" style="cursor: pointer" class="myButton"
+     [style.background-color]="isSelected?'white':bgColor">
   <h2
-    [style.color]="textcolor" style=" font-weight: bold">{{roomNumber}}</h2></div>
+    [style.color]="isSelected?bgColor:'white'" style=" font-weight: bold">{{roomNumber}}</h2></div>
 

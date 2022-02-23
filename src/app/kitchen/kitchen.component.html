@@ -1,8 +1,10 @@
 <nz-layout>
   <nz-header style="position: fixed;width:100vw">
-    <div style="background-color: #d21241;width:100%;height: 100%" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div style="background-color: #d21241;width:100%;height: 100%" nz-row
+         [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div style="background-color:white" nz-col class="gutter-row" [nzSpan]="4">
-        <div class="inner-box"><img src="../../../assets/log.png" class="myImage" style="height: 60px;width: 100px"></div>
+        <div class="inner-box"><img src="../../../assets/log.png" class="myImage" style="height: 60px;width: 100px">
+        </div>
       </div>
       <div style="height: 100%" nz-col class="gutter-row" [nzSpan]="20">
         <div style="height: 100%" class="inner-box">
@@ -11,14 +13,13 @@
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total
-                Breakfast :100</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total Breakfast : {{totalOrders}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="1">
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Remaining: 10000</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Remaining: {{totalNotCompleteOrderCount}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="1">
               <div class="inner-box"></div>
@@ -26,7 +27,8 @@
             <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box">
                 <div class="navButton"><h2
-                  style=" cursor:pointer; padding: 0;margin-top: 20px;color:#d21241;font-weight: bolder;text-align: center " (click)="goToPage('kitchen2')" >Not PickUp </h2></div>
+                  style=" cursor:pointer; padding: 0;margin-top: 20px;color:#d21241;font-weight: bolder;text-align: center "
+                  (click)="goToPage('kitchen2')">Not PickUp </h2></div>
               </div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="1">
@@ -34,7 +36,7 @@
             </div>
             <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box">
-                <div style="background-color:white;border-radius: 15px;margin-right: 10px"><h2
+                <div (click)="viewAllOrders()" style="background-color:white;border-radius: 15px;margin-right: 10px;cursor: pointer"><h2
                   style="padding: 0;margin-top: 20px;color:#d21241;font-weight: bolder">View All </h2></div>
               </div>
             </div>
@@ -53,19 +55,25 @@
             <div nz-col class="gutter-row" style="overflow: scroll;height:100%; " [nzSpan]="span5">
               <div class="inner-box" style="height: 100%;overflow: scroll">
                 <div nz-row id="new" [nzGutter]="0" style="height:100%;padding-bottom:50px ">
-                  <div style="" [id]="i" *ngFor="let order of orders; let i=index" nz-col class="gutter-row"
+                  <div style="" [id]="i" *ngFor="let order of order; let i=index" nz-col class="gutter-row"
                        [nzSpan]="span">
                     <div class="inner-box" style="margin-top: 10px; margin-right: 10px">
-                      <app-kitechen-card [cardId]="i" (resizeCardID)="setCardSize($event)" [cardTitle]="order.title" [protien]="order.protein" [toast]="order.toast"
-                                         [hashbrown]="order.hashbrown" [eggAvailable]="order.eggAvailable"
-                                         [eggStyle]="order.eggStyle" [bgColor]="order.orderColor"
-                                         [roomNo]="order.roomNo" [time]="order.time"></app-kitechen-card>
+                      <!--                      if you want to re size card please re place this to <app-kitchen-card>'(resizeCardID)="setCardSize($event)"' -->
+                      <app-kitechen-card (reFreshPage)="refreshPage($event)" [cardId]="i" [bookingID]="order.booking" [orderId]="order.id"
+                                         [cardTitle]="order.detailsPayload.category"
+                                         [protien]="order.detailsPayload.protien" [toast]="order.detailsPayload.toast"
+                                         [hashbrown]="order.detailsPayload.hashbrown" [eggAvailable]="0"
+                                         [eggStyle]="order.detailsPayload.egg_style"
+                                         [bgColor]="order.detailsPayload.category=== 'Egg & Cheese Sandwich'?'#3ba0e9':order.detailsPayload.category=== 'Eggs'?'#92D050':order.detailsPayload.category=== 'Pancake'?'#ffcd00':order.detailsPayload.category=== 'Cheese Omelette'?'#f4ff3e':'#ff4da8'"
+                                         [roomNo]="order.roomNo" [qty]="order.detailsPayload.qty"
+                                         [notes]="order.detailsPayload.note"
+                                         [time]="order.req_time"></app-kitechen-card>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div  nz-col class="gutter-row" [nzSpan]="span4">
+            <div nz-col class="gutter-row" [nzSpan]="span4">
             </div>
           </div>
         </div>
@@ -73,8 +81,9 @@
       <div nz-col class="gutter-row" [nzSpan]="span3"
            style="background: white; height: 100%; overflow: scroll;margin-top: 5px;">
         <div class="inner-box" style=" overflow: scroll; padding-bottom: 50px">
-          <app-kitchen-button *ngFor="let order of orders" [roomNumber]="order.roomNo"
-                              [bgColor]="order.orderColor"></app-kitchen-button>
+          <app-kitchen-button [id]="room" [buttonType]="1" *ngFor="let room of rooms"
+                              [bgColor]="'#d21241'" [isSelected]="room === selectedRoom"
+                              [roomNumber]="room" (filterOrdersByRoomNo)="filterOrdersByRoomNo($event)" (click)="changeSelectedButton(room)"></app-kitchen-button>
         </div>
       </div>
     </div>
@@ -83,7 +92,8 @@
     <!--      <div style="background-color:#722ed1; padding: 0; margin:0" nz-col [nzSpan]="20" [nzPull]="4">col-6 col-pull-18</div>-->
     <!--    </div>-->
   </nz-content>
-  <div style="text-align: center;margin-top: 20px"><span nz-typography><strong>Design & Developed By Technography</strong></span>
+  <div style="text-align: center;margin-top: 20px"><span
+    nz-typography><strong>Design & Developed By Technography</strong></span>
   </div>
 </nz-layout>
 

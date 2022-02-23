@@ -40,12 +40,19 @@ export class SelectOrderComponent implements OnInit {
   @Input()
   orderTitle: any;
 
+  @Input()
+  editOrder: cartItems[]|null = []
+
+  @Input()
+  otherDetailsList:any;
+
   @Output() visibility = new EventEmitter<boolean>();
   @Output() visibleCart = new EventEmitter<boolean>();
   @Output() cart = new EventEmitter<any>();
   @Output() setPreview = new EventEmitter<any>();
   @Output() setFavourIteList = new EventEmitter<any>();
-  @Output() reFreshFavouriteList=new EventEmitter<any>();
+  @Output() reFreshFavouriteList = new EventEmitter<any>();
+  @Output() sendOtherDetailsList=new EventEmitter<any>();
 
   public myInnerWidth: any;
   isVisible: boolean = false;
@@ -57,6 +64,7 @@ export class SelectOrderComponent implements OnInit {
   sunny: boolean = false;
   over: boolean = false;
   scrambled: boolean = false;
+  qty = 1;
 
   Brownbread: any;
   Whitebread: any;
@@ -70,7 +78,7 @@ export class SelectOrderComponent implements OnInit {
   eggstyle = "N/A";
   image: any;
   isEggsAvailable = 0;
-  favouriteId:number=0;
+  favouriteId: number = 0;
 
   activeFavourite = 0;
 
@@ -78,11 +86,12 @@ export class SelectOrderComponent implements OnInit {
   alertType = 0;
 
 
-  constructor(private guestService: GuestService,private message: NzMessageService) {
+  constructor(private guestService: GuestService, private message: NzMessageService) {
   }
 
   ngOnInit(): void {
     this.myInnerWidth = window.innerWidth;
+    this.setExistingOrderDetails();
   }
 
   changeBrownbread(b: boolean) {
@@ -121,7 +130,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.over) {
       this.sunny = false;
       this.scrambled = false;
-      this.eggstyle = "Sunny Sideup"
+      this.eggstyle = "OverEasy"
     } else {
       this.eggstyle = "N/A";
     }
@@ -154,7 +163,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.extra_egg) {
       this.bacon = false;
       this.sausage = false;
-      this.protien = "Sausage";
+      this.protien = "Extra Egg";
     } else {
       this.protien = "";
     }
@@ -211,6 +220,12 @@ export class SelectOrderComponent implements OnInit {
     for (let i = 0; i < this.cartItem.length;) {
       this.cartItem.splice(0);
     }
+    if(this.editOrder!=null){
+      for (let i = 0; i < this.editOrder.length;) {
+        this.editOrder.splice(i);
+      }
+    }
+    this.otherDetailsList=null;
   }
 
   handleCancel1(): void {
@@ -236,6 +251,8 @@ export class SelectOrderComponent implements OnInit {
       this.isVisible2 = false;
       this.visibleCart.emit(true);
       this.visibility.emit(this.isVisible2);
+      this.sendOtherDetailsList.emit(this.otherDetailsList);
+      console.log(this.otherDetailsList);
       this.cart.emit(this.cartItem);
       this.clearVariables();
       this.setPreview.emit(0);
@@ -281,28 +298,62 @@ export class SelectOrderComponent implements OnInit {
     }
     this.guestService.addToFavourite(favouriteBody).subscribe(response => {
       console.log(response);
-      this.favouriteId=parseInt(response.message);
+      this.favouriteId = parseInt(response.message);
       this.reFreshFavouriteList.emit(true);
-      if(response.status===true){
-        this.createMessage('success','This item added to your Favourites')
-      }else{
-        this.createMessage('warning','something went wrong')
+      if (response.status === true) {
+        this.createMessage('success', 'This item added to your Favourites')
+      } else {
+        this.createMessage('warning', 'something went wrong')
       }
     });
   }
 
-  deleteFavourite(){
-    this.guestService.removeFavourite(this.favouriteId).subscribe(response=>{
+  deleteFavourite() {
+    this.guestService.removeFavourite(this.favouriteId).subscribe(response => {
       console.log(response);
-      if(response===true){
-        this.createMessage('success','This item removed from your Favourites')
-      }else{
-        this.createMessage('warning','something went wrong')
+      if (response === true) {
+        this.createMessage('success', 'This item removed from your Favourites')
+      } else {
+        this.createMessage('warning', 'something went wrong')
       }
     });
   }
 
-  createMessage(type: string,message:string): void {
+  createMessage(type: string, message: string): void {
     this.message.create(type, message);
+  }
+
+  setExistingOrderDetails() {
+    if(this.editOrder!=null){
+
+      for (let i = 0; i < this.editOrder.length; i++) {
+        this.orderTitle = this.editOrder[i].category;
+        if (this.editOrder[i].toast === "Brownbread") {
+          this.changeBrownbread(true);
+        } else {
+          this.changeWhitebread(true);
+        }
+        if (this.editOrder[i].protien === "Sausage") {
+          this.changeSausage(true);
+        } else if (this.editOrder[i].protien === "Extra Egg") {
+          this.changeExtraEgg(true);
+        } else {
+          this.changeBacon(true);
+        }
+        if (this.editOrder[i].hashbrown === "Yes") {
+          this.changeHashbrown(true);
+        }
+        if (this.editOrder[i].egg_style != "N/A") {
+          if (this.editOrder[i].egg_style === "Sunny Sideup") {
+            this.changeSunny(true)
+          } else if (this.editOrder[i].egg_style === "OverEasy") {
+            this.changeOver(true)
+          } else {
+            this.changeScrambled(true);
+          }
+        }
+      }
+    }
+
   }
 }

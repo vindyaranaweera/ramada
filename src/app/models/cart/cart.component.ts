@@ -42,12 +42,17 @@ export class CartComponent implements OnInit {
   cart: cartItems[] = [];
   totalQuantity = 0;
 
-  note: string = "";
-  qty = 1;
+  note:any| string = "";
+  qty:any = 1;
   calenderDisableDate: Date = new Date();
   timePickerTime: Date|null = null;
   date: any = new Date();
   isEnglish = false;
+
+  Date:any=this.datepipe.transform(new Date(), 'yyyy/MM/dd');
+  Time:any=this.datepipe.transform(new Date(), 'HH:MM');
+  orderId=0;
+  orderDetailsId=0;
 
   buttonText = "Send To Kitchen";
 
@@ -56,13 +61,24 @@ export class CartComponent implements OnInit {
 
   @Input()
   isVisible: boolean = false;
+
   @Input()
   isPreview: any;
   @Input()
   bookingId: any;
 
-  @Output() setCartVisibility = new EventEmitter<boolean>();
+  @Input()
+  OtherDetails:any;
 
+  @Input()
+  totalRemainingOrders:any;
+
+
+
+  @Output() setCartVisibility = new EventEmitter<boolean>();
+  @Output() refreshSetTotalOrders=new EventEmitter();
+
+  emitValue = false;
 
   constructor(private modal: NzModalService, public datepipe: DatePipe, private guestService: GuestService,private message: NzMessageService) {
   }
@@ -76,6 +92,10 @@ export class CartComponent implements OnInit {
     if (this.right_now_enable === false) {
       this.date = null;
     }
+    if(this.OtherDetails!=null){
+      console.log('sdhfoihsadoifsdoifposdjfposdgp')
+     this.setValues();
+    }
   }
 
   disabledCurrentDate = (current: Date): boolean =>
@@ -85,6 +105,21 @@ export class CartComponent implements OnInit {
   disabledBeforeDate = (current: Date): boolean =>
     // Can not select days before today and today
     differenceInCalendarDays(current, this.calenderDisableDate) < 0;
+
+  setValues(){
+    for (let i=0;i<this.OtherDetails.length;i++){
+      this.orderId=this.OtherDetails[i].id
+      console.log(this.orderId)
+      this.qty=this.OtherDetails[i].qty
+      this.bookingId=this.OtherDetails[i].bookingId
+      this.timePickerTime=new Date(this.OtherDetails[i].date +' '+this.OtherDetails[i].time)
+      this.date=this.OtherDetails[i].date
+      this.note=this.OtherDetails[i].note
+      this.Time=this.OtherDetails[i].placedTime
+      this.Date=this.OtherDetails[i].PlacedDate
+      this.orderDetailsId=this.OtherDetails[i].orderDetailsId
+    }
+  }
 
   deleteQty(i: any) {
     let index = this.cartItem.indexOf(i);
@@ -144,8 +179,8 @@ export class CartComponent implements OnInit {
   }
 
   placeOrder() {
-    let currentDate: any = this.datepipe.transform(new Date(), 'yyyy/MM/dd');
-    let currentTime: any = this.datepipe.transform(new Date(), 'HH:MM');
+    let currentDate: any = this.Date
+    let currentTime: any = this.Time
     let RequestedDate: any = this.datepipe.transform(this.date, 'yyyy/MM/dd');
     let RequestTime: any = this.datepipe.transform(this.timePickerTime, 'HH:MM');
     let status: any = 0;
@@ -163,6 +198,7 @@ export class CartComponent implements OnInit {
       egg_style = this.cartItem[i].egg_style;
     }
     let cart = {
+      id:this.orderDetailsId,
       category: category,
       protien: protien,
       toast: toast,
@@ -172,7 +208,7 @@ export class CartComponent implements OnInit {
       note: this.note
     }
     let orderBody = {
-      id: 0,
+      id: this.orderId,
       date: currentDate,
       time: currentTime,
       req_date: RequestedDate,
@@ -181,15 +217,25 @@ export class CartComponent implements OnInit {
       booking: bookingId,
       detailsPayload: cart
     }
-    this.guestService.placeOrder(orderBody).subscribe(response => {
-      console.log(response);
-      if(response.status===true){
-        this.createMessage('success',response.message)
-      }else {
-        this.createMessage('error',response.message);
-      }
-    })
     console.log(orderBody);
+    if(this.orderId===0){
+      this.guestService.placeOrder(orderBody).subscribe(response => {
+        console.log(response);
+        if(response.status===true){
+          this.createMessage('success',response.message);
+        }else {
+          this.createMessage('error',response.message);
+        }
+      });
+    }else{
+      this.guestService.updateOrder(orderBody).subscribe(response=>{
+        if(response.status===true){
+          this.createMessage('success',response.message);
+        }else {
+          this.createMessage('error',response.message);
+        }
+      });
+    }
     this.isVisible = false;
     this.setCartVisibility.emit(this.isVisible);
     this.resetVariables();
@@ -207,7 +253,9 @@ export class CartComponent implements OnInit {
   }
 
   addCount(): void {
-    this.qty++;
+    if(this.qty<this.totalRemainingOrders){
+      this.qty++;
+    }
   }
 
   minCount(): void {
@@ -226,6 +274,8 @@ export class CartComponent implements OnInit {
     this.cartItem.splice(0);
     this.date = null;
     this.timePickerTime = null;
+    this.note="";
+    this.orderId=0;
   }
 
   createMessage(type: string,message:string): void {
