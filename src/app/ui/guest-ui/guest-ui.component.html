@@ -5,7 +5,7 @@
 
     </div>
     <div nz-col nzSpan="5" style="justify-content: center;">
-      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="../../../ramada/assets/newlogo.png"
+      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="../../../assets/newlogo.png"
            [style.height.px]="getScreenWidth<768?60:100"
            [style.width.px]="getScreenWidth>1000? getScreenWidth/8:getScreenWidth/4"
            [style.margin-left.px]="getScreenWidth>1000?50:0">
@@ -36,29 +36,29 @@
                  [style.justify-items]="getScreenWidth<1025 ?'':'center'"
                  [style.padding-right]="getScreenWidth<1025?'50px':'0'">
               <div class="myCol" [ngClass]="getScreenWidth<1025 ? 'myCol':'myCol2'">
-                <app-category-card image="../../../ramada/assets/001.jpg" width="100px" text="Cheese Omelette"
+                <app-category-card image="../../../assets/001.jpg" width="100px" text="Cheese Omelette"
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(1);">
                 </app-category-card>
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
-                <app-category-card image="../../../ramada/assets/006.jpg" width="100px" text="Pancake"
+                <app-category-card image="../../../assets/006.jpg" width="100px" text="Pancake"
                                    name="3 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(2);"></app-category-card>
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
-                <app-category-card image="../../../ramada/assets/new.jpg" width="100px" text="Egg & Cheese Sandwich"
+                <app-category-card image="../../../assets/new.jpg" width="100px" text="Egg & Cheese Sandwich"
 
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(3);"></app-category-card>
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
-                <app-category-card image="../../../ramada/assets/pan.jpg" width="100px" text="French Toast"
+                <app-category-card image="../../../assets/pan.jpg" width="100px" text="French Toast"
                                    name="3 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(4);"></app-category-card>
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
-                <app-category-card image="../../../ramada/assets/e2.jpg" width="100px" text="Eggs"
+                <app-category-card image="../../../assets/e2.jpg" width="100px" text="Eggs"
                                    name="5 Choices Available" background="#D21241" text_color="white"
                                    (click)="changeItemPanel(5);"></app-category-card>
               </div>
