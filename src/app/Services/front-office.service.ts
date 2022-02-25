@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class FrontOfficeService {
 
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = 'http://143.198.36.89/api/';
 
   constructor(private http: HttpClient) {
   }

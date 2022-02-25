@@ -7,7 +7,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 })
 export class KitchenService {
 
-  private apiServerUrl='http://localhost:8080';
+  private apiServerUrl='http://143.198.36.89/api/';
 
   constructor(private http:HttpClient) { }
 
