@@ -10,6 +10,6 @@
                           [time]="i.req_time" [bookingId]="i.booking" [note]="i.detailsPayload.note" [qty]="i.detailsPayload.qty"
                           [status]="i.status" [finishedAt]="i.finishedAt" [OrderId]="i.id" [PlacedDate]="i.date"
                           [placedTime]="i.time" [orderDetailsId]="i.detailsPayload.id"
-                          (sendOtherDetails)="otherDetailsList=$event "(sendEditOrderDetails)="showOrder($event) "></app-edite-order-card>
+                          (sendOtherDetails)="otherDetailsList=$event "(sendEditOrderDetails)="showOrder($event) " (sendCancelOrder)="rFreshOrderHistory($event)"></app-edite-order-card>
   </div>
 </nz-modal>

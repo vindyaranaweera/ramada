@@ -17,7 +17,7 @@
                 style="padding: 0;margin-top: 11px;color: white;font-weight: bolder;margin-left: 10px">Total
                 Not Pick-Up: {{totalOfNotPickups}}</h2></div>
             </div>
-            <div nz-col class="gutter-row" [nzSpan]="7">
+            <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
@@ -32,6 +32,13 @@
                 <div class="navButton" style="cursor: pointer" (click)="viewAll()"><h2
                   style="padding:0;margin-top: 12px;color:#d21241;font-weight: bolder;text-align: center;background-color: white;border-radius: 15px;margin-left: 10px;">
                   View All </h2></div>
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="3">
+              <div class="inner-box">
+                <button nz-button nzType="default"
+                        style="margin-top: 12px; float: right; background-color: white;border: solid 2px #D21241;color: #fafafa;font-weight: bold;height: 65px;width: 65px;border-radius: 5px; margin-left:10px"
+                        (click)="logOut()"><img src="assets/log-out%20(1).png" style="width: 30px;height: 30px; margin-left:3px">    </button>
               </div>
             </div>
           </div>

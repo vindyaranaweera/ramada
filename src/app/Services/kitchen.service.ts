@@ -52,4 +52,9 @@ export class KitchenService {
     let queryParams = new HttpParams().append("reqDate", date);
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/not_pickup_order_count`,queryParams);
   }
+
+  public getOrderCategoryById(orderId:any){
+    let queryParams = new HttpParams().append("id", orderId);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_order_by_orderid`,queryParams);
+  }
 }

@@ -486,6 +486,10 @@ export class GuestUiComponent implements OnInit {
       this.totalOrders=response.message
     });
   }
+
+  logOut(){
+    this.router.navigate([''])
+  }
 }
 
 

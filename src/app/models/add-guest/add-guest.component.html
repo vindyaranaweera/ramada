@@ -9,7 +9,7 @@
 
   <ng-template #modalContent>
     <nz-input-group [nzPrefix]="guestID">
-      <input type="search" (ngModelChange)="searchGuest(key.value)" #key [(ngModel)]="getGuestId" nz-input
+      <input type="search" [disabled]="visibleType!=1" (ngModelChange)="searchGuest(key.value)" #key [(ngModel)]="getGuestId" nz-input
              placeholder="ID number"/>
     </nz-input-group>
     <ng-template #guestID><i nz-icon nzType="idcard" nzTheme="outline"></i></ng-template>

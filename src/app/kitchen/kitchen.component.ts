@@ -289,4 +289,7 @@ export class KitchenComponent implements OnInit {
   changeSelectedButton(room: any) {
     this.selectedRoom = room;
   }
+  logOut(){
+    this.router.navigate([''])
+  }
 }

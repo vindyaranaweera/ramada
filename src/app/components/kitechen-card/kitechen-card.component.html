@@ -1,8 +1,8 @@
 <div nz-col>
-<!--  <input id="CrdId" checked="{{isChecked}}" style="" type="checkbox">-->
-<!--  'cardHeight' meka height eka chang karanawanam apply karanna -->
-<!--  if you want to re size card please insert this to<nz-card>'(click)="cardClick()"'-->
-  <nz-card class="myCrd"  [style.background-color]="bgColor"
+  <!--  <input id="CrdId" checked="{{isChecked}}" style="" type="checkbox">-->
+  <!--  'cardHeight' meka height eka chang karanawanam apply karanna -->
+  <!--  if you want to re size card please insert this to<nz-card>'(click)="cardClick()"'-->
+  <nz-card class="myCrd" [style.background-color]="bgColor"
            [style.width]="widthChangeEnable===1?cardWidth:'100%'" [style.height]="widthChangeEnable===1?'100%':'100%'"
            style=" transition: 1s; text-align: center;font-weight: bold" [nzTitle]="Heading">
     <ng-template style="text-align: center; margin: 0; padding: 0" #Heading>
@@ -55,11 +55,13 @@
       <h4 style="font-weight: bold;color: #d21241">Order Notes</h4>
     </div>
     <div style="width: 100%;float: left;">
-      <h4 style="font-weight: bold;text-align: left">{{notes!=''?notes:'N/A'}}</h4>
+      <h4 style="font-weight: bold;text-align: left">{{notes != '' ? notes : 'N/A'}}</h4>
     </div>
-    <button nz-button nzType="primary"
+    <button *ngIf="status===1" nz-button nzType="primary"
             style="margin-top:10px;padding-bottom:0;width: 99%;height: 40px;font-weight: bold;font-size:20px;"><p
-      style="margin-top: -3px;" (click)="completeOrder()">Done</p></button>
-
+      style="margin-top: -3px;" (click)="startPreparing()">Start</p></button>
+    <button *ngIf="status===2" nz-button nzType="primary"
+            style="margin-top:10px;padding-bottom:0;width: 99%;height: 40px;font-weight: bold;font-size:20px;"><p
+      style="margin-top: -3px;" (click)="completeOrder()">Finish</p></button>
   </nz-card>
 </div>

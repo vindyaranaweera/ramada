@@ -323,4 +323,8 @@ export class Kitchen2Component implements OnInit {
       this.totalOfNotPickups=response;
     });
   }
+
+  logOut(){
+    this.router.navigate([''])
+  }
 }

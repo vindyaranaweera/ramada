@@ -1,8 +1,8 @@
 <div nz-row style="background-color:white;padding: 20px;height: 10vh">
   <div nz-col nzSpan="4">
-    <img src="../../assets/log.png" style="height:60px;width:100px"/>
+    <img src="assets/log.png" style="margin-top:-10px;height:60px;width:100px"/>
   </div>
-  <div nz-col nzSpan="16"></div>
+  <div nz-col nzSpan="14"></div>
   <div nz-col nzSpan="2" style="text-align: right;padding: 0">
     <button nz-button nzType="default"
             style="margin-top: -5px; background-color: #D21241;border-color: #D21241;color: #fafafa;font-weight: bold;height: 50px;width: 100px;border-radius: 10px;"
@@ -14,6 +14,11 @@
             style=" margin-top: -5px; background-color: #D21241;border-color: #D21241;color: #fafafa;font-weight: bold;height: 50px;width: 100px; border-radius: 10px ;"
             (click)="changeScreen(1)">Rooms
     </button>
+  </div>
+  <div nz-col nzSpan="2">
+    <button nz-button nzType="default"
+            style="margin-top: -5px; float: right; background-color: white;border: solid 2px #D21241;color: #fafafa;font-weight: bold;height: 50px;width: 50px;border-radius: 5px; margin-left:10px"
+            (click)="logOut()"><img src="assets/log-out%20(1).png" style="width: 30px;height: 30px; margin-left:-5px">    </button>
   </div>
 </div>
 
