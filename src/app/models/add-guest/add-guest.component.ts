@@ -165,8 +165,8 @@ export class AddGuestComponent implements OnInit {
 
   minCount(): void {
     this.packs--;
-    if (this.packs < 0) {
-      this.packs = 0;
+    if (this.packs <= 0) {
+      this.packs = 1;
     }
   }
 

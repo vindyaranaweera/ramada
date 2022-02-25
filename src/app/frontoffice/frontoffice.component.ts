@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-frontoffice',
@@ -13,6 +14,7 @@ export class FrontofficeComponent implements OnInit {
   isVisible: boolean = false;
   suggestions: any;
   buttonText = "ADD";
+  rout:any;
 
   span2: any;
   span4: any;
@@ -135,7 +137,8 @@ myInnerWidth:any;
   dateFormat: any;
   demoValue: any;
 
-  constructor() {
+  constructor(private router:Router) {
+    this.rout=router;
   }
 
   ngOnInit(): void {
@@ -145,7 +148,6 @@ myInnerWidth:any;
   changeScreen(number: number) {
     this.room = number;
   }
-
 
   add() {
     this.isVisible = false;
@@ -183,5 +185,9 @@ myInnerWidth:any;
 
   showModal() {
     this.isVisible = true;
+  }
+
+  logOut(){
+    this.rout.navigate([''])
   }
 }

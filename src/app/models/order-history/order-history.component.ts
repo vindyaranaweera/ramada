@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NzModalService} from "ng-zorro-antd/modal";
 import {GuestService} from "../../Services/guest.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-order-history',
@@ -22,7 +23,7 @@ export class OrderHistoryComponent implements OnInit {
   editOrderList:any;
   otherDetailsList:any[]=[{}];
 
-  constructor(private guestService:GuestService) {
+  constructor(private guestService:GuestService,private message: NzMessageService) {
   }
 
   ngOnInit(): void {
@@ -47,5 +48,21 @@ export class OrderHistoryComponent implements OnInit {
     this.sendOrderDetails.emit(list);
     this.isVisible=false;
     this.resetVisibility.emit(false);
+  }
+
+  rFreshOrderHistory(orderId:any){
+      this.guestService.cancelOrder(orderId).subscribe(response => {
+        console.log(response);
+        if (response.status === true) {
+          this.createMessage('success',response.message);
+          this.getOrderHistory(this.bookingId);
+        }else {
+          this.createMessage('error',response.message);
+        }
+      });
+  }
+
+  createMessage(type: string, message: string): void {
+    this.message.create(type, message);
   }
 }

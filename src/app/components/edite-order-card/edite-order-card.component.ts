@@ -61,6 +61,8 @@ export class EditeOrderCardComponent implements OnInit {
   @Input()
   orderDetailsId:any
 
+  @Output()sendCancelOrder=new EventEmitter<any>()
+
   constructor(private message: NzMessageService, private modal: NzModalService, private guestService: GuestService) {
   }
 
@@ -118,13 +120,6 @@ export class EditeOrderCardComponent implements OnInit {
   }
 
   cancelOrder() {
-    this.guestService.cancelOrder(this.OrderId).subscribe(response => {
-      console.log(response);
-      if (response.status === true) {
-        this.createMessage('success',response.message);
-      }else {
-        this.createMessage('error',response.message);
-      }
-    });
+    this.sendCancelOrder.emit(this.OrderId);
   }
 }

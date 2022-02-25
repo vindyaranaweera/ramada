@@ -36,6 +36,8 @@ export class KitchenButtonComponent implements OnInit {
   @Input()
   isSelected:any
 
+  category:any;
+
   @Output()filterOrdersByRoomNo= new EventEmitter<any>();
   @Output()sendOrderId=new EventEmitter<any>();
   @Output()sendOrderStatus=new EventEmitter<any>();
@@ -45,6 +47,7 @@ export class KitchenButtonComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getOrderById();
   }
 
   ButtonClicked(){
@@ -80,5 +83,14 @@ export class KitchenButtonComponent implements OnInit {
   setOrderStatus(status:any){
     this.sendOrderId.emit(this.orderId);
     this.sendOrderStatus.emit(status);
+  }
+
+  getOrderById(){
+    if(this.buttonType===2){
+      this.kitchenService.getOrderCategoryById(this.orderId).subscribe(response=>{
+        console.log(response);
+        this.category=response.message;
+      });
+    }
   }
 }

@@ -157,13 +157,13 @@ export class CartComponent implements OnInit {
       if (this.datepipe.transform(this.date, 'yyyy/MM/dd') != this.datepipe.transform(this.calenderDisableDate, 'yyyy/MM/dd')) {
         this.modal.confirm({
           nzTitle: '<i>Confirm Order</i>',
-          nzContent: '<b><p>you place this order for ' + this.datepipe.transform(this.date, 'yyyy/MM/dd') + ' ' + this.datepipe.transform(this.timePickerTime, 'HH:mm') + ' a.m</p></b>',
+          nzContent: '<b><p>Order placed for '+ this.datepipe.transform(this.timePickerTime, 'HH:mm') +' a.m' +' '+ this.datepipe.transform(this.date, 'yyyy/MM/dd')+' </p></b>',
           nzOnOk: () => this.placeOrder()
         });
       } else {
         this.modal.confirm({
           nzTitle: '<i>Confirm Order</i>',
-          nzContent: '<b><p>you place this order for Today ' + this.datepipe.transform(this.timePickerTime, 'HH:mm') + ' a.m</p></b>',
+          nzContent: '<b><p>Order placed for '+ this.datepipe.transform(this.timePickerTime, 'HH:mm') +' a.m' +' '+ this.datepipe.transform(this.date, 'yyyy/MM/dd')+' </p></b>',
           nzOnOk: () => this.placeOrder()
         });
       }

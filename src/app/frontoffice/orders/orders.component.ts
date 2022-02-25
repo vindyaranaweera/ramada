@@ -87,10 +87,10 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setOrderSummery();
+    this.setOrderSummery(this.date);
   }
-  setOrderSummery(){
-    let date:any=this.datePipe.transform(this.date, 'YYYY/MM/dd');
+  setOrderSummery(date:any){
+    date=this.datePipe.transform(date, 'YYYY/MM/dd');
     console.log(date);
     this.frontOfficeService.getOrderDetails(date).subscribe(response => {
       console.log(response);
@@ -130,4 +130,7 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  onChange(result: Date): void {
+   this.setOrderSummery(result);
+  }
 }

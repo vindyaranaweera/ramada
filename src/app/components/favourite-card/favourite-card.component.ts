@@ -56,16 +56,16 @@ export class FavouriteCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.title === 'Egg & Cheese Sandwich') {
-      this.image = "../../../ramada/assets/categories/egg and cheese sandwich.png"
+      this.image = "assets/categories/egg and cheese sandwich.png"
     } else if (this.title === 'Pancake') {
-      this.image = "../../../ramada/assets/categories/pancake.png"
+      this.image = "assets/categories/pancake.png"
     } else if (this.title === 'Eggs') {
       this.eggAvailable=1;
-      this.image = "../../../ramada/assets/categories/eggs.png"
+      this.image = "assets/categories/eggs.png"
     } else if (this.title === 'Cheese Omelette') {
-      this.image = "../../../ramada/assets/categories/cheese omlette.png"
+      this.image = "assets/categories/cheese omlette.png"
     } else {
-      this.image = "../../../ramada/assets/categories/french toast.png"
+      this.image = "assets/categories/french toast.png"
     }
   }
 

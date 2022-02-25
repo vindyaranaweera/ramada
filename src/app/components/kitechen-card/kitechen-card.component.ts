@@ -10,6 +10,9 @@ import {NzModalService} from "ng-zorro-antd/modal";
 export class KitechenCardComponent implements OnInit {
 
   @Input()
+  status:any;
+
+  @Input()
   cardTitle: any;
 
   @Input()
@@ -126,16 +129,24 @@ export class KitechenCardComponent implements OnInit {
     });
   }
 
+  startPreparing(){
+    this.modal.confirm({
+      nzTitle: '<i>Start Order</i>',
+      nzContent: '<b><p>Are You Sure Want To Start This Order</p></b>',
+      nzOnOk: () => this.setOrderStatus(2)
+    });
+  }
+
   completeOrder() {
     this.modal.confirm({
       nzTitle: '<i>Complete Order</i>',
       nzContent: '<b><p>Are You Sure Want To Complete This Order</p></b>',
-      nzOnOk: () => this.setOrderStatus()
+      nzOnOk: () => this.setOrderStatus(4)
     });
   }
 
-  setOrderStatus() {
-    this.kitchenService.completeOrder(this.orderId, 4).subscribe(response => {
+  setOrderStatus(status:any) {
+    this.kitchenService.completeOrder(this.orderId, status).subscribe(response => {
       console.log(response);
       this.rFresh=true;
     });

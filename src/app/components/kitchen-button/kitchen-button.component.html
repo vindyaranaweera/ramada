@@ -1,5 +1,8 @@
 <div (click)="ButtonClicked()" style="cursor: pointer" class="myButton"
      [style.background-color]="isSelected?'white':bgColor">
+  <nz-badge *ngIf="buttonType===2" style="position: absolute; margin-left: 58px;margin-top: -22px" [nzCount]="1" [nzStyle]="{ backgroundColor: category=== 'Egg & Cheese Sandwich'?'#3ba0e9':category=== 'Eggs'?'#92D050':category=== 'Pancake'?'#ffcd00':category=== 'Cheese Omelette'?'#f4ff3e':'#ff4da8',border:'#d21241',color:'transparent'}">
+  </nz-badge>
   <h2
-    [style.color]="isSelected?bgColor:'white'" style=" font-weight: bold">{{roomNumber}}</h2></div>
+    [style.color]="isSelected?bgColor:'white'" style=" font-weight: bold">{{roomNumber}}</h2>
+</div>
 
