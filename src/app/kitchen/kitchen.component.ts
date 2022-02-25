@@ -164,6 +164,7 @@ export class KitchenComponent implements OnInit {
     this.setTotalOrderCount();
     this.setNoteCompleteOrderCount();
     this.setRoomNumbers();
+    this.displayDate();
   }
 
   getScreenWidth() {
@@ -289,7 +290,13 @@ export class KitchenComponent implements OnInit {
   changeSelectedButton(room: any) {
     this.selectedRoom = room;
   }
+
   logOut(){
     this.router.navigate([''])
+  }
+
+  displayDate(){
+    let date=this.datePipe.transform(new Date(),'HH:mm');
+    console.log(date);
   }
 }

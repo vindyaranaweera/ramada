@@ -13,10 +13,12 @@
               <div class="inner-box"></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total Breakfast : {{totalOrders}}</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Total
+                Breakfast : {{totalOrders}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="6">
-              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">Remaining: {{totalNotCompleteOrderCount}}</h2></div>
+              <div class="inner-box"><h2 style="padding: 0;margin-top: 20px;color: white;font-weight: bolder">
+                Remaining: {{totalNotCompleteOrderCount}}</h2></div>
             </div>
             <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box">
@@ -30,7 +32,8 @@
             </div>
             <div nz-col class="gutter-row" [nzSpan]="4">
               <div class="inner-box">
-                <div (click)="viewAllOrders()" style="background-color:white;border-radius: 15px;margin-right: 10px;cursor: pointer"><h2
+                <div (click)="viewAllOrders()"
+                     style="background-color:white;border-radius: 15px;margin-right: 10px;cursor: pointer"><h2
                   style="padding: 0;margin-top: 20px;color:#d21241;font-weight: bolder">View All </h2></div>
               </div>
             </div>
@@ -38,7 +41,8 @@
               <div class="inner-box">
                 <button nz-button nzType="default"
                         style="margin-top: 20px; float: right; background-color: white;border: solid 2px #D21241;color: #fafafa;font-weight: bold;height: 65px;width: 65px;border-radius: 5px; margin-left:10px"
-                        (click)="logOut()"><img src="assets/log-out%20(1).png" style="width: 30px;height: 30px; margin-left:3px">    </button>
+                        (click)="logOut()"><img src="assets/log-out%20(1).png"
+                                                style="width: 30px;height: 30px; margin-left:3px"></button>
               </div>
             </div>
           </div>
@@ -60,7 +64,8 @@
                        [nzSpan]="span">
                     <div class="inner-box" style="margin-top: 10px; margin-right: 10px">
                       <!--                      if you want to re size card please re place this to <app-kitchen-card>'(resizeCardID)="setCardSize($event)"' -->
-                      <app-kitechen-card (reFreshPage)="refreshPage($event)" [cardId]="i" [bookingID]="order.booking" [orderId]="order.id"
+                      <app-kitechen-card (reFreshPage)="refreshPage($event)" [cardId]="i" [bookingID]="order.booking"
+                                         [orderId]="order.id"
                                          [cardTitle]="order.detailsPayload.category"
                                          [protien]="order.detailsPayload.protien" [toast]="order.detailsPayload.toast"
                                          [hashbrown]="order.detailsPayload.hashbrown" [eggAvailable]="0"
@@ -84,7 +89,8 @@
         <div class="inner-box" style=" overflow: scroll; padding-bottom: 50px">
           <app-kitchen-button [id]="room" [buttonType]="1" *ngFor="let room of rooms"
                               [bgColor]="'#d21241'" [isSelected]="room === selectedRoom"
-                              [roomNumber]="room" (filterOrdersByRoomNo)="filterOrdersByRoomNo($event)" (click)="changeSelectedButton(room)"></app-kitchen-button>
+                              [roomNumber]="room" (filterOrdersByRoomNo)="filterOrdersByRoomNo($event)"
+                              (click)="changeSelectedButton(room)"></app-kitchen-button>
         </div>
       </div>
     </div>

@@ -183,7 +183,7 @@ export class CartComponent implements OnInit {
     let currentTime: any = this.Time
     let RequestedDate: any = this.datepipe.transform(this.date, 'yyyy/MM/dd');
     let RequestTime: any = this.datepipe.transform(this.timePickerTime, 'HH:MM');
-    let status: any = 0;
+    let status: any = 1;
     let bookingId: any = this.bookingId;
     let category: any;
     let protien: any;
