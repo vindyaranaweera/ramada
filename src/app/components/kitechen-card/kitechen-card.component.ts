@@ -71,16 +71,17 @@ export class KitechenCardComponent implements OnInit {
   span = 8;
 
   constructor(private modal: NzModalService, private kitchenService: KitchenService) {
+
+
+  }
+
+  ngOnInit(): void {
     setInterval(()=>{
       if(this.rFresh===true){
         this.reFreshPage.emit(true);
         this.rFresh=false;
       }
     });
-
-  }
-
-  ngOnInit(): void {
     this.getScreenHeght();
     this.getRoomNumber();
   }
@@ -105,7 +106,7 @@ export class KitechenCardComponent implements OnInit {
     setInterval(() => {
       this.myInnerHeight = window.innerHeight;
       this.myInnerWidth = window.innerWidth;
-      console.log("SCREEN HEIGHT: " + this.myInnerHeight);
+      // console.log("SCREEN HEIGHT: " + this.myInnerHeight);
       if (this.myInnerHeight < 601) {
         this.cardHeight = '100%'
       } else if (this.myInnerHeight < 1025) {
@@ -124,7 +125,7 @@ export class KitechenCardComponent implements OnInit {
 
   getRoomNumber() {
     this.kitchenService.getRoomNumber(this.bookingID).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.roomNo = response.message
     });
   }

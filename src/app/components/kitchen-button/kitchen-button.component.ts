@@ -36,6 +36,7 @@ export class KitchenButtonComponent implements OnInit {
   @Input()
   isSelected:any
 
+  newBgColor:any;
   category:any;
 
   @Output()filterOrdersByRoomNo= new EventEmitter<any>();
@@ -86,10 +87,24 @@ export class KitchenButtonComponent implements OnInit {
   }
 
   getOrderById(){
-    if(this.buttonType===2){
+    if(this.buttonType===2||this.buttonType===3){
       this.kitchenService.getOrderCategoryById(this.orderId).subscribe(response=>{
         console.log(response);
         this.category=response.message;
+        if(this.buttonType===3){
+          if(this.category=== 'Egg & Cheese Sandwich'){
+            this.newBgColor='#3ba0e9';
+          }else if(this.category=== 'Eggs'){
+            this.newBgColor='#92D050';
+          }else if(this.category=== 'Pancake'){
+            this.newBgColor='#ffcd00';
+          }else if(this.category=== 'Cheese Omelette'){
+            this.newBgColor='#f4ff3e';
+            console.log('this is chees')
+          }else {
+            this.newBgColor='#ff4da8';
+          }
+        }
       });
     }
   }

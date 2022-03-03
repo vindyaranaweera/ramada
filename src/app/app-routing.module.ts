@@ -24,11 +24,11 @@ const routes: Routes = [
   },
   {
     path: 'kitchen',
-    component: KitchenComponent
+    component: Kitchen2Component
   },
   {
     path: 'kitchen2',
-    component: Kitchen2Component
+    component: KitchenComponent
   },
   {
     path: 'guestUi/:bookingId',

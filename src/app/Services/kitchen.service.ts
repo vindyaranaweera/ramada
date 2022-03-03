@@ -17,7 +17,7 @@ export class KitchenService {
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_active_orders`,queryParams);
   }
 
-  public getRoomNumber(bookingId:any){
+  public getRoomNumber(bookingId:any):Observable<any>{
     let queryParams = new HttpParams().append("id", bookingId);
     return this.http.post<any>(`${this.apiServerUrl}/api/booking_controller/get_roomno_by_bookingid`,queryParams);
   }

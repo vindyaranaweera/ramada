@@ -122,6 +122,10 @@ export class Kitchen2Component implements OnInit {
     },
   ];
 
+  waitingOrders: any = [];
+
+  kCard: any = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
   routerNavigate: any
   selectedButton = 1;
   currentDate: any = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
@@ -131,12 +135,15 @@ export class Kitchen2Component implements OnInit {
   selectedRoom: any
   //type 1 for not select any room and default view
   viewType = 1
+  showWaitingOrder = 0;
 
   changeFilterRange = 1
-  roomNumber:any='';
+  roomNumber: any = '';
 
   pickupStatus = 1
-  totalOfNotPickups=0;
+  totalOfNotPickups = 0;
+  totalOrders: any;
+  totalNotCompleteOrderCount: any;
 
   constructor(private datePipe: DatePipe, private router: Router, private kitchenService: KitchenService) {
     this.routerNavigate = router;
@@ -147,7 +154,7 @@ export class Kitchen2Component implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['kitchen']);
+    this.router.navigate(['kitchen2']);
   }
 
   reFreshPage() {
@@ -155,37 +162,44 @@ export class Kitchen2Component implements OnInit {
     this.viewType = 1;
     this.selectedRoom = '';
     this.selectedButton = 1;
-    this.getAllPreparedOrders(1);
+    // this.getAllPreparedOrders(1);
     this.filterRoomNumbers();
     this.setTotalNotPickupOrders();
-    this.roomNumber='';
+    this.roomNumber = '';
+    this.setTotalOrderCount();
+    this.setNoteCompleteOrderCount();
+    this.setOrders()
+    this.setRoomNumberList();
   }
 
   setSelection(value: any) {
     this.changeFilterRange = 1;
     if (value === 1) {
+      this.showWaitingOrder = 0;
       this.selectedButton = 1;
       this.pickupStatus = 1
       if (this.viewType === 1) {
         this.getAllPreparedOrders(1)
-      }else{
-        this.getOrdersByRoomNoAndRange(this.roomNumber,1)
+      } else {
+        this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
       }
     } else if (value === 2) {
+      this.showWaitingOrder = 1;
       this.selectedButton = 2;
       this.pickupStatus = 2
       if (this.viewType === 1) {
         this.getAllNotPickUpOrders(1)
-      }else{
-        this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber,1,3);
+      } else {
+        this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber, 1, 3);
       }
     } else {
+      this.showWaitingOrder = 1;
       this.selectedButton = 3;
       this.pickupStatus = 3
       if (this.viewType === 1) {
         this.getAllPickUpOrders(1)
-      }else{
-        this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber,1,4)
+      } else {
+        this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber, 1, 4)
       }
     }
   }
@@ -194,6 +208,13 @@ export class Kitchen2Component implements OnInit {
     this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
       console.log(response);
       this.allPreparedOrders = response;
+    });
+  }
+
+  setRoomNumberList(){
+    this.kitchenService.getAllPreparedOrders(1, this.currentDate,).subscribe(response => {
+      console.log(response);
+      this.roomNumberList = response;
     });
   }
 
@@ -237,26 +258,126 @@ export class Kitchen2Component implements OnInit {
   }
 
   changeSelectedRoom(roomNo: any) {
-    this.selectedButton=1;
-    this.roomNumber=roomNo;
-    this.viewType = 2;
-    this.selectedRoom = roomNo;
-    this.getOrdersByRoomNoAndRange(roomNo,1);
+    // this.selectedButton=1;
+    // this.roomNumber=roomNo;
+    // this.viewType = 2;
+    // this.selectedRoom = roomNo;
+    // this.getOrdersByRoomNoAndRange(roomNo,1);
   }
 
   viewAll() {
     this.reFreshPage();
   }
 
+  setTotalOrderCount() {
+    this.kitchenService.getTotalOrderCountByDate(this.currentDate).subscribe(response => {
+      console.log(response);
+      this.totalOrders = response;
+    });
+  }
+
+  setNoteCompleteOrderCount() {
+    this.kitchenService.getNotCompleteOrderCount(this.currentDate).subscribe(response => {
+      console.log(response);
+      this.totalNotCompleteOrderCount = response;
+    });
+  }
+
   filterPickupsByRoomNumberRange(range: any) {
     this.changeFilterRange = range
-    if (this.pickupStatus === 1) {
-      this.getAllPreparedOrders(range);
-    } else if (this.pickupStatus === 2) {
-      this.getAllNotPickUpOrders(range);
+    if (this.showWaitingOrder === 1) {
+      if (this.pickupStatus === 1) {
+        this.getAllPreparedOrders(range);
+      } else if (this.pickupStatus === 2) {
+        this.getAllNotPickUpOrders(range);
+      } else {
+        this.getAllPickUpOrders(range);
+      }
     } else {
-      this.getAllPickUpOrders(range);
+      this.filterOrderByRoomNo(range);
     }
+  }
+
+  filterOrderByRoomNo(range: any) {
+    let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+    this.kitchenService.getAllOrders(date).subscribe(response => {
+      let list = response
+      let newList: any = [];
+      if (range === 100) {
+        for (let i = 0; i < list.length; i++) {
+          this.kitchenService.getRoomNumber(list[i].booking).subscribe(response => {
+            let roomNo: number = parseInt(response.message);
+            console.log(roomNo);
+            if (100 <= roomNo && roomNo < 200) {
+              console.log(list[i].booking);
+              let newDetailsPayload: any = {
+                category: list[i].detailsPayload.category,
+                egg_style: list[i].detailsPayload.egg_style,
+                hashbrown: list[i].detailsPayload.hashbrown,
+                id: list[i].detailsPayload.id,
+                note: list[i].detailsPayload.note,
+                protien: list[i].detailsPayload.protien,
+                qty: list[i].detailsPayload.qty,
+                toast: list[i].detailsPayload.toast
+              }
+              newList.push({
+                booking: list[i].booking,
+                date: list[i].date,
+                finishedAt: list[i].finishedAt,
+                id: list[i].id,
+                req_date: list[i].req_date,
+                req_time: list[i].req_time,
+                status: list[i].status,
+                time: list[i].time,
+                detailsPayload: newDetailsPayload
+              });
+              console.log(list);
+            }
+          });
+          console.log("jeiuewrtuwerotuer")
+          this.waitingOrders = newList;
+          console.log(this.waitingOrders);
+        }
+      } else if (range === 200) {
+        for (let i = 0; i < list.length; i++) {
+          this.kitchenService.getRoomNumber(list[i].booking).subscribe(response => {
+            let roomNo: number = parseInt(response.message);
+            if (roomNo >= 200 && roomNo < 300) {
+              let newDetailsPayload: any = {
+                category: list[i].detailsPayload.category,
+                egg_style: list[i].detailsPayload.egg_style,
+                hashbrown: list[i].detailsPayload.hashbrown,
+                id: list[i].detailsPayload.id,
+                note: list[i].detailsPayload.note,
+                protien: list[i].detailsPayload.protien,
+                qty: list[i].detailsPayload.qty,
+                toast: list[i].detailsPayload.toast
+              }
+              // console.log(this.waitingOrders[i].booking)
+              newList.push({
+                booking: list[i].booking,
+                date: list[i].date,
+                finishedAt: list[i].finishedAt,
+                id: list[i].id,
+                req_date: list[i].req_date,
+                req_time: list[i].req_time,
+                status: list[i].status,
+                time: list[i].time,
+                detailsPayload: newDetailsPayload
+              });
+              console.log("hsafoaosdfiu")
+              console.log(newDetailsPayload);
+              console.log('dsfpsdpfsdfospdfsdpof')
+              console.log(list);
+            }
+          });
+        }
+        this.waitingOrders = newList;
+      } else {
+        this.waitingOrders=response
+      }
+    });
+
   }
 
   filterRoomNumbers() {
@@ -289,42 +410,60 @@ export class Kitchen2Component implements OnInit {
         if (response[i].roomNo === roomNo) {
           orderList.push({
             roomNo: response[i].roomNo,
-            orderId:response[i].orderId,
-            status:response[i].status
+            orderId: response[i].orderId,
+            status: response[i].status
           });
         }
       }
-      this.allPreparedOrders=orderList;
+      this.allPreparedOrders = orderList;
       console.log(this.allPreparedOrders);
     });
   }
 
-  getOrdersByRoomNoAndRangeAndStatus(roomNo: any, range: any,status:any) {
+  getOrdersByRoomNoAndRangeAndStatus(roomNo: any, range: any, status: any) {
     this.kitchenService.getAllPreparedOrders(range, this.currentDate,).subscribe(response => {
       console.log(response);
       let orderList: any = [];
       for (let i = 0; i < response.length; i++) {
-        if (response[i].roomNo === roomNo && response[i].status===status) {
+        if (response[i].roomNo === roomNo && response[i].status === status) {
           orderList.push({
             roomNo: response[i].roomNo,
-            orderId:response[i].orderId,
-            status:response[i].status
+            orderId: response[i].orderId,
+            status: response[i].status
           });
         }
       }
-      this.allPreparedOrders=orderList;
+      this.allPreparedOrders = orderList;
       console.log(this.allPreparedOrders);
     });
   }
 
-  setTotalNotPickupOrders(){
-    this.kitchenService.getTotalOfNotPickUpOrders(this.currentDate).subscribe(response=>{
+  setTotalNotPickupOrders() {
+    this.kitchenService.getTotalOfNotPickUpOrders(this.currentDate).subscribe(response => {
       console.log(response);
-      this.totalOfNotPickups=response;
+      this.totalOfNotPickups = response;
     });
   }
 
-  logOut(){
+  logOut() {
     this.router.navigate([''])
+  }
+
+  setOrders() {
+    this.selectedRoom = '';
+    let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+    this.kitchenService.getAllOrders(date).subscribe(response => {
+      console.log(response);
+      this.waitingOrders = response;
+    });
+  }
+
+  AfterReFreshPage(value: boolean) {
+    if (value === true) {
+      this.reFreshPage();
+      // this.setOrders();
+      // this.setTotalOrderCount();
+      // this.setNoteCompleteOrderCount();
+    }
   }
 }
