@@ -1,16 +1,17 @@
 <div nz-row
-     style="overflow:hidden;height:80vh;background-color:#D21241;margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
-  <div nz-col nzSpan="8">
-    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;height: 50px">
+     style="overflow:hidden;height:80vh;background-color:#D21241;margin-top: 10px;border-top-style: none">
+  <div nz-col nzSpan="4">
+    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 55px;font-weight: bold;height: 50px">
       Rooms</h3>
   </div>
 
-  <div nz-col nzSpan="16" style="text-align: right">
+  <div nz-col nzSpan="18" style="text-align: right;background-color: white;height: 15px;border-bottom-right-radius: 50px;border-bottom-left-radius: 50px;
+border-top-style: none">
 
   </div>
   <div nz-row
        style="overflow: scroll; height:90%;background-color:transparent; padding-bottom: 10px">
-    <div style="margin-left:30px; overflow: scroll" nz-row>
+    <div style="margin-left:55px; overflow: scroll" nz-row>
       <app-room-card (setRoomNo)="currentRoom=$event" [cardType]="'room'"
                      *ngFor="let items of showRoomslist" [isAvailable]="!items.status" [order_status]="3"
                      [number]="items.number"

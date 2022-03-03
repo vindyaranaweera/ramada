@@ -78,9 +78,17 @@
       <div nz-row>
         <div nz-col nzSpan="8">
           <p style="font-weight:bold">Date</p>
-          <nz-date-picker style="margin-right: 10px;height: 30px" [nzDisabledDate]="!right_now_enable?disabledCurrentDate:disabledBeforeDate" [nzMode]="'date'"
+          <nz-date-picker style="margin-right: 10px;height: 30px" [nzMode]="'date'"
                           [nzFormat]="'yyyy/MM/dd'"
-                          [(ngModel)]="date"></nz-date-picker>
+                          [(ngModel)]="date" [nzDateRender]="tplRender"
+                          [nzDisabledDate]="!right_now_enable?disabledCurrentDate:disabledBeforeDate"></nz-date-picker>
+
+          <ng-template #tplRender let-current>
+            <div class="ant-picker-cell-inner ng-star-inserted" [class.border]="!disableDates(current)"
+                 (click)="checkSelectedDate(current)">
+              {{ current.getDate() }}
+            </div>
+          </ng-template>
         </div>
         <div nz-col nzSpan="8">
           <p style="font-weight:bold">Time</p>
@@ -106,7 +114,7 @@
       <textarea nz-input [(ngModel)]="note" [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
     </nz-mention>
     <div style="text-align:right;margin-top: 10px;">
-      <button *ngIf="showSendtokitchen===1&& isPreview==0" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+      <button *ngIf="showSendtokitchen===1&& isPreview==0 && isValidDate" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
       color: white;" (click)="sendToKitchen()">{{cartItem.length > 0 ? 'Send To Kitchen' : 'Back To Items'}}
       </button>
     </div>

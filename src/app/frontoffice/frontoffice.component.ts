@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {FrontOfficeService} from "../Services/front-office.service";
+import {DatePipe} from "@angular/common";
+import {KitchenService} from "../Services/kitchen.service";
 
 @Component({
   selector: 'app-frontoffice',
@@ -9,12 +12,13 @@ import {Router} from "@angular/router";
 
 
 export class FrontofficeComponent implements OnInit {
+  todayDate: Date = new Date();
   room = 1;
   Rooms: any = [];
   isVisible: boolean = false;
   suggestions: any;
   buttonText = "ADD";
-  rout:any;
+  rout: any;
 
   span2: any;
   span4: any;
@@ -31,7 +35,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Egg & Cheese Sandwich',
-      time:'08.00'
+      time: '08.00'
     },
     {
       roomNo: '002',
@@ -42,7 +46,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Pancake',
-      time:'10.00'
+      time: '10.00'
     },
     {
       roomNo: '005',
@@ -53,7 +57,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 1,
       eggStyle: 'Scrambled',
       title: 'Egg',
-      time:'08.00'
+      time: '08.00'
     },
     {
       roomNo: '003',
@@ -64,7 +68,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'French Toast',
-      time:'10.00'
+      time: '10.00'
     },
     {
       roomNo: '004',
@@ -75,7 +79,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Cheese Omelette',
-      time:'06.00'
+      time: '06.00'
     },
     {
       roomNo: '006',
@@ -86,7 +90,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Egg & Cheese Sandwich',
-      time:'04.00'
+      time: '04.00'
     },
     {
       roomNo: '007',
@@ -97,7 +101,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Pancake',
-      time:'10.00'
+      time: '10.00'
     },
     {
       roomNo: '008',
@@ -108,7 +112,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 1,
       eggStyle: 'Over Easy',
       title: 'Egg',
-      time:'07.00'
+      time: '07.00'
     },
     {
       roomNo: '009',
@@ -119,7 +123,7 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'French Toast',
-      time:'10.00'
+      time: '10.00'
     },
     {
       roomNo: '010',
@@ -130,19 +134,47 @@ export class FrontofficeComponent implements OnInit {
       eggAvailable: 0,
       eggStyle: 'N/A',
       title: 'Cheese Omelette',
-      time:'09.00'
+      time: '09.00'
     },
   ];
-myInnerWidth:any;
+  myInnerWidth: any;
   dateFormat: any;
   demoValue: any;
 
-  constructor(private router:Router) {
-    this.rout=router;
+  totalPacks = 0;
+  totalOrders = 0;
+  whatDate = 'To Day';
+
+  constructor(private router: Router, private frontOfficeService: FrontOfficeService, public datepipe: DatePipe, private kitchenService: KitchenService) {
+    this.rout = router;
+    setInterval(() => {
+      this.todayDate = new Date();
+      // console.log(this.todayDate)
+    }, 1000);
   }
 
   ngOnInit(): void {
     this.getScreenWidth();
+    this.findTotalPacks();
+    this.getOrderCount();
+  }
+
+  findTotalPacks() {
+    this.frontOfficeService.getAllPacks().subscribe(response => {
+      this.totalPacks = response;
+    });
+  }
+
+  getOrderCount() {
+    // code
+    let date = this.datepipe.transform(new Date(), 'yyyy/MM/dd');
+    if (this.todayDate.getHours() > 8) {
+      date = this.datepipe.transform(new Date().setDate(new Date().getDate() + 1), 'yyyy/MM/dd');
+      this.whatDate = 'Tomorrow';
+    }
+    this.kitchenService.getOrderCountByDate(date).subscribe(res => {
+      this.totalOrders = res;
+    });
   }
 
   changeScreen(number: number) {
@@ -160,15 +192,15 @@ myInnerWidth:any;
   private getScreenWidth() {
     setInterval(() => {
       this.myInnerWidth = window.innerWidth;
-      console.log("SCREEN : "+this.myInnerWidth);
-      if (this.myInnerWidth<821){
-        this.span=12;
+      // console.log("SCREEN : " + this.myInnerWidth);
+      if (this.myInnerWidth < 821) {
+        this.span = 12;
       }
-      if (this.myInnerWidth<600|| (719<this.myInnerWidth && this.myInnerWidth<1025)){
-        this.span2=18;
+      if (this.myInnerWidth < 600 || (719 < this.myInnerWidth && this.myInnerWidth < 1025)) {
+        this.span2 = 18;
         // this.span3=6;
-        this.span4=1;
-        this.span5=22;
+        this.span4 = 1;
+        this.span5 = 22;
       }
     }, 1000);
   }
@@ -187,7 +219,9 @@ myInnerWidth:any;
     this.isVisible = true;
   }
 
-  logOut(){
+  logOut() {
     this.rout.navigate([''])
   }
+
+
 }

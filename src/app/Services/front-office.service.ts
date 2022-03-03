@@ -8,14 +8,18 @@ import {Observable} from "rxjs";
 })
 export class FrontOfficeService {
 
-  private apiServerUrl = 'http://143.198.36.89/api/';
-  // private apiServerUrl = 'http://localhost:8080';
+  // private apiServerUrl = 'http://143.198.36.89/api';
+  private apiServerUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
   }
 
   public getAllRooms():Observable<any>{
     return this.http.get<any>(`${this.apiServerUrl}/api/room_controller/get_rooms`);
+  }
+
+  public getAllPacks():Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/api/booking_controller/get_active_packs`);
   }
 
   public findGuest(IdNo: any): Observable<any> {
@@ -82,5 +86,19 @@ export class FrontOfficeService {
   public getCanceledOrderCount(date:any){
     let queryParams = new HttpParams().append("reqDate", date);
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_canceled_order_count`,queryParams);
+  }
+
+  public getOrderById(id:any){
+    let queryParams = new HttpParams().append("id", id);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_order_by_orderid`,queryParams);
+  }
+
+  getOrdersByBookingId(bookingId:any){
+    let queryParams = new HttpParams().append("id", bookingId);
+    return this.http.get<any>(`${this.apiServerUrl}/api/order_controller/get_order_historylist`,{params:queryParams});
+  }
+
+  public changeOrderStatus(OrderId:any,status:any){
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/update_order_status?id=`+OrderId+`&status=`+status,'');
   }
 }

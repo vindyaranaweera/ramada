@@ -10,6 +10,9 @@ import {AddGuestComponent} from "../../models/add-guest/add-guest.component";
 export class RoomCardComponent implements OnInit {
 
   @Input()
+  orderId:any;
+
+  @Input()
   cardType:any;
   @Input()
   number: any = 0;
@@ -26,12 +29,18 @@ export class RoomCardComponent implements OnInit {
   @Input()
   orderQty:any;
 
+  showDetailsCom = false;
+
+  @Input()
+  itemDetails:any;
+
   @Input()setRoomOrderNumber(value:any){
     console.log("dshfihaifdofjas")
   }
 
   @Output() showPopup = new EventEmitter<number>();
   @Output() setRoomNo = new EventEmitter<any>();
+  @Output() refreshOrder = new EventEmitter<any>();
 
 
   constructor(private frontOfficeService:FrontOfficeService) {
@@ -58,10 +67,20 @@ export class RoomCardComponent implements OnInit {
     console.log(this.bookingId);
   }
 
+  showDetails() {
+    this.showDetailsCom = true;
+  }
+
   getRoomNumber(){
     this.frontOfficeService.getRoomNumber(this.bookingId).subscribe(response=>{
       console.log(response);
       this.number=response.message
     });
+  }
+
+  reFreshOrderPage(status:any){
+    if(status){
+      this.refreshOrder.emit(true);
+    }
   }
 }

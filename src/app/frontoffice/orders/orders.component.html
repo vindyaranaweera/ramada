@@ -1,62 +1,91 @@
 <div nz-row
-     style="overflow:hidden;height:80vh;background-color:#D21241; padding-bottom:10px;margin-top: 10px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;">
+     style="overflow:hidden;height:80vh;background-color:#D21241; padding-bottom:10px;margin-top: 10px;">
   <div nz-col nzSpan="3">
-    <h3 nz-typography style="color: #fafafa;padding-top: 20px;padding-left: 15px;font-weight: bold;height: 50px">
+    <h3 nz-typography style="color: #fafafa;padding-top: 15px;padding-left: 35px;font-weight: bold;height: 50px">
       Orders</h3>
   </div>
-
-  <div nz-col nzSpan="14" style="text-align: right">
-    <div style="width: 100%; background-color: white;height: 90%; margin-top: 4px">
-      <div nz-row>
-        <div nz-col nzSpan="3">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #66034d;border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Pending</p>
-        </div>
-        <div nz-col nzSpan="3">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color:#0e0066; border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Queue</p>
-        </div>
-        <div nz-col nzSpan="4">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #f98c10; border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Preparing</p>
-        </div>
-        <div nz-col nzSpan="4">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #a307f5;border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Prepared</p>
-        </div>
-        <div nz-col nzSpan="3">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #036600; border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Finished</p>
-        </div>
-        <div nz-col nzSpan="4">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #f53602;border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Canceled</p>
-        </div>
-        <div nz-col nzSpan="3">
-          <div
-            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #c00033;border-radius: 50%">
-          </div>
-          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Void</p>
-        </div>
+  <div nz-col nzSpan="17" style="text-align: right;margin-left: -10px">
+    <div
+      style="width: 100%; background-color: white;height: 90%; margin-top: -1px;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+border-bottom-right-radius: 5px;border-bottom-left-radius: 5px">
+      <!--            <div nz-row>-->
+      <!--              <div nz-col nzSpan="3">-->
+      <!--                <div-->
+      <!--                  style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #66034d;border-radius: 50%">-->
+      <!--                </div>-->
+      <!--                <p style="float: right; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Pending</p>-->
+      <!--              </div>-->
+      <!--        <div nz-col nzSpan="3">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color:#0e0066; border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Queue</p>-->
+      <!--        </div>-->
+      <!--        <div nz-col nzSpan="4">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #f98c10; border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px; padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Preparing</p>-->
+      <!--        </div>-->
+      <!--        <div nz-col nzSpan="4">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #a307f5;border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Prepared</p>-->
+      <!--        </div>-->
+      <!--        <div nz-col nzSpan="3">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #036600; border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Finished</p>-->
+      <!--        </div>-->
+      <!--        <div nz-col nzSpan="4">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #f53602;border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Canceled</p>-->
+      <!--        </div>-->
+      <!--        <div nz-col nzSpan="3">-->
+      <!--          <div-->
+      <!--            style="float: left; margin-top:15px;text-align: left; margin-left: 10px; width:20px; height: 20px; background-color: #c00033;border-radius: 50%">-->
+      <!--          </div>-->
+      <!--          <p style="float: left; margin-left: 10px;margin-top: 13px; font-weight: bold; font-size: 15px;padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0">- Void</p>-->
+      <!--        </div>-->
+      <!--            </div>-->
+      <div style="margin-right: 20px">
+        <h4 style="padding-top:7px;margin-bottom:-1px;margin-right: 10px">Various Order Stages</h4>
+        <nz-tag nzColor="lime">
+          <i nz-icon nzType="redo" nzSpin></i>
+          <span>PENDING</span>
+        </nz-tag>
+        <nz-tag nzColor="gold">
+          <i nz-icon nzType="container"></i>
+          <span>IN THE QUEUE</span>
+        </nz-tag>
+        <nz-tag nzColor="orange">
+          <i nz-icon nzType="loading-3-quarters"></i>
+          <span>PREPARING</span>
+        </nz-tag>
+        <nz-tag nzColor="blue">
+          <i nz-icon nzType="check-circle"></i>
+          <span>PREPARED</span>
+        </nz-tag>
+        <nz-tag nzColor="green">
+          <i nz-icon nzType="carry-out"></i>
+          <span>SERVED</span>
+        </nz-tag>
+        <nz-tag nzColor="red">
+          <i nz-icon nzType="close-circle"></i>
+          <span>CANCELED</span>
+        </nz-tag>
+        <nz-tag nzColor="volcano">
+          <i nz-icon nzType="exclamation-circle"></i>
+          <span>VOIDED</span>
+        </nz-tag>
       </div>
     </div>
   </div>
-  <div nz-col nzSpan="3" style="">
-    <!--    <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>-->
-  </div>
-  <div nz-col nzSpan="4" style="">
+  <div nz-col nzSpan="4" style="text-align: right;;padding-right: 15px">
     <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"
                     style="margin-top: 15px; width: 220px"></nz-date-picker>
   </div>
@@ -67,8 +96,8 @@
       <div style="margin-left:40px; overflow: scroll" nz-row>
         <app-room-card *ngFor="let items of orders"
                        [orderColor]="items.detailsPayload.category=== 'Egg & Cheese Sandwich'?'#3ba0e9':items.detailsPayload.category=== 'Eggs'?'#92D050':items.detailsPayload.category=== 'Pancake'?'#ffcd00':items.detailsPayload.category=== 'Cheese Omelette'?'#f4ff3e':'#ff4da8'"
-                       [cardType]="'order'" [bookingId]="items.booking" [orderQty]="items.detailsPayload.qty"
-                       [orderStatus]="items.status">
+                       [cardType]="'order'" [bookingId]="items.booking" [orderId]="items.id" [orderQty]="items.detailsPayload.qty"
+                       [orderStatus]="items.status" [itemDetails]="items" (refreshOrder)="afterOrderChange($event)">
         </app-room-card>
       </div>
     </div>
@@ -189,7 +218,5 @@
       <h1 style="margin-top: 0">Total : {{total}}</h1>
     </ng-template>
   </div>
-
-
 </div>
 

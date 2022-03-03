@@ -40,8 +40,9 @@
                  [style.padding-right]="getScreenWidth<1025?'50px':'0'">
               <div class="myCol" [ngClass]="getScreenWidth<1025 ? 'myCol':'myCol2'">
                 <app-category-card image="assets/001.jpg" width="100px" text="Cheese Omelette"
-                                   name="5 Choices Available" background="#D21241" text_color="white"
-                                   (click)="changeItemPanel(1);">
+                                   name="5 Choices Available" background="#D2124151" text_color="white"
+                                   (click)="notAvailable('Cheese Omelette')">
+                  <!--                changeItemPanel(1);-->
                 </app-category-card>
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
@@ -57,8 +58,9 @@
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="assets/pan.jpg" width="100px" text="French Toast"
-                                   name="3 Choices Available" background="#D21241" text_color="white"
-                                   (click)="changeItemPanel(4);"></app-category-card>
+                                   name="3 Choices Available" background="#D2124151" text_color="white"
+                                   (click)="notAvailable('French Toast')"></app-category-card>
+<!--                changeItemPanel(4);-->
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="assets/e2.jpg" width="100px" text="Eggs"

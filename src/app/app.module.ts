@@ -45,7 +45,7 @@ import { KitchenButtonComponent } from './components/kitchen-button/kitchen-butt
 import { Kitchen2Component } from './kitchen2/kitchen2.component';
 import { LogComponent } from './log/log.component';
 import {NzFormModule} from "ng-zorro-antd/form";
-import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {LibPackerModule, NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import { SelectOrderComponent } from './models/select-order/select-order.component';
 import { CartComponent } from './models/cart/cart.component';
 import { FavouriteCardComponent } from './components/favourite-card/favourite-card.component';
@@ -58,6 +58,8 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {GuestService} from "./Services/guest.service";
 import { OrderHistoryComponent } from './models/order-history/order-history.component';
 import { EditeOrderCardComponent } from './components/edite-order-card/edite-order-card.component';
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
+import { OrderDetailsComponent } from './models/order-details/order-details.component';
 
 
 registerLocaleData(en);
@@ -84,6 +86,7 @@ registerLocaleData(en);
     AddGuestComponent,
     OrderHistoryComponent,
     EditeOrderCardComponent,
+    OrderDetailsComponent,
   ],
     imports: [
         BrowserModule,
@@ -117,7 +120,9 @@ registerLocaleData(en);
         NzFormModule,
         NzDatePickerModule,
         NzPopoverModule,
-        NzTagModule
+        NzTagModule,
+        NzToolTipModule,
+        LibPackerModule
     ],
   providers: [{ provide: NZ_I18N, useValue: en_US },DatePipe,NzMessageService],
   bootstrap: [AppComponent]

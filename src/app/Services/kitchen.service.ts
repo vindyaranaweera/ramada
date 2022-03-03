@@ -7,8 +7,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 })
 export class KitchenService {
 
-  private apiServerUrl='http://143.198.36.89/api/';
-  // private apiServerUrl='http://localhost:8080';
+  // private apiServerUrl='http://143.198.36.89/api';
+  private apiServerUrl='http://localhost:8080';
 
   constructor(private http:HttpClient) { }
 
@@ -57,5 +57,9 @@ export class KitchenService {
   public getOrderCategoryById(orderId:any){
     let queryParams = new HttpParams().append("id", orderId);
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_order_by_orderid`,queryParams);
+  }
+  public getOrderCountByDate(date:any){
+    let queryParams = new HttpParams().append("date", date);
+    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_order_count_by_date`,queryParams);
   }
 }

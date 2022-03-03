@@ -43,9 +43,9 @@ export class AddGuestComponent implements OnInit {
   guestDBId = 0;
   roomDBId: any;
   packs = 1;
-  bookingId:any = 0;
+  bookingId: any = 0;
   bookingStatus = 1;
-  accessCode = 123;
+  accessCode = '';
 
   constructor(private message: NzMessageService, private i18n: NzI18nService, private frontOfficeService: FrontOfficeService, private modal: NzModalService) {
   }
@@ -80,7 +80,7 @@ export class AddGuestComponent implements OnInit {
 
   }
 
-  resetGuestDetails2(){
+  resetGuestDetails2() {
     this.getGuestName = null;
     this.getGuestContactNo = null;
     this.getGuestId = null;
@@ -93,9 +93,9 @@ export class AddGuestComponent implements OnInit {
   }
 
   searchGuest(key: any) {
-    if(this.visibleType===0){
+    if (this.visibleType === 0) {
       this.resetGuestDetails2()
-    }else{
+    } else {
       this.resetGuestDetails()
     }
     this.frontOfficeService.findGuest(key).subscribe(response => {
@@ -135,16 +135,16 @@ export class AddGuestComponent implements OnInit {
   //   console.log('week: ', getISOWeek(result));
   // }
   validateGuestDetails(): boolean {
-    if ((this.getGuestId != null && this.getGuestId != "") && (this.getGuestName != null && this.getGuestName != "") && (this.getGuestContactNo != null && this.getGuestContactNo != "") && this.checkInDate != null && this.checkOutDate != null) {
+    if ((this.getGuestName != null && this.getGuestName != "") && (this.getGuestContactNo != null && this.getGuestContactNo != "") && this.checkInDate != null && this.checkOutDate != null) {
       console.log(this.getGuestContactNo);
       return true;
     } else {
-      if (this.getGuestId === null || this.getGuestId === "") {
-        this.createMessage('error', 'please enter guest ID/Passport or Driving License card no')
-      } else if (this.getGuestName === null || this.getGuestName === "") {
+      // if (this.getGuestId === null || this.getGuestId === "") {
+      //   this.createMessage('error', 'please enter guest ID/Passport or Driving License card no')
+      if (this.getGuestName === null || this.getGuestName === "") {
         this.createMessage('error', 'please enter guest name')
-      } else if (this.getGuestContactNo === null || this.getGuestContactNo === "") {
-        this.createMessage('error', 'please enter guest contact no')
+        // } else if (this.getGuestContactNo === null || this.getGuestContactNo === "") {
+        //   this.createMessage('error', 'please enter guest contact no')
       } else if (this.checkInDate === null) {
         this.createMessage('error', 'please enter check-In date')
       } else if (this.checkOutDate === null) {
@@ -173,7 +173,7 @@ export class AddGuestComponent implements OnInit {
   success(status: any, message: any): void {
     this.modal.success({
       nzTitle: status,
-      nzContent: "<b><h2 style='font-size: 30px; font-weight: bold; color: #d21241'>"+ message+"<h2/></b>"
+      nzContent: "<b><h2 style='font-size: 30px; font-weight: bold; color: #d21241'>" + message + "<h2/></b>"
     });
   }
 
@@ -218,6 +218,8 @@ export class AddGuestComponent implements OnInit {
   }
 
   checkInGuest() {
+    this.getGuestContactNo = 999999999;
+    // this.getGuestId = 99999999999
     if (this.validateGuestDetails() === true) {
       const guestBody = {
         id: this.guestDBId,
@@ -230,8 +232,8 @@ export class AddGuestComponent implements OnInit {
         console.log('before');
         console.log(response);
         console.log('after');
-        if(response.message!="updated successfully"){
-          this.guestDBId=parseInt(response.message);
+        if (response.message != "updated successfully") {
+          this.guestDBId = parseInt(response.message);
         }
         this.frontOfficeService.getRoomId(this.roomNo).subscribe(response => {
           console.log("reddvsv " + response)
@@ -300,13 +302,13 @@ export class AddGuestComponent implements OnInit {
   checkOutGuest() {
     this.modal.confirm({
       nzTitle: '<i>Confirm Checking Out</i>',
-      nzContent: '<b><p>Are You Sure Want To Check Out This Booking <h1 style="font-weight: bold">Room No '+this.roomNo+'</h1></p></b>',
+      nzContent: '<b><p>Are You Sure Want To Check Out This Booking <h1 style="font-weight: bold">Room No ' + this.roomNo + '</h1></p></b>',
       nzOnOk: () => {
-        this.frontOfficeService.checkOutBooking(this.bookingId).subscribe(response=>{
-          if(response.status===false){
-            this.createMessage('error',response.message);
-          }else{
-            this.createMessage('success',response.message);
+        this.frontOfficeService.checkOutBooking(this.bookingId).subscribe(response => {
+          if (response.status === false) {
+            this.createMessage('error', response.message);
+          } else {
+            this.createMessage('success', response.message);
             this.refreshRoomPage.emit(true);
           }
           this.resetVariables();

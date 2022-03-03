@@ -80,10 +80,10 @@ export class GuestUiComponent implements OnInit {
   bookingId: any;
   guestId: any;
   totalPacks: any;
-  totalOrders:any;
+  totalOrders: any;
 
   editOrderList: any
-  otherDetailsList:any;
+  otherDetailsList: any;
 
   constructor(private guestService: GuestService, public getPRoute: ActivatedRoute, private message: NzMessageService, private modal: NzModalService, router: Router, public datepipe: DatePipe) {
     this.router = router;
@@ -105,9 +105,9 @@ export class GuestUiComponent implements OnInit {
     });
     this.getBookingDetails();
     this.setTotalOrders();
-    setInterval(()=>{
+    setInterval(() => {
       this.setTotalOrders();
-    },2000);
+    }, 2000);
   }
 
   changeItemPanel(number: number) {
@@ -470,8 +470,8 @@ export class GuestUiComponent implements OnInit {
     }
   }
 
-  setOtherList(list:any){
-    this.otherDetailsList=list
+  setOtherList(list: any) {
+    this.otherDetailsList = list
   }
 
   editOrder(list: any) {
@@ -480,15 +480,21 @@ export class GuestUiComponent implements OnInit {
     this.isVisible2 = true;
   }
 
-  setTotalOrders(){
-    let date=this.datepipe.transform(new Date(),'YYYY/MM/dd');
-    this.guestService.setTotalOrders(this.bookingId,date).subscribe(response=>{
-      this.totalOrders=response.message
+  setTotalOrders() {
+    let date = this.datepipe.transform(new Date(), 'YYYY/MM/dd');
+    this.guestService.setTotalOrders(this.bookingId, date).subscribe(response => {
+      this.totalOrders = response.message
+      console.log(response);
+
     });
   }
 
-  logOut(){
+  logOut() {
     this.router.navigate([''])
+  }
+
+  notAvailable(text: any) {
+    this.message.info(text + ' not available at the moment!');
   }
 }
 

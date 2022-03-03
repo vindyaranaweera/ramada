@@ -5,15 +5,56 @@
   <span nz-typography style="text-align: center"><strong
     style="font-size: x-large;font-weight: bold;color: #D21241">{{number}}</strong></span>
 </nz-card>
-<nz-card *ngIf="cardType==='order'"
+
+<nz-card (click)="showDetails()" *ngIf="cardType==='order'"
          style="width:120px;box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px;"
          [style.background-color]="orderColor" [style.border.color]="orderColor">
-  <nz-badge style="position: absolute; margin-left: 58px;margin-top: -22px" [nzCount]="orderQty" [nzStyle]="{ backgroundColor: orderStatus===0?'#66034d':orderStatus===1?'#0e0066':orderStatus===2?'#f98c10':orderStatus===3?'#a307f5':orderStatus===4?'#036600':orderStatus===5?'#f53602':'#c00033',border:'#d21241',color:'transparent'}">
-  </nz-badge>
-  <img *ngIf="orderStatus>4" src="assets/Background (1).png"
-       style="width: 80px;height: 80px;margin-top: -21px;margin-left: -20px; position: absolute">
+  <!--  <nz-badge style="position: absolute; margin-left: 58px;margin-top: -22px" [nzCount]="orderQty"-->
+  <!--            [nzStyle]="{ backgroundColor: orderStatus===0?'#66034d':orderStatus===1?'#0e0066':orderStatus===2?'#f98c10':orderStatus===3?'#a307f5':orderStatus===4?'#036600':orderStatus===5?'#f53602':'#c00033',border:'#d21241',color:'transparent'}">-->
+  <!--  </nz-badge>-->
+  <nz-tag nzColor="lime" nz-tooltip nzTooltipTitle="Pending Order!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===0">
+    <i nz-icon nzType="redo" nzSpin></i>
+  </nz-tag>
+  <nz-tag nzColor="gold" nz-tooltip nzTooltipTitle="Order is in the queue!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===1">
+    <i nz-icon nzType="container"></i>
+  </nz-tag>
+  <nz-tag nzColor="orange" nz-tooltip nzTooltipTitle="Preparing...!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===2">
+    <i nz-icon nzType="loading-3-quarters"></i>
+  </nz-tag>
+  <nz-tag nzColor="blue" nz-tooltip nzTooltipTitle="Ready to serve!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===3">
+    <i nz-icon nzType="check-circle"></i>
+  </nz-tag>
+  <nz-tag nzColor="green" nz-tooltip nzTooltipTitle="Order completed!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===4">
+    <i nz-icon nzType="carry-out"></i>
+  </nz-tag>
+  <nz-tag nzColor="red" nz-tooltip nzTooltipTitle="Order has been canceled!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===5">
+    <i nz-icon nzType="close-circle"></i>
+  </nz-tag>
+  <nz-tag nzColor="volcano" nz-tooltip nzTooltipTitle="Order has been voided!"
+          style="position: absolute; margin-left: 50px;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+          *ngIf="orderStatus===6">
+    <i nz-icon nzType="exclamation-circle"></i>
+  </nz-tag>
+  <!--  <img *ngIf="orderStatus>4" src="assets/Background (1).png"-->
+  <!--       style="width: 80px;height: 80px;margin-top: -21px;margin-left: -20px; position: absolute">-->
   <span nz-typography style="text-align: center"><strong
     style="font-size: x-large;font-weight: bold;color: black"
     [style.color]="orderStatus>4?'black':'#d21241'">{{number}}</strong> </span>
 </nz-card>
+
+<app-order-details *ngIf="showDetailsCom" [bookingId]="bookingId" (hideModel)="showDetailsCom=$event"
+                   [orderId]="orderId" [orderdetails]="showDetailsCom" [item]="itemDetails" [room]="number"
+                   [orderStatus]="orderStatus" (refreshOrderPage)="reFreshOrderPage($event)"></app-order-details>
 

@@ -8,13 +8,13 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  pancake:any;
-  EggAndCheeseSandwich:any;
-  CheeseOmelette:any;
-  FrenchToast:any;
-  Eggs:any;
-  canceled:any=0;
-  total:any;
+  pancake: any;
+  EggAndCheeseSandwich: any;
+  CheeseOmelette: any;
+  FrenchToast: any;
+  Eggs: any;
+  canceled: any = 0;
+  total: any;
   date: Date = new Date();
   OrderList: any = [
     {roomNo: "101", orderColor: '#3ba0e9'},
@@ -80,57 +80,71 @@ export class OrdersComponent implements OnInit {
 
 
   ]
-  orders:any;
-  visibleRoomCard=false;
+  orders: any;
+  visibleRoomCard = false;
+  visibleType: any;
+  orderVisibility: any
 
   constructor(private frontOfficeService: FrontOfficeService, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
+    this.reFreshPage();
+  }
+
+  reFreshPage(){
     this.setOrderSummery(this.date);
   }
-  setOrderSummery(date:any){
-    date=this.datePipe.transform(date, 'YYYY/MM/dd');
+
+  setOrderSummery(date: any) {
+    date = this.datePipe.transform(date, 'YYYY/MM/dd');
     console.log(date);
     this.frontOfficeService.getOrderDetails(date).subscribe(response => {
       console.log(response);
-      this.total=response;
+      this.total = response;
     });
-    let categoryList=['pancake','Egg %26 Cheese Sandwich','Cheese Omelette','Eggs','French Toast'];
-    for (let i=0;i<categoryList.length;i++){
-      this.frontOfficeService.getCategoryCount(date,categoryList[i]).subscribe(response=>{
-        if(categoryList[i]==='pancake'){
-          this.pancake=response;
-        }else if(categoryList[i]==='Egg %26 Cheese Sandwich'){
-          this.EggAndCheeseSandwich=response;
-        }else if(categoryList[i]==='Cheese Omelette'){
-          this.CheeseOmelette=response;
-        }else if(categoryList[i]==='Eggs'){
-          this.Eggs=response;
-        }else {
-          this.FrenchToast=response;
+    let categoryList = ['pancake', 'Egg %26 Cheese Sandwich', 'Cheese Omelette', 'Eggs', 'French Toast'];
+    for (let i = 0; i < categoryList.length; i++) {
+      this.frontOfficeService.getCategoryCount(date, categoryList[i]).subscribe(response => {
+        if (categoryList[i] === 'pancake') {
+          this.pancake = response;
+        } else if (categoryList[i] === 'Egg %26 Cheese Sandwich') {
+          this.EggAndCheeseSandwich = response;
+        } else if (categoryList[i] === 'Cheese Omelette') {
+          this.CheeseOmelette = response;
+        } else if (categoryList[i] === 'Eggs') {
+          this.Eggs = response;
+        } else {
+          this.FrenchToast = response;
           console.log(this.pancake)
           console.log(this.EggAndCheeseSandwich)
           console.log(this.CheeseOmelette)
           console.log(this.FrenchToast)
           console.log(this.Eggs)
         }
-        this.frontOfficeService.getCanceledOrderCount(date).subscribe(response=>{
+        this.frontOfficeService.getCanceledOrderCount(date).subscribe(response => {
           console.log(response);
-          this.canceled=response;
+          this.canceled = response;
         });
       });
     }
 
-    this.frontOfficeService.getAllOrders(date).subscribe(response=>{
+    this.frontOfficeService.getAllOrders(date).subscribe(response => {
       // console.log(response);
-      this.orders=response;
+      this.orders = response;
       console.log(this.orders)
-      this.visibleRoomCard=true;
+      this.visibleRoomCard = true;
     });
   }
 
   onChange(result: Date): void {
-   this.setOrderSummery(result);
+    this.setOrderSummery(result);
+  }
+
+  afterOrderChange(status:any){
+    if(status){
+      this.reFreshPage();
+    }
   }
 }
+

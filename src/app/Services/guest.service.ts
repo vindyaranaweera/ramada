@@ -8,8 +8,8 @@ import {environment} from "../../environments/environment";
 })
 export class GuestService {
 
-  private apiServerUrl='http://143.198.36.89/api/';
-  // private apiServerUrl='http://localhost:8080';
+  // private apiServerUrl='http://143.198.36.89/api';
+  private apiServerUrl='http://localhost:8080';
 
   constructor(private http:HttpClient) { }
 
@@ -55,10 +55,10 @@ export class GuestService {
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/update_order`,orderBody);
   }
 
-  public setRemainingOrderCount(bookingId:any){
-    let queryParams = new HttpParams().append("id",bookingId);
-    return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/cancel_order`,queryParams);
-  }
+  // public setRemainingOrderCount(bookingId:any){
+  //   let queryParams = new HttpParams().append("id",bookingId);
+  //   return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/cancel_order`,queryParams);
+  // }
 
   public setTotalOrders(bookingId:number,date:any){
     let queryParams = new HttpParams().append("id",bookingId);
