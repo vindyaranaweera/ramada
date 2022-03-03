@@ -1,0 +1,92 @@
+<button nz-button nzType="primary" (click)="showModal()">
+</button>
+<nz-modal
+  [(nzVisible)]="orderdetails"
+  nzTitle="{{item.detailsPayload.category}}"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzOkLoading]=""
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <div nz-row>
+      <div nz-col nzSpan="8"><b>Egg Style : </b></div>
+      <div nz-col nzSpan="8"><p> {{item.detailsPayload.egg_style}}</p></div>
+      <div nz-col nzSpan="8"><h4 style="font-weight: bold;">Room-No : {{room}}</h4></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="8"><b>Protein : </b></div>
+      <div nz-col nzSpan="8"><p> {{item.detailsPayload.protien}}</p></div>
+      <div nz-col nzSpan="8"><h4 style="font-weight: bold;">Quantity : {{item.detailsPayload.qty}}</h4></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="8"><b>Toast : </b></div>
+      <div nz-col nzSpan="8"><p> {{item.detailsPayload.toast}}</p></div>
+      <div nz-col nzSpan="8"><h4 style="font-weight: bold;">{{item.req_date + ' ' + item.req_time}}</h4></div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="8"><b>Hashbrown : </b></div>
+      <div nz-col nzSpan="8"><p> {{item.detailsPayload.hashbrown}}</p></div>
+      <div nz-col nzSpan="8">
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="8"><b style="font-weight: bold;color: #d21241">Order Notes</b></div>
+      <div nz-col nzSpan="8"><p>{{item.detailsPayload.note}}</p></div>
+      <div nz-col nzSpan="8" style="text-align: left;">
+        <nz-tag nzColor="lime" nz-tooltip nzTooltipTitle="Pending Order!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===0">
+          <i nz-icon nzType="redo" nzSpin></i>
+          <span>PENDING</span>
+        </nz-tag>
+        <nz-tag nzColor="gold" nz-tooltip nzTooltipTitle="Order is in the queue!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===1">
+          <i nz-icon nzType="container"></i>
+          <span>IN THE QUEUE</span>
+        </nz-tag>
+        <nz-tag nzColor="orange" nz-tooltip nzTooltipTitle="Preparing...!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===2">
+          <i nz-icon nzType="loading-3-quarters"></i>
+          <span>PREPARING</span>
+        </nz-tag>
+        <nz-tag nzColor="blue" nz-tooltip nzTooltipTitle="Ready to serve!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===3">
+          <i nz-icon nzType="check-circle"></i>
+          <span>PREPARED</span>
+        </nz-tag>
+        <nz-tag nzColor="green" nz-tooltip nzTooltipTitle="Order completed!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===4">
+          <i nz-icon nzType="carry-out"></i>
+          <span>SERVED</span>
+        </nz-tag>
+        <nz-tag nzColor="red" nz-tooltip nzTooltipTitle="Order has been canceled!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===5">
+          <i nz-icon nzType="close-circle"></i>
+          <span>CANCELED</span>
+        </nz-tag>
+        <nz-tag nzColor="volcano" nz-tooltip nzTooltipTitle="Order has been voided!"
+                style="position: absolute;margin-top: -20px;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;"
+                *ngIf="orderStatus===6">
+          <i nz-icon nzType="exclamation-circle"></i>
+          <span>VOIDED</span>
+        </nz-tag>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <div nz-row *ngIf="orderStatus<6">
+      <div nz-col nzSpan="8"><b>Actions : </b></div>
+      <div nz-col nzSpan="8">
+        <button nz-button nzType="primary" *ngIf="orderStatus<6" nzBlock style="font-weight: bold" (click)="clickVoidOrCancel(6)">Void</button>
+      </div>
+      <div nz-col nzSpan="8" style="padding-left: 10px">
+        <button nz-button nzType="primary" nzBlock style="font-weight: bold" *ngIf="orderStatus<5" (click)="clickVoidOrCancel(5)">Cancel</button>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>
