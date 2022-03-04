@@ -163,7 +163,7 @@ export class Kitchen2Component implements OnInit {
     this.selectedRoom = '';
     this.selectedButton = 1;
     // this.getAllPreparedOrders(1);
-    this.filterRoomNumbers();
+    // this.filterRoomNumbers();
     this.setTotalNotPickupOrders();
     this.roomNumber = '';
     this.setTotalOrderCount();
@@ -192,7 +192,7 @@ export class Kitchen2Component implements OnInit {
       } else {
         this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber, 1, 3);
       }
-    } else {
+    } else if (value === 3) {
       this.showWaitingOrder = 1;
       this.selectedButton = 3;
       this.pickupStatus = 3
@@ -201,19 +201,32 @@ export class Kitchen2Component implements OnInit {
       } else {
         this.getOrdersByRoomNoAndRangeAndStatus(this.roomNumber, 1, 4)
       }
+    } else {
+      this.showWaitingOrder = 0;
+      this.selectedButton = 4;
+      this.pickupStatus = 1
+      if (this.viewType === 1) {
+        this.getAllPreparedOrders(1)
+      } else {
+        this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
+      }
     }
   }
 
   getAllPreparedOrders(searchRange: any) {
     this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.allPreparedOrders = response;
     });
   }
 
-  setRoomNumberList(){
+  setRoomNumberList() {
     this.kitchenService.getAllPreparedOrders(1, this.currentDate,).subscribe(response => {
-      console.log(response);
+      // console.log('before3');
+      // console.log(this.currentDate);
+      // console.log(response);
+      // console.log('after3');
+
       this.roomNumberList = response;
     });
   }
@@ -252,7 +265,7 @@ export class Kitchen2Component implements OnInit {
 
   changeOrderStatus(status: any) {
     this.kitchenService.completeOrder(this.orderId, status).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.reFreshPage();
     });
   }
@@ -271,14 +284,16 @@ export class Kitchen2Component implements OnInit {
 
   setTotalOrderCount() {
     this.kitchenService.getTotalOrderCountByDate(this.currentDate).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.totalOrders = response;
     });
   }
 
   setNoteCompleteOrderCount() {
     this.kitchenService.getNotCompleteOrderCount(this.currentDate).subscribe(response => {
-      console.log(response);
+      // console.log('before2');
+      // console.log(response);
+      // console.log('after2');
       this.totalNotCompleteOrderCount = response;
     });
   }
@@ -307,7 +322,7 @@ export class Kitchen2Component implements OnInit {
         for (let i = 0; i < list.length; i++) {
           this.kitchenService.getRoomNumber(list[i].booking).subscribe(response => {
             let roomNo: number = parseInt(response.message);
-            console.log(roomNo);
+            // console.log(roomNo);
             if (100 <= roomNo && roomNo < 200) {
               console.log(list[i].booking);
               let newDetailsPayload: any = {
@@ -334,9 +349,9 @@ export class Kitchen2Component implements OnInit {
               console.log(list);
             }
           });
-          console.log("jeiuewrtuwerotuer")
+          // console.log("jeiuewrtuwerotuer")
           this.waitingOrders = newList;
-          console.log(this.waitingOrders);
+          // console.log(this.waitingOrders);
         }
       } else if (range === 200) {
         for (let i = 0; i < list.length; i++) {
@@ -365,16 +380,16 @@ export class Kitchen2Component implements OnInit {
                 time: list[i].time,
                 detailsPayload: newDetailsPayload
               });
-              console.log("hsafoaosdfiu")
-              console.log(newDetailsPayload);
-              console.log('dsfpsdpfsdfospdfsdpof')
-              console.log(list);
+              // console.log("hsafoaosdfiu")
+              // console.log(newDetailsPayload);
+              // console.log('dsfpsdpfsdfospdfsdpof')
+              // console.log(list);
             }
           });
         }
         this.waitingOrders = newList;
       } else {
-        this.waitingOrders=response
+        this.waitingOrders = response
       }
     });
 
@@ -384,7 +399,7 @@ export class Kitchen2Component implements OnInit {
     let list: any = [];
     let roomList: any = [];
     this.kitchenService.getAllPreparedOrders(1, this.currentDate,).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       list = response;
       for (let i = 0; i < list.length; i++) {
         if (roomList.length > 0) {
@@ -397,14 +412,14 @@ export class Kitchen2Component implements OnInit {
           })
         }
       }
-      console.log(roomList);
+      // console.log(roomList);
       this.roomNumberList = roomList;
     });
   }
 
   getOrdersByRoomNoAndRange(roomNo: any, range: any) {
     this.kitchenService.getAllPreparedOrders(range, this.currentDate,).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       let orderList: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].roomNo === roomNo) {
@@ -416,13 +431,13 @@ export class Kitchen2Component implements OnInit {
         }
       }
       this.allPreparedOrders = orderList;
-      console.log(this.allPreparedOrders);
+      // console.log(this.allPreparedOrders);
     });
   }
 
   getOrdersByRoomNoAndRangeAndStatus(roomNo: any, range: any, status: any) {
     this.kitchenService.getAllPreparedOrders(range, this.currentDate,).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       let orderList: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].roomNo === roomNo && response[i].status === status) {
@@ -434,13 +449,13 @@ export class Kitchen2Component implements OnInit {
         }
       }
       this.allPreparedOrders = orderList;
-      console.log(this.allPreparedOrders);
+      // console.log(this.allPreparedOrders);
     });
   }
 
   setTotalNotPickupOrders() {
     this.kitchenService.getTotalOfNotPickUpOrders(this.currentDate).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.totalOfNotPickups = response;
     });
   }
@@ -452,11 +467,71 @@ export class Kitchen2Component implements OnInit {
   setOrders() {
     this.selectedRoom = '';
     let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+    // console.log(date);
     this.kitchenService.getAllOrders(date).subscribe(response => {
+      // console.log('before');
       console.log(response);
+      // console.log('after');
       this.waitingOrders = response;
+      this.groupOrders();
     });
   }
+
+  getTimeList():any{
+    let timeList = [];
+    for (let hour = 4; hour < 9; hour++) {
+      for (let min = 0; min <= 60; min = min + 15) {
+        let setMin: any;
+        let setHour: any = hour;
+        if (min === 0) {
+          setMin = "00";
+        } else {
+          if (min === 60) {
+            setMin = "00";
+            setHour++;
+          } else {
+            setMin = min.toString();
+          }
+        }
+        let date2: any = this.datePipe.transform(this.datePipe.transform(new Date(), "YYYY/MM/dd") + " 0" + setHour + ":" + setMin, 'EEE MMM dd y h:mm:ss zzzz');
+        timeList.push(date2);
+        // console.log(date2);
+      }
+    }
+    return timeList;
+  }
+
+  groupOrders() {
+    let date: any;
+    let timeList=this.getTimeList()
+    for (let i=0;i<timeList.length;i++){
+      let date: any = this.datePipe.transform(timeList[i], 'EEE MMM dd y h:mm:ss zzzz');
+      let formatDate:any=(new Date(date.toString()));
+      let val=this.checkTime(formatDate,15);
+    }
+    // console.log(date.toLocaleString('en-US',{houre:'numeric',hour12:false}));
+  }
+
+  checkTime(start:any,range: any): any {
+    let date:any;
+    let list:any=[];
+    for(let i=0;i<this.waitingOrders.length;i++){
+      date = this.datePipe.transform(this.waitingOrders[i].req_date + " "+this.waitingOrders[i].req_time, 'EEE MMM dd y h:mm:ss zzzz');
+      date=new Date(date.toString());
+      if (start.getHours() === date.getHours()) {
+        if (start.getMinutes() + range > date.getMinutes()) {
+          console.log(start);
+          console.log(start.getMinutes() + range);
+          console.log(date);
+          list.push(this.waitingOrders[i])
+        }
+      }
+    }
+    console.log(list);
+    return list;
+
+  }
+
 
   AfterReFreshPage(value: boolean) {
     if (value === true) {
