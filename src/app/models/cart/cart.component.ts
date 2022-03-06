@@ -46,6 +46,7 @@ export class CartComponent implements OnInit {
 
   note: any | string = "";
   qty: any = 1;
+  guestName:any;
   calenderDisableDate: Date = new Date();
   timePickerTime: Date | null = null;
   date: any;
@@ -138,6 +139,7 @@ export class CartComponent implements OnInit {
     for (let i = 0; i < this.OtherDetails.length; i++) {
       this.orderId = this.OtherDetails[i].id
       console.log(this.orderId)
+      this.guestName=this.OtherDetails[i].guestName
       this.qty = this.OtherDetails[i].qty
       this.bookingId = this.OtherDetails[i].bookingId
       this.timePickerTime = new Date(this.OtherDetails[i].date + ' ' + this.OtherDetails[i].time)
@@ -243,6 +245,7 @@ export class CartComponent implements OnInit {
       req_time: RequestTime,
       status: status,
       booking: bookingId,
+      guestName:this.guestName,
       detailsPayload: cart
     }
     console.log(orderBody);
@@ -295,7 +298,7 @@ export class CartComponent implements OnInit {
   }
 
   onChange(result: Date): void {
-    console.log('onChange: ', result);
+    console.log(this.guestName);
   }
 
   resetVariables() {

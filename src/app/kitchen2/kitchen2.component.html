@@ -4,7 +4,8 @@
          [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div style="background-color:white" nz-col class="gutter-row" [nzSpan]="4">
         <div class="inner-box">
-          <img src="../../../assets/log.png" class="myImage" style="height: 50px;width: 100px">
+<!--          <img src="../../../assets/log.png" class="myImage" style="height: 50px;width: 100px">-->
+          <img src="assets/newbrand.jpeg" style="margin-top:0px;margin-left:0px;height:80px;width:90px"/>
         </div>
       </div>
       <div style="height: 100%;padding-top: 0px" nz-col class="gutter-row" [nzSpan]="20">
@@ -16,9 +17,9 @@
             <div nz-col class="gutter-row" [nzSpan]="8">
               <div class="inner-box"><h2 style="padding: 0;margin-top: 5px;color: white;font-weight: bolder">Total
                 Breakfast : {{totalOrders}}</h2></div>
-<!--              <div class="inner-box"><h2-->
-<!--                style="padding: 0;margin-top: 11px;color: white;font-weight: bolder;margin-left: 10px">Total-->
-<!--                Not Pick-Up: {{totalOfNotPickups}}</h2></div>-->
+              <!--              <div class="inner-box"><h2-->
+              <!--                style="padding: 0;margin-top: 11px;color: white;font-weight: bolder;margin-left: 10px">Total-->
+              <!--                Not Pick-Up: {{totalOfNotPickups}}</h2></div>-->
             </div>
             <div nz-col class="gutter-row" [nzSpan]="8">
               <div class="inner-box"><h2 style="padding: 0;margin-top: 5px;color: white;font-weight: bolder">
@@ -31,7 +32,8 @@
               <div class="inner-box">
                 <button nz-button nzType="default"
                         style="margin-top: 5px; float: right; background-color: white;border: solid 2px #D21241;color: #fafafa;font-weight: bold;height: 65px;width: 65px;border-radius: 5px; margin-left:10px"
-                        (click)="logOut()"><img src="assets/log-out%20(1).png" style="width: 30px;height: 30px; margin-left:3px">    </button>
+                        (click)="logOut()"><img src="assets/log-out%20(1).png"
+                                                style="width: 30px;height: 30px; margin-left:3px"></button>
               </div>
             </div>
           </div>
@@ -51,10 +53,14 @@
               <div nz-col class="gutter-row" [nzSpan]="22">
                 <div class="inner-box">
                   <div *ngIf="showWaitingOrder===0" nz-row [nzGutter]="0" style="padding-bottom: 30px">
-                    <div style="padding: 10px" *ngFor="let order of waitingOrders; let i=index" nz-col class="gutter-row"
-                         [nzSpan]="8">
-                      <app-kitechen-card (reFreshPage)="AfterReFreshPage($event)" [cardId]="i" [bookingID]="order.booking"
+                    <div style="padding: 10px" *ngFor="let order of waitingOrders; let i=index" nz-col
+                         class="gutter-row"
+                         [nzSpan]="12">
+                      <app-kitechen-card (reFreshPage)="AfterReFreshPage($event)" [cardId]="i"
+                                         [bookingID]="order.booking"
                                          [orderId]="order.id"
+                                         [Date]="order.req_date"
+                                         [GuestName]="order.guestName"
                                          [cardTitle]="order.detailsPayload.category"
                                          [protien]="order.detailsPayload.protien" [toast]="order.detailsPayload.toast"
                                          [hashbrown]="order.detailsPayload.hashbrown" [eggAvailable]="0"
@@ -64,16 +70,16 @@
                                          [notes]="order.detailsPayload.note"
                                          [time]="order.req_time" [status]="order.status"></app-kitechen-card>
                     </div>
-<!--                    <div nz-col class="gutter-row" *ngFor="let order of allPreparedOrders" [nzSpan]="6">-->
-<!--                      <div class="inner-box">-->
-<!--                        <app-kitchen-button style="width: 70px;text-align: center;" [orderId]="order.orderId"-->
-<!--                                            [OrderStatus]="order.status"-->
-<!--                                            [buttonType]="2" [bgColor]="order.status===3?'#d21241':'#15ff57'"-->
-<!--                                            (sendOrderId)="orderId=$event" (sendOrderStatus)="changeOrderStatus($event)"-->
-<!--                                            [roomNumber]="order.roomNo" [textcolor]="'black'">-->
-<!--                        </app-kitchen-button>-->
-<!--                      </div>-->
-<!--                    </div>-->
+                    <!--                    <div nz-col class="gutter-row" *ngFor="let order of allPreparedOrders" [nzSpan]="6">-->
+                    <!--                      <div class="inner-box">-->
+                    <!--                        <app-kitchen-button style="width: 70px;text-align: center;" [orderId]="order.orderId"-->
+                    <!--                                            [OrderStatus]="order.status"-->
+                    <!--                                            [buttonType]="2" [bgColor]="order.status===3?'#d21241':'#15ff57'"-->
+                    <!--                                            (sendOrderId)="orderId=$event" (sendOrderStatus)="changeOrderStatus($event)"-->
+                    <!--                                            [roomNumber]="order.roomNo" [textcolor]="'black'">-->
+                    <!--                        </app-kitchen-button>-->
+                    <!--                      </div>-->
+                    <!--                    </div>-->
                   </div>
                   <div *ngIf="showWaitingOrder===1" nz-row [nzGutter]="0" style="padding-bottom: 30px">
                     <div nz-col class="gutter-row" *ngFor="let order of allPreparedOrders" [nzSpan]="6">
@@ -130,7 +136,14 @@
                style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"><h2
             style="padding:0;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px"
             [style.color]="selectedButton!=1?'white':'#d21241'">
-           Orders</h2></div>
+            Orders</h2></div>
+<!--          <nz-divider></nz-divider>-->
+<!--          <div (click)="setSelection(4)" [style.background-color]="selectedButton===4?'white':'#d21241'"-->
+<!--               [style.border]="selectedButton!=4?'2px solid white':'2px solid #d21241'"-->
+<!--               style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"><h2-->
+<!--            style="padding:0;font-weight: bolder;text-align:center;border-color:#53596a;padding-top:19px"-->
+<!--            [style.color]="selectedButton!=4?'white':'#d21241'">-->
+<!--            Group Orders</h2></div>-->
           <nz-divider></nz-divider>
           <div (click)="setSelection(2)" [style.background-color]="selectedButton===2?'white':'#d21241'"
                style="cursor:pointer;border-radius: 15px;margin-right: 10px;height:70px;margin-left: 10px"
@@ -154,8 +167,9 @@
            style="background: white; height: 100%; overflow: scroll;padding-bottom: 20px;padding-left: 10px;">
         <div class="inner-box">
           <div class="inner-box">
-            <app-kitchen-button style="text-align: center" *ngFor="let room of roomNumberList" [roomNumber]="room.roomNo"
-                               [orderId]="room.orderId" [isSelected]="room.roomNo===selectedRoom"
+            <app-kitchen-button style="text-align: center" *ngFor="let room of roomNumberList"
+                                [roomNumber]="room.roomNo"
+                                [orderId]="room.orderId" [isSelected]="room.roomNo===selectedRoom"
                                 (click)="changeSelectedRoom(room.roomNo)" [buttonType]="3"></app-kitchen-button>
           </div>
         </div>

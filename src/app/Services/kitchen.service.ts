@@ -16,6 +16,9 @@ export class KitchenService {
     let queryParams = new HttpParams().append("reqDate",date);
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/get_active_orders`,queryParams);
   }
+  public getAllActiveOrdersNew():Observable<any>{
+    return this.http.get<any>(`${this.apiServerUrl}/api/order_controller/get_all_active_orders`);
+  }
 
   public getRoomNumber(bookingId:any):Observable<any>{
     let queryParams = new HttpParams().append("id", bookingId);
@@ -47,6 +50,11 @@ export class KitchenService {
 
   public getAllPreparedOrders(range:any,date:any){
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/all_complete_orders?reqDate=`+date+`&i=`+range,'');
+  }
+
+  public getAllPreparedOrdersAllDays(range:any){
+    let queryParams = new HttpParams().append("i", range);
+    return this.http.get<any>(`${this.apiServerUrl}/api/order_controller/all_complete_orders_all_days`,{params:queryParams});
   }
 
   public getTotalOfNotPickUpOrders(date:any){
