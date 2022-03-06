@@ -473,7 +473,8 @@ export class Kitchen2Component implements OnInit {
       console.log(response);
       // console.log('after');
       this.waitingOrders = response;
-      this.groupOrders();
+      // this for group orders
+      // this.groupOrders();
     });
   }
 
