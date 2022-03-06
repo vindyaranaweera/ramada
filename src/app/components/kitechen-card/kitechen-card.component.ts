@@ -28,6 +28,12 @@ export class KitechenCardComponent implements OnInit {
   roomNo: any;
 
   @Input()
+  Date:any
+
+  @Input()
+  GuestName:any
+
+  @Input()
   time: any;
 
   @Input()

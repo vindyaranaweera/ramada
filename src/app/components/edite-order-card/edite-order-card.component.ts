@@ -61,6 +61,9 @@ export class EditeOrderCardComponent implements OnInit {
   @Input()
   orderDetailsId:any
 
+  @Input()
+  guestName:any
+
   @Output()sendCancelOrder=new EventEmitter<any>()
 
   constructor(private message: NzMessageService, private modal: NzModalService, private guestService: GuestService) {
@@ -103,6 +106,7 @@ export class EditeOrderCardComponent implements OnInit {
         bookingId:this.bookingId,
         qty:this.qty,
         note:this.note,
+        guestName:this.guestName,
         PlacedDate:this.PlacedDate,
         placedTime:this.placedTime,
         orderDetailsId:this.orderDetailsId

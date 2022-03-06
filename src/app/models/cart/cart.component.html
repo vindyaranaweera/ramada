@@ -56,6 +56,22 @@
       <nz-divider></nz-divider>
       <div nz-row>
         <div>
+          <p style="font-weight: bold;color: #d21241;margin-top: 10px; margin-bottom: 0">Guest Name</p>
+          <nz-button-group style="float: left">
+            <input
+              style="width:100%; margin-top: 10px; height: 32px"
+              nz-input
+              nz-tooltip
+              nzTooltipTrigger="focus"
+              nzTooltipPlacement="topLeft"
+              [(ngModel)]="guestName"
+              (ngModelChange)="onChange($event)"
+            />
+          </nz-button-group>
+        </div>
+      </div>
+      <div nz-row>
+        <div>
           <p style="font-weight: bold;color: #d21241;margin-top: 10px; margin-bottom: 0">Quantity </p>
           <nz-button-group style="float: left">
             <input disabled

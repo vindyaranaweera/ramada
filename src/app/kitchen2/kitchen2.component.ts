@@ -158,6 +158,7 @@ export class Kitchen2Component implements OnInit {
   }
 
   reFreshPage() {
+    this.changeFilterRange=1;
     this.pickupStatus = 1
     this.viewType = 1;
     this.selectedRoom = '';
@@ -168,8 +169,10 @@ export class Kitchen2Component implements OnInit {
     this.roomNumber = '';
     this.setTotalOrderCount();
     this.setNoteCompleteOrderCount();
-    this.setOrders()
-    this.setRoomNumberList();
+    // this.setOrders()
+    this.setOrders2()
+    // this.setRoomNumberList();
+    this.setRoomNumberList2();
   }
 
   setSelection(value: any) {
@@ -179,7 +182,8 @@ export class Kitchen2Component implements OnInit {
       this.selectedButton = 1;
       this.pickupStatus = 1
       if (this.viewType === 1) {
-        this.getAllPreparedOrders(1)
+        // this.getAllPreparedOrders(1)
+        this.getAllPreparedOrders2(1)
       } else {
         this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
       }
@@ -206,15 +210,23 @@ export class Kitchen2Component implements OnInit {
       this.selectedButton = 4;
       this.pickupStatus = 1
       if (this.viewType === 1) {
-        this.getAllPreparedOrders(1)
+        // this.getAllPreparedOrders(1)
+        this.getAllPreparedOrders2(1)
       } else {
         this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
       }
     }
   }
 
-  getAllPreparedOrders(searchRange: any) {
-    this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
+  // getAllPreparedOrders(searchRange: any) {
+  //   this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
+  //     // console.log(response);
+  //     this.allPreparedOrders = response;
+  //   });
+  // }
+
+  getAllPreparedOrders2(searchRange: any) {
+    this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
       // console.log(response);
       this.allPreparedOrders = response;
     });
@@ -231,8 +243,19 @@ export class Kitchen2Component implements OnInit {
     });
   }
 
+  setRoomNumberList2() {
+    this.kitchenService.getAllPreparedOrdersAllDays(1).subscribe(response => {
+      // console.log('before3');
+      // console.log(this.currentDate);
+      console.log(response);
+      // console.log('after3');
+
+      this.roomNumberList = response;
+    });
+  }
+
   getAllNotPickUpOrders(searchRange: any) {
-    this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
+    this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
       let list: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].status === 3) {
@@ -248,7 +271,7 @@ export class Kitchen2Component implements OnInit {
   }
 
   getAllPickUpOrders(searchRange: any) {
-    this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
+    this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
       let list: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].status === 4) {
@@ -302,7 +325,8 @@ export class Kitchen2Component implements OnInit {
     this.changeFilterRange = range
     if (this.showWaitingOrder === 1) {
       if (this.pickupStatus === 1) {
-        this.getAllPreparedOrders(range);
+        // this.getAllPreparedOrders(range);
+        this.getAllPreparedOrders2(range);
       } else if (this.pickupStatus === 2) {
         this.getAllNotPickUpOrders(range);
       } else {
@@ -315,7 +339,7 @@ export class Kitchen2Component implements OnInit {
 
   filterOrderByRoomNo(range: any) {
     let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
-    this.kitchenService.getAllOrders(date).subscribe(response => {
+    this.kitchenService.getAllActiveOrdersNew().subscribe(response => {
       let list = response
       let newList: any = [];
       if (range === 100) {
@@ -344,6 +368,7 @@ export class Kitchen2Component implements OnInit {
                 req_time: list[i].req_time,
                 status: list[i].status,
                 time: list[i].time,
+                guestName:list[i].guestName,
                 detailsPayload: newDetailsPayload
               });
               console.log(list);
@@ -378,6 +403,7 @@ export class Kitchen2Component implements OnInit {
                 req_time: list[i].req_time,
                 status: list[i].status,
                 time: list[i].time,
+                guestName:list[i].guestName,
                 detailsPayload: newDetailsPayload
               });
               // console.log("hsafoaosdfiu")
@@ -469,6 +495,20 @@ export class Kitchen2Component implements OnInit {
     let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
     // console.log(date);
     this.kitchenService.getAllOrders(date).subscribe(response => {
+      // console.log('before');
+      console.log(response);
+      // console.log('after');
+      this.waitingOrders = response;
+      // this for group orders
+      // this.groupOrders();
+    });
+  }
+
+  setOrders2() {
+    this.selectedRoom = '';
+    let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
+    // console.log(date);
+    this.kitchenService.getAllActiveOrdersNew().subscribe(response => {
       // console.log('before');
       console.log(response);
       // console.log('after');

@@ -46,7 +46,7 @@
   margin-top: -3px;
 }
 
-.cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10) ,.cardData:nth-child(14){
+.cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10) ,.cardData:nth-child(14),.cardData:nth-child(16),.cardData:nth-child(18){
   color: #000c17;
   font-weight: bold;
   font-size: 17px;
@@ -67,7 +67,7 @@
   }
 
 
-  .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10), .cardData:nth-child(14) {
+  .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10), .cardData:nth-child(14),.cardData:nth-child(16),.cardData:nth-child(18) {
     text-align: center;
   }
 }
@@ -85,7 +85,7 @@
     margin: 0;
   }
 
-  .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10), .cardData:nth-child(14) {
+  .cardData:nth-child(2), .cardData:nth-child(4), .cardData:nth-child(6), .cardData:nth-child(8), .cardData:nth-child(12), .cardData:nth-child(10), .cardData:nth-child(14),.cardData:nth-child(16),.cardData:nth-child(18) {
     text-align: center;
   }
 }
