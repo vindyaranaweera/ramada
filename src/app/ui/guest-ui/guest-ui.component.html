@@ -109,3 +109,5 @@
 <app-cart *ngIf="visibleCart" [bookingId]="bookingId" [isPreview]="isPreview" (setCartVisibility)="visibleCart = $event" [OtherDetails]="otherDetailsList" [cartItem]="cartItem"
           [isVisible]="visibleCart" [totalRemainingOrders]="totalOrders"></app-cart>
 <app-order-history  (sendOtherDetails)="setOtherList($event)" (sendOrderDetails)="editOrder($event)" *ngIf="visibleOrderHistory"  [bookingId]="bookingId" (resetVisibility)="visibleOrderHistory=$event" [isVisible]="visibleOrderHistory"></app-order-history>
+
+<!--newlogo-->
