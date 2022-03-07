@@ -4,12 +4,12 @@
     <div nz-col nzSpan="9" style="text-align: center;  justify-content: center;">
 
     </div>
-<!--    <div nz-col nzSpan="5" style="justify-content: center;">-->
-<!--      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="assets/newlogo.png"-->
-<!--           [style.height.px]="getScreenWidth<768?60:100"-->
-<!--           [style.width.px]="getScreenWidth>1000? getScreenWidth/8:getScreenWidth/4"-->
-<!--           [style.margin-left.px]="getScreenWidth>1000?50:0">-->
-<!--    </div> -->
+    <!--    <div nz-col nzSpan="5" style="justify-content: center;">-->
+    <!--      <img [style.margin-top.px]="getScreenWidth>1000?70:50" src="assets/newlogo.png"-->
+    <!--           [style.height.px]="getScreenWidth<768?60:100"-->
+    <!--           [style.width.px]="getScreenWidth>1000? getScreenWidth/8:getScreenWidth/4"-->
+    <!--           [style.margin-left.px]="getScreenWidth>1000?50:0">-->
+    <!--    </div> -->
     <div nz-col nzSpan="5" style="justify-content: center;">
       <img [style.margin-top.px]="getScreenWidth>1000?50:50" src="assets/newbrand.jpeg"
            [style.height.px]="getScreenWidth<768?110:150"
@@ -19,12 +19,13 @@
     <div nz-col nzSpan="10" style="text-align: center;  justify-content: center;">
       <button nz-button nzType="default"
               style="margin-top: 10px; float: right; background-color: white;border: solid 2px #D21241;color: #fafafa;font-weight: bold;height: 40px;width: 40px;border-radius: 5px; margin-right:30px"
-              (click)="logOut()"><img src="assets/lock.png" style="width: 20px;height: 20px; margin-left:-7px">    </button>
+              (click)="logOut()"><img src="assets/lock.png" style="width: 20px;height: 20px; margin-left:-7px"></button>
     </div>
     <nz-divider nzText="BREAKFAST MENU" nzOrientation="center" style="text-align: center;"></nz-divider>
     <nz-affix [nzOffsetTop]="50" style="margin-left:5px;position:relative; z-index: 10">
       <nz-button-group>
-        <button nz-button style="border-color: #d21241;"><b style="color: #d21241">{{totalOrders}} OUT OF {{totalPacks}}</b></button>
+        <button nz-button style="border-color: #d21241;"><b style="color: #d21241">{{totalOrders}} OUT
+          OF {{totalPacks}}</b></button>
         <button nz-button nzType="primary" style="background-color: #d21241;border-color:white"
                 (click)="showOrderHistory()">
           <i nz-icon
@@ -66,7 +67,7 @@
                 <app-category-card image="assets/pan.jpg" width="100px" text="French Toast"
                                    name="3 Choices Available" background="#D2124151" text_color="white"
                                    (click)="notAvailable('French Toast')"></app-category-card>
-<!--                changeItemPanel(4);-->
+                <!--                changeItemPanel(4);-->
               </div>
               <div class="myCol" [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'">
                 <app-category-card image="assets/e2.jpg" width="100px" text="Eggs"
@@ -95,8 +96,10 @@
               <div *ngFor="let items of favouriteList;let i = index;" class="myCol"
                    [ngClass]="getScreenWidth<913 ? 'myCol':'myCol2'"
                    [style.margin-left.px]="getScreenWidth<400&&favouriteList.length<2?80:0||getScreenWidth<820&&favouriteList.length<2?95:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<2?300:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<3?150:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<4?80:0||767<getScreenWidth&&getScreenWidth<913&&favouriteList.length<5?50:0">
-                <app-favourite-card  (visibleCart)="visibleCart=$event" (cart)="setCartItem($event)"
-                                    (deleteItemIndex)="deleteFavouriteItem($event)" (reFreshFavouriteList)="reFreshFavouriteList($event)" [ItemId]="items.id" [itemIndex]="i"
+                <app-favourite-card (visibleCart)="visibleCart=$event" (cart)="setCartItem($event)"
+                                    (deleteItemIndex)="deleteFavouriteItem($event)"
+                                    (reFreshFavouriteList)="reFreshFavouriteList($event)" [ItemId]="items.id"
+                                    [itemIndex]="i"
                                     [title]="items.category" [eggAvailable]="items.eggAvailable"
                                     [hashBrown]="items.hashbrown" [eggStyle]="items.eggstyle" [protein]="items.protien"
                                     [toast]="items.toast"></app-favourite-card>
@@ -108,10 +111,17 @@
     </div>
   </div>
 </div>
-<app-select-order *ngIf="isVisible2" [editOrder]="editOrderList" [otherDetailsList]="otherDetailsList"  (reFreshFavouriteList)="reFreshFavouriteList($event)" (setFavourIteList)="addFavouriteList($event)" [guestId]="guestId" (setPreview)="isPreview=$event"
+<app-select-order *ngIf="isVisible2" [editOrder]="editOrderList" [otherDetailsList]="otherDetailsList"
+                  (reFreshFavouriteList)="reFreshFavouriteList($event)" (setFavourIteList)="addFavouriteList($event)"
+                  [guestId]="guestId" (setPreview)="isPreview=$event"
                   (cart)="setCartItem($event)" (visibleCart)="visibleCart = $event"
-                  (visibility)="handleCancel1($event)" [isVisible2]="isVisible2" [ShowModel]="panel" (sendOtherDetailsList)="otherDetailsList=$event"
+                  (visibility)="handleCancel1($event)" [isVisible2]="isVisible2" [ShowModel]="panel"
+                  (sendOtherDetailsList)="otherDetailsList=$event"
                   [orderTitle]="orderTitle"></app-select-order>
-<app-cart *ngIf="visibleCart" [bookingId]="bookingId" [isPreview]="isPreview" (setCartVisibility)="visibleCart = $event" [OtherDetails]="otherDetailsList" [cartItem]="cartItem"
+<app-cart *ngIf="visibleCart" [guestId]="guestId" [bookingId]="bookingId" [isPreview]="isPreview"
+          (setCartVisibility)="visibleCart = $event"
+          [OtherDetails]="otherDetailsList" [cartItem]="cartItem" (reFreshFavouriteList)="reFreshFavouriteList($event)"
           [isVisible]="visibleCart" [totalRemainingOrders]="totalOrders"></app-cart>
-<app-order-history  (sendOtherDetails)="setOtherList($event)" (sendOrderDetails)="editOrder($event)" *ngIf="visibleOrderHistory"  [bookingId]="bookingId" (resetVisibility)="visibleOrderHistory=$event" [isVisible]="visibleOrderHistory"></app-order-history>
+<app-order-history (sendOtherDetails)="setOtherList($event)" (sendOrderDetails)="editOrder($event)"
+                   *ngIf="visibleOrderHistory" [bookingId]="bookingId" (resetVisibility)="visibleOrderHistory=$event"
+                   [isVisible]="visibleOrderHistory"></app-order-history>

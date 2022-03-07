@@ -129,10 +129,18 @@
       <p style="padding-top:10px;font-weight: bold;">Note</p>
       <textarea nz-input [(ngModel)]="note" [nzAutosize]="{ minRows:4, maxRows:4}" nzMentionTrigger></textarea>
     </nz-mention>
-    <div style="text-align:right;margin-top: 10px;">
+    <div nz-row style="text-align:right;margin-top: 10px;">
+      <div nz-col nzSpan="10">
+        <img (click)="addToFavourite()"
+          src="{{activeFavourite==1?'assets/star (3).png':'assets/star (2).png'}}"
+          style="float:left;height: 30px; width: 30px ; margin-top: 10px; cursor: pointer">
+      </div>
+      <div nz-col nzSpan="14">
       <button *ngIf="showSendtokitchen===1&& isPreview==0 && isValidDate" nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
       color: white;" (click)="sendToKitchen()">{{cartItem.length > 0 ? 'Send To Kitchen' : 'Back To Items'}}
       </button>
+      </div>
+
     </div>
   </div>
 </nz-modal>

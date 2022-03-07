@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
 
   note: any | string = "";
   qty: any = 1;
-  guestName:any;
+  guestName: any = null;
   calenderDisableDate: Date = new Date();
   timePickerTime: Date | null = null;
   date: any;
@@ -80,12 +80,21 @@ export class CartComponent implements OnInit {
   @Input()
   totalRemainingOrders: any;
 
+  @Input()
+  guestId: any;
+
+  @Input()
+  favouriteId: any
+
 
   @Output() setCartVisibility = new EventEmitter<boolean>();
   @Output() refreshSetTotalOrders = new EventEmitter();
+  @Output() reFreshFavouriteList = new EventEmitter<any>();
+
 
   emitValue = false;
   isValidDate = false;
+  activeFavourite = 0;
 
   constructor(private modal: NzModalService, public datepipe: DatePipe, private guestService: GuestService, private message: NzMessageService, private frontOfficeService: FrontOfficeService) {
 
@@ -139,7 +148,7 @@ export class CartComponent implements OnInit {
     for (let i = 0; i < this.OtherDetails.length; i++) {
       this.orderId = this.OtherDetails[i].id
       console.log(this.orderId)
-      this.guestName=this.OtherDetails[i].guestName
+      this.guestName = this.OtherDetails[i].guestName
       this.qty = this.OtherDetails[i].qty
       this.bookingId = this.OtherDetails[i].bookingId
       this.timePickerTime = new Date(this.OtherDetails[i].date + ' ' + this.OtherDetails[i].time)
@@ -183,7 +192,7 @@ export class CartComponent implements OnInit {
   }
 
   sendToKitchen() {
-    if (this.date !== null && this.timePickerTime !== null) {
+    if (this.date !== null && this.timePickerTime !== null && this.guestName !== null) {
       if (this.datepipe.transform(this.date, 'yyyy/MM/dd') != this.datepipe.transform(this.calenderDisableDate, 'yyyy/MM/dd')) {
         this.modal.confirm({
           nzTitle: '<i>Confirm Order</i>',
@@ -204,6 +213,9 @@ export class CartComponent implements OnInit {
       } else if (this.timePickerTime === null) {
         console.log(this.timePickerTime)
         this.createMessage('error', "Please Select Wanted Time Before Place Order");
+      } else if (this.guestName === null) {
+        console.log(this.guestName)
+        this.createMessage('error', "Please Enter Guest Name Before Place Order");
       }
     }
   }
@@ -245,7 +257,7 @@ export class CartComponent implements OnInit {
       req_time: RequestTime,
       status: status,
       booking: bookingId,
-      guestName:this.guestName,
+      guestName: this.guestName,
       detailsPayload: cart
     }
     console.log(orderBody);
@@ -316,5 +328,65 @@ export class CartComponent implements OnInit {
     // 'error'
     // 'warning'
     this.message.create(type, message);
+  }
+
+  addToFavourite() {
+    if (this.activeFavourite === 0) {
+      if (this.date !== null && this.timePickerTime !== null && this.guestName !== null) {
+        this.activeFavourite = 1;
+        this.saveFavourite();
+        // this.reFreshFavouriteList.emit(true);
+      } else {
+        this.activeFavourite = 0;
+        if (this.date === null) {
+          this.createMessage('error', "Please Select Wanted Date Before Add to Favourite");
+        } else if (this.timePickerTime === null) {
+          console.log(this.timePickerTime)
+          this.createMessage('error', "Please Select Wanted Time Before Add to Favourite");
+        } else if (this.guestName === null) {
+          console.log(this.guestName)
+          this.createMessage('error', "Please Enter Guest Name Before Add to Favourite");
+        }
+      }
+    } else {
+      this.activeFavourite = 0
+      this.deleteFavourite();
+    }
+  }
+
+  saveFavourite() {
+    let favouriteBody: any;
+    for (let i = 0; i < this.cartItem.length; i++) {
+      favouriteBody = {
+        category: this.cartItem[i].category,
+        protien: this.cartItem[i].protien,
+        toast: this.cartItem[i].toast,
+        hashbrown: this.cartItem[i].hashbrown,
+        eggstyle: this.cartItem[i].egg_style,
+        guest: this.guestId,
+        time: this.datepipe.transform(this.timePickerTime,'HH:mm')
+      }
+    }
+    this.guestService.addToFavourite(favouriteBody).subscribe(response => {
+      this.favouriteId = parseInt(response.message);
+      this.reFreshFavouriteList.emit(true);
+      if (response.status === true) {
+        this.createMessage('success', 'This item added to your Favourites')
+      } else {
+        this.createMessage('warning', 'something went wrong')
+      }
+    });
+  }
+
+  deleteFavourite() {
+    this.guestService.removeFavourite(this.favouriteId).subscribe(response => {
+      console.log(response);
+      if (response === true) {
+        this.reFreshFavouriteList.emit(true);
+        this.createMessage('success', 'This item removed from your Favourites')
+      } else {
+        this.createMessage('warning', 'something went wrong')
+      }
+    });
   }
 }
