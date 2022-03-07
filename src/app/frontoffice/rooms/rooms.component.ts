@@ -21,7 +21,6 @@ export class RoomsComponent implements OnInit {
     {roomNo: "110", availability: 0},
     {roomNo: "111", availability: 1},
     {roomNo: "112", availability: 1},
-    {roomNo: "113", availability: 0},
     {roomNo: "114", availability: 1},
     {roomNo: "115", availability: 0},
     {roomNo: "116", availability: 1},

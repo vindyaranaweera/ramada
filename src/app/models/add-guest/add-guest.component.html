@@ -15,6 +15,7 @@
 <!--    <ng-template #guestID><i nz-icon nzType="idcard" nzTheme="outline"></i></ng-template>-->
 <!--    <br/>-->
 <!--    <br/>-->
+    <p style="font-weight: bolder;text-align: center">Room No: {{roomNo}}</p>
     <nz-input-group [nzPrefix]="guestName">
       <input type="text" [(ngModel)]="getGuestName" nz-input placeholder="Guest name"/>
     </nz-input-group>
@@ -34,7 +35,7 @@
                     (ngModelChange)="onChange($event)"
                     (nzOnOk)="onOk($event)" style="margin-right: 30px" nzPlaceHolder="Check In Date"
                     [(ngModel)]="checkInDate"></nz-date-picker>
-    <nz-date-picker
+    <nz-date-picker id="cOutDate"
                     nzFormat="yyyy-MM-dd "
                     ngModel
                     [nzDisabledDate]="disabledDate"
@@ -64,7 +65,7 @@
          style="padding-bottom:10px; padding-left:5px;padding-right:5px;float: right;text-align:center;font-weight:bold;background-color: #d21241;color: white;margin-top:-28px;border-radius: 3px">
       Room Access Code<p
       style="background-color:white;color:#d21241;font-weight: bold;font-size: 30px;padding: 0;margin: 0;border-radius: 3px;box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.9) -3px -3px 10px 1px inset;">
-      {{accessCode}}</p>
+      {{showAccessCode===true?accessCode:'----'}}</p>
     </div>
   </ng-template>
   <ng-template #modalFooter>

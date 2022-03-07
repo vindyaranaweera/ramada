@@ -101,4 +101,8 @@ export class FrontOfficeService {
   public changeOrderStatus(OrderId:any,status:any){
     return this.http.post<any>(`${this.apiServerUrl}/api/order_controller/update_order_status?id=`+OrderId+`&status=`+status,'');
   }
+
+  public getCheckoutCount(checkoutdate:any){
+    return this.http.get<any>(`${this.apiServerUrl}/api/booking_controller/get_checkout_count?checkoutdate=`,{params:checkoutdate});
+  }
 }

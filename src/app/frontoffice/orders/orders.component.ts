@@ -15,7 +15,7 @@ export class OrdersComponent implements OnInit {
   Eggs: any;
   canceled: any = 0;
   total: any;
-  date: Date = new Date();
+  date: any = new Date();
   OrderList: any = [
     {roomNo: "101", orderColor: '#3ba0e9'},
     {roomNo: "102", orderColor: '#ffcd00'},
@@ -89,11 +89,12 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.date = new Date().setDate(new Date().getDate() + 1);
     this.reFreshPage();
   }
 
   reFreshPage(){
-    this.setOrderSummery(this.date);
+    this.setOrderSummery(new Date().setDate(new Date().getDate() + 1));
   }
 
   setOrderSummery(date: any) {

@@ -142,14 +142,16 @@ export class FrontofficeComponent implements OnInit {
   demoValue: any;
 
   totalPacks = 0;
+  checkoutcount=0;
   totalOrders = 0;
   whatDate = 'To Day';
-
+tobeCheckout=0;
   constructor(private router: Router, private frontOfficeService: FrontOfficeService, public datepipe: DatePipe, private kitchenService: KitchenService) {
     this.rout = router;
     setInterval(() => {
       this.todayDate = new Date();
-      // console.log(this.todayDate)
+      this.findTotalPacks();
+      this.getOrderCount();
     }, 1000);
   }
 
@@ -157,6 +159,7 @@ export class FrontofficeComponent implements OnInit {
     this.getScreenWidth();
     this.findTotalPacks();
     this.getOrderCount();
+    this.getcheckoutcount();
   }
 
   findTotalPacks() {
@@ -165,9 +168,16 @@ export class FrontofficeComponent implements OnInit {
     });
   }
 
+  getcheckoutcount(){
+    let date = this.datepipe.transform(new Date(), 'yyyy/MM/dd','MST+1');
+    this.frontOfficeService.getCheckoutCount(date).subscribe(res=>{
+      this.tobeCheckout=res;
+    });
+  }
+
   getOrderCount() {
     // code
-    let date = this.datepipe.transform(new Date(), 'yyyy/MM/dd');
+    let date = this.datepipe.transform(new Date(), 'yyyy/MM/dd','MST+1');
     if (this.todayDate.getHours() > 8) {
       date = this.datepipe.transform(new Date().setDate(new Date().getDate() + 1), 'yyyy/MM/dd');
       this.whatDate = 'Tomorrow';
@@ -222,6 +232,4 @@ export class FrontofficeComponent implements OnInit {
   logOut() {
     this.rout.navigate([''])
   }
-
-
 }

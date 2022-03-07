@@ -4,6 +4,7 @@ import {FrontOfficeService} from "../../Services/front-office.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {differenceInCalendarDays, setHours} from 'date-fns';
 import {NzMessageService} from "ng-zorro-antd/message";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-add-guest',
@@ -46,8 +47,8 @@ export class AddGuestComponent implements OnInit {
   bookingId: any = 0;
   bookingStatus = 1;
   accessCode = '';
-
-  constructor(private message: NzMessageService, private i18n: NzI18nService, private frontOfficeService: FrontOfficeService, private modal: NzModalService) {
+showAccessCode=true;
+  constructor(public datepipe: DatePipe,private message: NzMessageService, private i18n: NzI18nService, private frontOfficeService: FrontOfficeService, private modal: NzModalService) {
   }
 
 
@@ -128,7 +129,8 @@ export class AddGuestComponent implements OnInit {
   }
 
   onChange(result: Date): void {
-    console.log('onChange: ', result);
+    // console.log('onChange: ', result);
+    this.clickCheckout();
   }
 
   // getWeek(result: Date): void {
@@ -194,6 +196,8 @@ export class AddGuestComponent implements OnInit {
 
   //this for set already exist booking details
   setDetails() {
+    let date = this.datepipe.transform(new Date(), 'yyyy/MM/dd','MST+1');
+    let checkoutdate;
     if (this.visibleType === 0) {
       this.frontOfficeService.viewBooking(this.roomNo).subscribe(response => {
         console.log(response)
@@ -203,10 +207,15 @@ export class AddGuestComponent implements OnInit {
         console.log("sdfjsdifoj = " + this.guestDBId);
         this.checkInDate = response.checkindate;
         this.checkOutDate = response.checkoutdate;
+        checkoutdate = this.datepipe.transform(response.checkoutdate, 'yyyy/MM/dd','MST+1');
         this.packs = response.packs;
         // console.log("get booking Id "+this.bookingId);
         this.bookingStatus = response.status;
-        this.accessCode = response.access_code;
+        if (checkoutdate===date && new Date().getHours()>8){
+          this.showAccessCode=false;
+        }else {
+          this.showAccessCode=true;
+        }this.accessCode = response.access_code;
         this.roomDBId = response.room;
         this.frontOfficeService.getGuestByDBId(this.guestDBId).subscribe(response => {
           this.getGuestId = response.idNumber;
@@ -320,5 +329,11 @@ export class AddGuestComponent implements OnInit {
 
   createMessage(type: string, message: string): void {
     this.message.create(type, message);
+  }
+
+  clickCheckout(){
+    let picker:any;
+    picker=document.getElementById('cOutDate');
+    picker.click();
   }
 }
