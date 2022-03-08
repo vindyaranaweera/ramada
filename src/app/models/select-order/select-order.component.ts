@@ -64,6 +64,7 @@ export class SelectOrderComponent implements OnInit {
   sunny: boolean = false;
   over: boolean = false;
   scrambled: boolean = false;
+  overhard:boolean=false;
   qty = 1;
 
   Brownbread: any;
@@ -119,6 +120,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.sunny) {
       this.over = false;
       this.scrambled = false;
+      this.overhard=false;
       this.eggstyle = "Sunny Sideup";
     } else {
       this.eggstyle = "N/A";
@@ -130,6 +132,7 @@ export class SelectOrderComponent implements OnInit {
     if (this.over) {
       this.sunny = false;
       this.scrambled = false;
+      this.overhard=false;
       this.eggstyle = "OverEasy"
     } else {
       this.eggstyle = "N/A";
@@ -141,7 +144,20 @@ export class SelectOrderComponent implements OnInit {
     if (this.scrambled) {
       this.sunny = false;
       this.over = false;
+      this.overhard=false;
       this.eggstyle = "Scrambled";
+    } else {
+      this.eggstyle = "N/A";
+    }
+  }
+
+  changeOverHard(b: boolean) {
+    this.overhard = b;
+    if (this.overhard) {
+      this.sunny = false;
+      this.scrambled = false;
+      this.over=false;
+      this.eggstyle = "OverHard"
     } else {
       this.eggstyle = "N/A";
     }
@@ -237,8 +253,9 @@ export class SelectOrderComponent implements OnInit {
 
   handleOk(cate: any): void {
     this.isVisible = true;
-    if (this.hash != "" && this.protien != "" && this.toast != "" && this.eggstyle != "") {
-
+    if (this.hash === "No" && this.protien === "" && this.toast === "" && this.eggstyle === "N/A") {
+        this.showAlert = true;
+    }else {
       this.cartItem.push({
         category: this.orderTitle,
         hashbrown: this.hash,
@@ -256,9 +273,10 @@ export class SelectOrderComponent implements OnInit {
       this.cart.emit(this.cartItem);
       this.clearVariables();
       this.setPreview.emit(0);
-    } else {
-      this.showAlert = true;
     }
+    // } else {
+    //   this.showAlert = true;
+    // }
   }
 
   addToFavourite() {
@@ -357,3 +375,9 @@ export class SelectOrderComponent implements OnInit {
 
   }
 }
+// <button nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+// color: white;" (click)="sendToKitchen()" *ngIf="cartItem.length>0">Send To Kitchen
+// </button>
+// <button nz-button nzType="default" style="background-color: #D21241;border-color:#D21241; height: 50px;
+// color: white;" (click)="backToItems()" *ngIf="cartItem.length<1">Back To Items
+// </button>

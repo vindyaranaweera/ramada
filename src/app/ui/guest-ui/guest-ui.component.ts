@@ -111,8 +111,11 @@ export class GuestUiComponent implements OnInit {
   }
 
   changeItemPanel(number: number) {
+    console.log(this.otherDetailsList);
     this.panel = number;
     this.isVisible2 = true;
+    this.editOrderList=null;
+    this.otherDetailsList=null;
     if (number === 1) {
       this.orderTitle = "Cheese Omelette"
     }
@@ -475,6 +478,24 @@ export class GuestUiComponent implements OnInit {
   }
 
   editOrder(list: any) {
+    for (let i=0; i<list.length;i++){
+      if(list[i].category==="Cheese Omelette"){
+        this.orderTitle = "Cheese Omelette"
+        this.panel=1;
+      }else if(list[i].category==="Pancake"){
+        this.orderTitle = "Pancake"
+        this.panel=2
+      }else if (list[i].category==="Egg & Cheese Sandwich"){
+        this.orderTitle = "Egg & Cheese Sandwich"
+        this.panel=3
+      }else if(list[i].category==="French Toast"){
+        this.orderTitle = "French Toast"
+        this.panel=4
+      }else if(list[i].category==="Eggs"){
+        this.orderTitle = "Eggs"
+        this.panel=5
+      }
+    }
     console.log(this.otherDetailsList)
     this.editOrderList = list;
     this.isVisible2 = true;
@@ -484,7 +505,6 @@ export class GuestUiComponent implements OnInit {
     let date = this.datepipe.transform(new Date(), 'YYYY/MM/dd');
     this.guestService.setTotalOrders(this.bookingId, date).subscribe(response => {
       this.totalOrders = response.message
-      console.log(response);
 
     });
   }

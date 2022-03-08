@@ -145,7 +145,7 @@ export class FrontofficeComponent implements OnInit {
   checkoutcount=0;
   totalOrders = 0;
   whatDate = 'To Day';
-tobeCheckout=0;
+ tobeCheckout=0;
   constructor(private router: Router, private frontOfficeService: FrontOfficeService, public datepipe: DatePipe, private kitchenService: KitchenService) {
     this.rout = router;
     setInterval(() => {

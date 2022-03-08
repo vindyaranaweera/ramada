@@ -15,29 +15,37 @@
     <nz-input-group nzCompact *ngIf="ShowModel===5">
       <p style="font-weight: bold;color: white;font-size:17px">Style Your Egg</p><br>
       <div>
-        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'400px'}" nz-row
-             style="width:470px;height: 120px;margin-top: 10px;">
-          <div *ngIf="myInnerWidth<=768" nz-col nzSpan="6" nzOrder="4"></div>
-          <div nz-col nzSpan="6" nzOrder="3" style="width:30px;padding-top: 10px;margin-right: 20px">
+        <div [ngStyle]="{'width':myInnerWidth<768 ?'90vw':'500px'}" nz-row
+             style="height: 120px;margin-top: 10px;text-align: center;">
+<!--          <div *ngIf="myInnerWidth<=768" nz-col nzSpan="1"></div>-->
+          <div *ngIf="myInnerWidth>=768" nz-col nzSpan="1"></div>
+          <div nz-col nzSpan="5" style="padding-top: 10px;" [ngStyle]="{'margin-left':myInnerWidth<768 ?'-10px':'0px'}">
             <img src="assets/dssb.jpg" (click)="changeSunny(true)" *ngIf="!sunny"
-                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
+                 style="width: 80px; height: 80px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">
             <img src="assets/dssb.jpg" (click)="changeSunny(false)" *ngIf="sunny"
-                 style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
-            <p style="margin-left: 35px;font-weight: bold;color: white">Sunny Sideup</p>
+                 style="width: 80px; height: 80px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px;">
+            <p style="font-weight: bold;color: white;text-align: center;margin-top: 5px;" [ngStyle]="{'font-size':myInnerWidth<768 ?'x-small':'medium'}">Sunny Sideup</p>
           </div>
-          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+          <div nz-col nzSpan="5" style="padding-top: 10px;" [ngStyle]="{'margin-left':myInnerWidth<768 ?'20px':'0px'}">
             <img src="assets/huhu.jpg" (click)="changeOver(true)" *ngIf="!over"
-                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+                 style="width: 80px; height: 80px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
             <img src="assets/huhu.jpg" (click)="changeOver(false)" *ngIf="over"
-                 style="margin-left:15px;width: 100px; height: 100px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
-            <p style="margin-left:23px;font-weight: bold;color: white">OverEasy</p>
+                 style="width: 80px; height: 80px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="font-weight: bold;color: white;text-align: center;margin-top: 5px;" [ngStyle]="{'font-size':myInnerWidth<768 ?'x-small':'medium'}">Over  Easy</p>
           </div>
-          <div nz-col nzSpan="6" nzOrder="2" style="width:30px;padding-top: 10px;margin-right: 20px">
+          <div nz-col nzSpan="5" style="padding-top: 10px;" [ngStyle]="{'margin-left':myInnerWidth<768 ?'20px':'0px'}">
             <img src="assets/errr.jpg" (click)="changeScrambled(true)" *ngIf="!scrambled"
-                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+                 style="width: 80px; height: 80px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
             <img src="assets/errr.jpg" (click)="changeScrambled(false)" *ngIf="scrambled"
-                 style="margin-left:15px;width: 100px; height: 100px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
-            <p style="margin-left: 15px;font-weight: bold;color: white">Scrambled</p>
+                 style="width: 80px; height: 80px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="font-weight: bold;color: white;text-align: center;margin-top: 5px;" [ngStyle]="{'font-size':myInnerWidth<768 ?'x-small':'medium'}">Scrambled</p>
+          </div>
+          <div nz-col nzSpan="5" style="padding-top: 10px;" [ngStyle]="{'margin-left':myInnerWidth<768 ?'20px':'0px'}">
+            <img src="assets/errr.jpg" (click)="changeOverHard(true)" *ngIf="!overhard"
+                 style="width: 80px; height: 80px;border-radius: 50px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px">
+            <img src="assets/errr.jpg" (click)="changeOverHard(false)" *ngIf="overhard"
+                 style="width: 80px; height: 80px;border-radius: 50px;box-shadow: rgba(255,255,255,0.87) 0px 2px 4px 0px, rgb(255,255,255) 0px 2px 16px 0px;border-radius: 50px">
+            <p style="font-weight: bold;color: white;text-align: center;margin-top: 5px;" [ngStyle]="{'font-size':myInnerWidth<768 ?'x-small':'medium'}">Over  hard</p>
           </div>
         </div>
       </div>
@@ -75,7 +83,7 @@
       </div>
     </nz-input-group>
     <br>
-    <nz-input-group nzCompact>
+    <nz-input-group nzCompact *ngIf="ShowModel!=2">
       <p style="font-weight: bold;color: white;font-size:17px">Select Your Toast</p><br>
       <img src="assets/bro.jpeg" (click)="changeBrownbread(true)" *ngIf="!Brownbread"
            style="margin-left:12px;width: 100px; height: 100px;box-shadow: rgba(145,13,46,0.73) 0px 0px 0px 2px, rgb(210,18,65) 0px 4px 6px -1px, rgba(210,18,65,0.65) 0px 1px 0px inset;border-radius: 50px;">

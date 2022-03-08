@@ -192,7 +192,11 @@ export class CartComponent implements OnInit {
   }
 
   sendToKitchen() {
-    if (this.date !== null && this.timePickerTime !== null && this.guestName !== null) {
+    // if (this.cartItem.length < 1) {
+    //   this.modal.closeAll();
+    // }
+    this.date = this.datepipe.transform(new Date().setDate(new Date().getDate() + 1), 'yyyy/MM/dd')
+    if (this.date !== null && this.timePickerTime !== null && this.guestName !== null&&this.cartItem.length>0) {
       if (this.datepipe.transform(this.date, 'yyyy/MM/dd') != this.datepipe.transform(this.calenderDisableDate, 'yyyy/MM/dd')) {
         this.modal.confirm({
           nzTitle: '<i>Confirm Order</i>',
@@ -207,6 +211,9 @@ export class CartComponent implements OnInit {
         });
       }
     } else {
+      if(this.cartItem.length<1){
+        this.modal.closeAll();
+      }
       if (this.date === null) {
         console.log(this.date);
         this.createMessage('error', "Please Select Wanted Date Before Place Order");
@@ -364,7 +371,7 @@ export class CartComponent implements OnInit {
         hashbrown: this.cartItem[i].hashbrown,
         eggstyle: this.cartItem[i].egg_style,
         guest: this.guestId,
-        time: this.datepipe.transform(this.timePickerTime,'HH:mm')
+        time: this.datepipe.transform(this.timePickerTime, 'HH:mm')
       }
     }
     this.guestService.addToFavourite(favouriteBody).subscribe(response => {
@@ -389,4 +396,8 @@ export class CartComponent implements OnInit {
       }
     });
   }
+
+  // backToItems() {
+  //   this.modal.closeAll();
+  // }
 }

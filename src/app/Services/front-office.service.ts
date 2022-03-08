@@ -8,8 +8,8 @@ import {Observable} from "rxjs";
 })
 export class FrontOfficeService {
 
-  // private apiServerUrl = 'http://143.198.36.89/api';
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = 'http://143.198.36.89/api';
+  // private apiServerUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
   }
@@ -103,6 +103,6 @@ export class FrontOfficeService {
   }
 
   public getCheckoutCount(checkoutdate:any){
-    return this.http.get<any>(`${this.apiServerUrl}/api/booking_controller/get_checkout_count?checkoutdate=`,{params:checkoutdate});
+    return this.http.get<any>(`${this.apiServerUrl}/api/booking_controller/get_checkout_count`,{params:checkoutdate});
   }
 }
