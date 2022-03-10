@@ -169,6 +169,7 @@ export class RoomsComponent implements OnInit {
     if(value===true){
       this.frontOfficeService.getAllRooms().subscribe(response=>{
         this.showRoomslist=response;
+        console.log(this.showRoomslist);
       })
     }
   }

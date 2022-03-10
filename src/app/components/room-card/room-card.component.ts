@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FrontOfficeService} from "../../Services/front-office.service";
 import {AddGuestComponent} from "../../models/add-guest/add-guest.component";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-room-card',
@@ -10,10 +11,10 @@ import {AddGuestComponent} from "../../models/add-guest/add-guest.component";
 export class RoomCardComponent implements OnInit {
 
   @Input()
-  orderId:any;
+  orderId: any;
 
   @Input()
-  cardType:any;
+  cardType: any;
   @Input()
   number: any = 0;
   @Input()
@@ -21,20 +22,20 @@ export class RoomCardComponent implements OnInit {
   @Input()
   isAvailable: boolean = true;
   @Input()
-  orderColor:string|any;
+  orderColor: string | any;
   @Input()
-  bookingId:any;
+  bookingId: any;
   @Input()
-  orderStatus:any;
+  orderStatus: any;
   @Input()
-  orderQty:any;
+  orderQty: any;
 
   showDetailsCom = false;
 
   @Input()
-  itemDetails:any;
+  itemDetails: any;
 
-  @Input()setRoomOrderNumber(value:any){
+  @Input() setRoomOrderNumber(value: any) {
     console.log("dshfihaifdofjas")
   }
 
@@ -42,45 +43,57 @@ export class RoomCardComponent implements OnInit {
   @Output() setRoomNo = new EventEmitter<any>();
   @Output() refreshOrder = new EventEmitter<any>();
 
+  needToCheckout = false;
 
-  constructor(private frontOfficeService:FrontOfficeService) {
+  constructor(private frontOfficeService: FrontOfficeService, public datepipe: DatePipe) {
   }
 
   ngOnInit(): void {
-    if(this.bookingId!=null){
-      this.number=this.bookingId;
+    if (this.bookingId != null) {
+      this.number = this.bookingId;
       this.getRoomNumber();
+    } else {
+      this.getBookingInfo();
     }
   }
 
   showRoomDetails() {
-      if(this.isAvailable){
-        this.showPopup.emit(1);
-      }else {
-        this.showPopup.emit(0);
-      }
-      this.setRoomNo.emit(this.number);
+    if (this.isAvailable) {
+      this.showPopup.emit(1);
+    } else {
+      this.showPopup.emit(0);
+    }
+    this.setRoomNo.emit(this.number);
     // this.messageEvent.emit(number.toString());
   }
 
   test() {
-    console.log(this.bookingId);
+
   }
 
   showDetails() {
     this.showDetailsCom = true;
   }
 
-  getRoomNumber(){
-    this.frontOfficeService.getRoomNumber(this.bookingId).subscribe(response=>{
-      console.log(response);
-      this.number=response.message
+  getRoomNumber() {
+    this.frontOfficeService.getRoomNumber(this.bookingId).subscribe(response => {
+      this.number = response.message
     });
   }
 
-  reFreshOrderPage(status:any){
-    if(status){
+  reFreshOrderPage(status: any) {
+    if (status) {
       this.refreshOrder.emit(true);
     }
+  }
+
+  private getBookingInfo() {
+    this.frontOfficeService.viewBooking(this.number).subscribe(res => {
+      if (res !== null && res !== undefined) {
+        if (this.datepipe.transform(res.checkoutdate, 'yyyy-MM-dd') === this.datepipe.transform(new Date(), 'yyyy-MM-dd')) {
+          this.needToCheckout = true;
+        }
+      }
+    });
   }
 }

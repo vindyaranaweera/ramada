@@ -4,10 +4,11 @@
          (click)="showRoomDetails()">
   <span nz-typography style="text-align: center"><strong
     style="font-size: x-large;font-weight: bold;color: #D21241">{{number}}</strong></span>
+  <h6 *ngIf="needToCheckout" style="margin-bottom: -15px;width: 100px;text-align: center;margin-left: -15px" class="blink_text text5">TO BE CHECKOUT</h6>
 </nz-card>
 
 <nz-card (click)="showDetails()" *ngIf="cardType==='order'"
-         style="width:120px;box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px;"
+         style="width:120px;box-shadow:rgba(0, 0, 0, 0.15) 0px 15px 25px,rgba(0, 0, 0, 0.05) 0px 5px 10px;cursor: pointer;text-align: center;margin: 5px;border-radius: 5px;"
          [style.background-color]="orderColor" [style.border.color]="orderColor">
   <!--  <nz-badge style="position: absolute; margin-left: 58px;margin-top: -22px" [nzCount]="orderQty"-->
   <!--            [nzStyle]="{ backgroundColor: orderStatus===0?'#66034d':orderStatus===1?'#0e0066':orderStatus===2?'#f98c10':orderStatus===3?'#a307f5':orderStatus===4?'#036600':orderStatus===5?'#f53602':'#c00033',border:'#d21241',color:'transparent'}">-->
