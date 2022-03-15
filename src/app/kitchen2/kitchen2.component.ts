@@ -144,6 +144,9 @@ export class Kitchen2Component implements OnInit {
   totalOfNotPickups = 0;
   totalOrders: any;
   totalNotCompleteOrderCount: any;
+  todayDate: Date = new Date();
+
+
 
   constructor(private datePipe: DatePipe, private router: Router, private kitchenService: KitchenService) {
     this.routerNavigate = router;
@@ -306,6 +309,9 @@ export class Kitchen2Component implements OnInit {
   }
 
   setTotalOrderCount() {
+    // this.kitchenService.getTotalOrderCountByDate(this.currentDate).subscribe(response => {
+    //   this.totalOrders = response;
+    // });
     this.kitchenService.getTotalOrderCountByDate(this.currentDate).subscribe(response => {
       // console.log(response);
       this.totalOrders = response;

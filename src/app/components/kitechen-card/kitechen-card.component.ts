@@ -136,13 +136,13 @@ export class KitechenCardComponent implements OnInit {
     });
   }
 
-  startPreparing(){
-    this.modal.confirm({
-      nzTitle: '<i>Start Order</i>',
-      nzContent: '<b><p>Are You Sure Want To Start This Order</p></b>',
-      nzOnOk: () => this.setOrderStatus(2)
-    });
-  }
+  // startPreparing(){
+  //   this.modal.confirm({
+  //     nzTitle: '<i>Start Order</i>',
+  //     nzContent: '<b><p>Are You Sure Want To Start This Order</p></b>',
+  //     nzOnOk: () => this.setOrderStatus(2)
+  //   });
+  // }
 
   completeOrder() {
     this.modal.confirm({
