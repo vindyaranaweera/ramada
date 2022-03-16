@@ -166,16 +166,18 @@ export class Kitchen2Component implements OnInit {
     this.viewType = 1;
     this.selectedRoom = '';
     this.selectedButton = 1;
+    this.showWaitingOrder=0;
     // this.getAllPreparedOrders(1);
     // this.filterRoomNumbers();
     this.setTotalNotPickupOrders();
     this.roomNumber = '';
     this.setTotalOrderCount();
     this.setNoteCompleteOrderCount();
-    // this.setOrders()
-    this.setOrders2()
-    // this.setRoomNumberList();
-    this.setRoomNumberList2();
+    this.setOrders()
+    // this.setOrders2()
+    this.setRoomNumberList();
+    this.filterOrderByRoomNo(1);
+    // this.setRoomNumberList2();
   }
 
   setSelection(value: any) {
@@ -185,8 +187,8 @@ export class Kitchen2Component implements OnInit {
       this.selectedButton = 1;
       this.pickupStatus = 1
       if (this.viewType === 1) {
-        // this.getAllPreparedOrders(1)
-        this.getAllPreparedOrders2(1)
+        this.getAllPreparedOrders(1)
+        // this.getAllPreparedOrders2(1)
       } else {
         this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
       }
@@ -213,20 +215,20 @@ export class Kitchen2Component implements OnInit {
       this.selectedButton = 4;
       this.pickupStatus = 1
       if (this.viewType === 1) {
-        // this.getAllPreparedOrders(1)
-        this.getAllPreparedOrders2(1)
+        this.getAllPreparedOrders(1)
+        // this.getAllPreparedOrders2(1)
       } else {
         this.getOrdersByRoomNoAndRange(this.roomNumber, 1)
       }
     }
   }
 
-  // getAllPreparedOrders(searchRange: any) {
-  //   this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
-  //     // console.log(response);
-  //     this.allPreparedOrders = response;
-  //   });
-  // }
+  getAllPreparedOrders(searchRange: any) {
+    this.kitchenService.getAllPreparedOrders(searchRange, this.currentDate,).subscribe(response => {
+      // console.log(response);
+      this.allPreparedOrders = response;
+    });
+  }
 
   getAllPreparedOrders2(searchRange: any) {
     this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
@@ -258,7 +260,7 @@ export class Kitchen2Component implements OnInit {
   }
 
   getAllNotPickUpOrders(searchRange: any) {
-    this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
+    this.kitchenService.getAllPreparedOrders(searchRange,this.currentDate).subscribe(response => {
       let list: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].status === 3) {
@@ -274,7 +276,7 @@ export class Kitchen2Component implements OnInit {
   }
 
   getAllPickUpOrders(searchRange: any) {
-    this.kitchenService.getAllPreparedOrdersAllDays(searchRange).subscribe(response => {
+    this.kitchenService.getAllPreparedOrders(searchRange,this.currentDate).subscribe(response => {
       let list: any = [];
       for (let i = 0; i < response.length; i++) {
         if (response[i].status === 4) {
@@ -331,8 +333,8 @@ export class Kitchen2Component implements OnInit {
     this.changeFilterRange = range
     if (this.showWaitingOrder === 1) {
       if (this.pickupStatus === 1) {
-        // this.getAllPreparedOrders(range);
-        this.getAllPreparedOrders2(range);
+        this.getAllPreparedOrders(range);
+        // this.getAllPreparedOrders2(range);
       } else if (this.pickupStatus === 2) {
         this.getAllNotPickUpOrders(range);
       } else {
@@ -345,7 +347,7 @@ export class Kitchen2Component implements OnInit {
 
   filterOrderByRoomNo(range: any) {
     let date = this.datePipe.transform(new Date(), 'YYYY/MM/dd');
-    this.kitchenService.getAllActiveOrdersNew().subscribe(response => {
+    this.kitchenService.getAllOrders(this.currentDate).subscribe(response => {
       let list = response
       let newList: any = [];
       if (range === 100) {
@@ -583,9 +585,9 @@ export class Kitchen2Component implements OnInit {
   AfterReFreshPage(value: boolean) {
     if (value === true) {
       this.reFreshPage();
-      // this.setOrders();
-      // this.setTotalOrderCount();
-      // this.setNoteCompleteOrderCount();
+      this.setOrders();
+      this.setTotalOrderCount();
+      this.setNoteCompleteOrderCount();
     }
   }
 }

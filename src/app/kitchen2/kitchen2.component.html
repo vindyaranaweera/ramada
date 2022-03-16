@@ -47,10 +47,8 @@
         <nz-layout style="height: 100%;width:99%;margin-top: 0;">
           <nz-content style="margin-top:0;background-color:white;height:80%;width:100%;overflow:scroll;">
             <div nz-row style="height: 100%" [nzGutter]="0">
-              <div nz-col class="gutter-row" [nzSpan]="1">
-                <div class="inner-box"></div>
-              </div>
-              <div nz-col class="gutter-row" [nzSpan]="23">
+
+              <div nz-col class="gutter-row" [nzSpan]="24">
                 <div class="inner-box">
                   <div *ngIf="showWaitingOrder===0" nz-row [nzGutter]="0" style="padding-bottom: 30px">
                     <div style="padding: 10px" *ngFor="let order of waitingOrders; let i=index" nz-col
@@ -84,7 +82,7 @@
                   <div *ngIf="showWaitingOrder===1" nz-row [nzGutter]="0" style="padding-bottom: 30px">
                     <div nz-col class="gutter-row" *ngFor="let order of allPreparedOrders" [nzSpan]="6">
                       <div class="inner-box">
-                        <app-kitchen-button style="width: 70px;text-align: center;" [orderId]="order.orderId"
+                        <app-kitchen-button  style="width: 70px;text-align: center;" [orderId]="order.orderId"
                                             [OrderStatus]="order.status"
                                             [buttonType]="2" [bgColor]="order.status===3?'#d21241':'#15ff57'"
                                             (sendOrderId)="orderId=$event" (sendOrderStatus)="changeOrderStatus($event)"
